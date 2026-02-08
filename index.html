@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XANAVI vs Pirates - Case Materials</title>
+    <title>XANAVI — Piratlikka qarshi materiallar</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -15,11 +15,7 @@
             align-items: center;
             justify-content: center;
         }
-        .container {
-            max-width: 700px;
-            width: 90%;
-            padding: 40px;
-        }
+        .container { max-width: 700px; width: 90%; padding: 40px; }
         .badge {
             display: inline-block;
             background: #dc3545;
@@ -40,17 +36,37 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .subtitle {
+        .subtitle { color: #888; font-size: 1.1em; margin-bottom: 16px; }
+        .lang-switch {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 8px;
+        }
+        .lang-btn {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            text-decoration: none;
+            border: 1px solid #333;
             color: #888;
-            font-size: 1.1em;
-            margin-bottom: 40px;
+            transition: all 0.2s;
+        }
+        .lang-btn.active { background: #dc3545; color: white; border-color: #dc3545; }
+        .lang-btn:hover { border-color: #dc3545; color: #fff; }
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #dc3545;
+            margin-top: 30px;
+            margin-bottom: 12px;
         }
         .card {
             background: #13131a;
             border: 1px solid #2a2a3a;
             border-radius: 16px;
             padding: 28px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             text-decoration: none;
             display: block;
             transition: all 0.3s ease;
@@ -77,21 +93,9 @@
         .card.tiktok::before { background: linear-gradient(180deg, #fe2c55, #25f4ee); }
         .card.tiktok:hover { border-color: #fe2c55; box-shadow: 0 8px 30px rgba(254, 44, 85, 0.15); }
         .card.tiktok:hover .card-arrow { color: #fe2c55; }
-        .card-icon {
-            font-size: 2em;
-            margin-bottom: 12px;
-        }
-        .card-title {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-        .card-desc {
-            color: #888;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
+        .card-icon { font-size: 2em; margin-bottom: 12px; }
+        .card-title { font-size: 1.3em; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .card-desc { color: #888; font-size: 0.95em; line-height: 1.5; }
         .card-arrow {
             position: absolute;
             right: 24px;
@@ -102,68 +106,72 @@
             transition: all 0.3s;
         }
         .card:hover .card-arrow { color: #ff6b6b; transform: translateY(-50%) translateX(4px); }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #444;
-            font-size: 0.85em;
-        }
+        .footer { text-align: center; margin-top: 40px; color: #444; font-size: 0.85em; }
         .footer span { color: #dc3545; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="badge">Confidential</div>
+        <div class="badge">Maxfiy</div>
         <h1>XANAVI Voice</h1>
-        <p class="subtitle">Anti-Piracy Case Materials</p>
+        <p class="subtitle">Piratlikka qarshi materiallar</p>
+
+        <div class="lang-switch">
+            <a href="index.html" class="lang-btn active">O'zbekcha</a>
+            <a href="index-ru.html" class="lang-btn">Ruscha</a>
+        </div>
+
+        <div class="section-label">TikTok serial</div>
+
+        <a href="tiktok-uz.html" class="card tiktok">
+            <div class="card-icon">&#9654;</div>
+            <div class="card-title">TikTok Serial — 24 qism</div>
+            <div class="card-desc">
+                Vertikal koreya drama uslubidagi serial uchun prodakshn-gayd.
+                24 qism, har biri 60-90 soniya. Sekundma-sekund ssenariy,
+                xuklar, kliffxengerlar, musiqa ishoralari, chiqarish strategiyasi.
+            </div>
+            <div class="card-arrow">&#8594;</div>
+        </a>
+
+        <a href="story-uz.html" class="card blue">
+            <div class="card-icon">&#127916;</div>
+            <div class="card-title">Tarix — Serial Bibliografi</div>
+            <div class="card-desc">
+                To'liq ssenariy: 8 epizod, personajlar, dialoglar.
+                BYD uchun ovozli boshqaruv yaratgan 20 kishining tarixi —
+                va har kuni uni piratlardan himoya qilish uchun kurash.
+            </div>
+            <div class="card-arrow">&#8594;</div>
+        </a>
+
+        <div class="section-label">Huquqiy hujjatlar</div>
 
         <a href="case.html" class="card red">
             <div class="card-icon">&#9878;</div>
-            <div class="card-title">Case File</div>
+            <div class="card-title">Sud ishi fayli</div>
             <div class="card-desc">
-                Full case documentation: incident timeline, technical forensics,
-                suspect identification, legal framework (UZ/RU/KZ),
-                evidence checklist, and court filing templates.
-            </div>
-            <div class="card-arrow">&#8594;</div>
-        </a>
-
-        <a href="tiktok-series.html" class="card tiktok">
-            <div class="card-icon">&#9654;</div>
-            <div class="card-title">TikTok Series — 24 Parts</div>
-            <div class="card-desc">
-                Production guide for vertical K-drama style series.
-                24 parts, 60-90 sec each. Shot-by-shot scripts,
-                hooks, cliffhangers, music cues, posting strategy.
-            </div>
-            <div class="card-arrow">&#8594;</div>
-        </a>
-
-        <a href="story.html" class="card blue">
-            <div class="card-icon">&#127916;</div>
-            <div class="card-title">The Story — Series Bible</div>
-            <div class="card-desc">
-                Full storytelling scenario: 8 episodes, characters, dialogues.
-                The story of 20 people who built voice control for BYD —
-                and fight every day to protect it from pirates.
+                To'liq ish hujjati: voqealar xronologiyasi, texnik ekspertiza,
+                gumonlanuvchi identifikatsiyasi, huquqiy asos (UZ/RU/QZ),
+                dalillar ro'yxati va sud arizalari shablonlari.
             </div>
             <div class="card-arrow">&#8594;</div>
         </a>
 
         <a href="damages.html" class="card orange">
             <div class="card-icon">&#128176;</div>
-            <div class="card-title">Damages Calculation</div>
+            <div class="card-title">Zarar hisob-kitobi</div>
             <div class="card-desc">
-                Financial impact analysis: direct damages ($16,300),
-                criminal liability (up to 6 years), civil claims
-                ($10K&ndash;$5M per Russia Art. 1301), per-user liability.
+                Moliyaviy tahlil: to'g'ridan-to'g'ri zarar ($16,300),
+                jinoiy javobgarlik (6 yilgacha), fuqarolik da'volari
+                ($10K&ndash;$5M Rossiya 1301-modda bo'yicha), har bir foydalanuvchi javobgarligi.
             </div>
             <div class="card-arrow">&#8594;</div>
         </a>
 
         <div class="footer">
-            XANAVI Voice &copy; UluSoft &mdash; <span>All rights reserved</span><br>
-            Prepared: February 2026
+            XANAVI Voice &copy; UluSoft &mdash; <span>Barcha huquqlar himoyalangan</span><br>
+            Tayyorlangan: 2026-yil fevral
         </div>
     </div>
 </body>

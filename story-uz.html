@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XANAVI: Serial — Story Bible</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#08080c;--surface:#101018;--surface2:#16161f;--border:#1e1e2e;--text:#e8e8ed;--dim:#888899;--accent:#ff6b35;--accent2:#ff3366;--blue:#4a9eff;--green:#00d68f;--gold:#ffd700}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,107,53,.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 50%,rgba(255,51,102,.06) 0%,transparent 50%),radial-gradient(ellipse at 50% 0%,rgba(74,158,255,.05) 0%,transparent 40%)}
+        .hero-content{position:relative;z-index:1;padding:40px}
+        .hero-label{display:inline-block;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,107,53,.3);padding:6px 20px;border-radius:30px;margin-bottom:30px}
+        .hero h1{font-family:'Playfair Display',serif;font-size:clamp(3em,8vw,7em);font-weight:700;line-height:1.05;margin-bottom:20px}
+        .hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-sub{font-size:1.3em;color:var(--dim);font-weight:300;max-width:600px;margin:0 auto 40px}
+        .hero-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5em;color:var(--dim);opacity:.7}
+        .container{max-width:900px;margin:0 auto;padding:0 30px}
+        section{padding:100px 0;border-bottom:1px solid var(--border)}
+        .section-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+        .section-title{font-family:'Playfair Display',serif;font-size:clamp(2em,4vw,3em);font-weight:700;margin-bottom:20px;line-height:1.2}
+        .section-desc{font-size:1.1em;color:var(--dim);max-width:700px;margin-bottom:50px}
+        .series-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:50px 0}
+        .meta-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+        .meta-card .label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+        .meta-card .value{font-size:1.4em;font-weight:700}
+        .characters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+        .char-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px;transition:all .3s}
+        .char-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+        .char-role{font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:inline-block;padding:3px 12px;border-radius:20px}
+        .char-role.lead{background:rgba(255,107,53,.15);color:var(--accent)}
+        .char-role.tech{background:rgba(74,158,255,.15);color:var(--blue)}
+        .char-role.young{background:rgba(0,214,143,.15);color:var(--green)}
+        .char-role.villain{background:rgba(255,51,102,.15);color:var(--accent2)}
+        .char-name{font-size:1.4em;font-weight:700;margin-bottom:4px}
+        .char-title{color:var(--dim);font-size:.9em;margin-bottom:14px}
+        .char-desc{font-size:.95em;color:var(--dim);line-height:1.6}
+        .char-quote{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-style:italic;color:var(--accent);font-size:.9em}
+        .episode{background:var(--surface);border:1px solid var(--border);border-radius:20px;margin-bottom:30px;overflow:hidden}
+        .episode-header{padding:30px 35px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:20px}
+        .ep-number{font-size:2.5em;font-weight:900;font-family:'Playfair Display',serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;min-width:70px}
+        .ep-info h3{font-size:1.3em;font-weight:700;margin-bottom:4px}
+        .ep-info .ep-sub{color:var(--dim);font-size:.9em}
+        .episode-body{padding:30px 35px}
+        .scene{margin-bottom:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.04)}
+        .scene:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+        .scene-heading{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+        .scene-location{font-weight:600;margin-bottom:14px;font-size:1.05em}
+        .scene p{color:var(--dim);margin-bottom:12px;font-size:.95em}
+        .dialogue{background:var(--surface2);border-left:3px solid var(--accent);padding:14px 20px;margin:14px 0;border-radius:0 8px 8px 0}
+        .dialogue .speaker{font-weight:700;font-size:.85em;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+        .dialogue .speaker.lead{color:var(--accent)}
+        .dialogue .speaker.tech{color:var(--blue)}
+        .dialogue .speaker.young{color:var(--green)}
+        .dialogue .speaker.villain{color:var(--accent2)}
+        .dialogue .speaker.neutral{color:var(--gold)}
+        .dialogue .line{color:var(--text);font-size:.95em}
+        .direction{font-style:italic;color:#555;font-size:.9em;margin:10px 0}
+        .emotional-beat{text-align:center;padding:30px;margin:20px 0;border:1px dashed var(--border);border-radius:12px;font-family:'Playfair Display',serif;font-style:italic;color:var(--dim);font-size:1.1em}
+        .montage{background:rgba(74,158,255,.05);border:1px solid rgba(74,158,255,.15);border-radius:12px;padding:20px 24px;margin:16px 0}
+        .montage-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+        .montage ul{list-style:none;padding:0}
+        .montage li{padding:6px 0;color:var(--dim);font-size:.9em;border-bottom:1px solid rgba(255,255,255,.03)}
+        .montage li:last-child{border:none}
+        .montage li::before{content:'//';color:var(--blue);margin-right:10px;font-weight:700}
+        .timeline{position:relative;padding-left:40px}
+        .timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2),var(--blue))}
+        .tl-item{position:relative;margin-bottom:40px}
+        .tl-item::before{content:'';position:absolute;left:-34px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+        .tl-year{font-weight:700;color:var(--accent);margin-bottom:4px}
+        .tl-title{font-weight:600;font-size:1.1em;margin-bottom:4px}
+        .tl-desc{color:var(--dim);font-size:.9em}
+        .themes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+        .theme-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px}
+        .theme-card h4{font-size:1.1em;margin-bottom:10px}
+        .theme-card p{color:var(--dim);font-size:.9em}
+        .finale-box{background:linear-gradient(135deg,rgba(255,107,53,.1),rgba(255,51,102,.1));border:1px solid rgba(255,107,53,.2);border-radius:20px;padding:50px 40px;text-align:center;margin:40px 0}
+        .finale-box h3{font-family:'Playfair Display',serif;font-size:2em;margin-bottom:16px}
+        .finale-box p{color:var(--dim);font-size:1.1em;max-width:600px;margin:0 auto}
+        .toc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px;margin:40px 0}
+        .toc h4{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+        .toc-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:8px}
+        .toc-list li a{color:var(--text);text-decoration:none;padding:8px 14px;display:block;border-radius:8px;transition:all .2s;font-size:.95em}
+        .toc-list li a:hover{background:var(--surface2);color:var(--accent)}
+        .toc-list li a .ep-num{color:var(--accent);font-weight:700;margin-right:8px}
+        @media(max-width:600px){.episode-header{flex-direction:column;align-items:flex-start;gap:10px}.episode-body{padding:20px}.container{padding:0 16px}section{padding:60px 0}}
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-label">Original Series</div>
+        <h1><span>XANAVI</span></h1>
+        <p class="hero-sub">
+            20 kishi. Pul yo'q. Bitta orzu.<br>
+            O'zbekistonda BYD avtomobillari uchun ovozli boshqaruv yaratgan jamoa haqida — va har kuni uni o'g'irlatishdan himoya qilish uchun kurashayotgan odamlar haqida.
+        </p>
+        <p class="hero-tagline">"Biz tunlari uxlamadik, kimdir buni bepul yuklab olishi uchun emas"</p>
+    </div>
+</div>
+
+<section id="overview">
+<div class="container">
+    <div class="section-label">Series Bible</div>
+    <h2 class="section-title">Serial haqida</h2>
+    <p class="section-desc">
+        Toshkentlik startap haqida hujjatli serial — imkonsiz narsani amalga oshiruvchilar:
+        maktab o'quvchilari va talabalar jahon darajasidagi texnologik mahsulot — avtomobillar uchun
+        ovozli assistent yaratadilar. Bu do'stlik, kod, uyqusiz tunlar va xiyonat haqida,
+        sening mehnatni kimdir o'g'irlab sotganda.
+    </p>
+
+    <div class="series-meta">
+        <div class="meta-card"><div class="label">Format</div><div class="value">8 seriya</div></div>
+        <div class="meta-card"><div class="label">Davomiylik</div><div class="value">15-25 daq</div></div>
+        <div class="meta-card"><div class="label">Janr</div><div class="value">Hujjatli / Drama</div></div>
+        <div class="meta-card"><div class="label">Joylashuv</div><div class="value">Toshkent, UZ</div></div>
+    </div>
+
+    <div class="toc">
+        <h4>Epizodlar</h4>
+        <ul class="toc-list">
+            <li><a href="#ep1"><span class="ep-num">01</span> Garaj</a></li>
+            <li><a href="#ep2"><span class="ep-num">02</span> Birinchi ovoz</a></li>
+            <li><a href="#ep3"><span class="ep-num">03</span> 20 kishi</a></li>
+            <li><a href="#ep4"><span class="ep-num">04</span> Uyqusiz</a></li>
+            <li><a href="#ep5"><span class="ep-num">05</span> Birinchi pul</a></li>
+            <li><a href="#ep6"><span class="ep-num">06</span> Har bir tiyin qaytadan</a></li>
+            <li><a href="#ep7"><span class="ep-num">07</span> O'g'rilar</a></li>
+            <li><a href="#ep8"><span class="ep-num">08</span> Biz taslim bo'lmaymiz</a></li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<section id="characters">
+<div class="container">
+    <div class="section-label">Personajlar</div>
+    <h2 class="section-title">Jamoa</h2>
+    <p class="section-desc">Haqiqiy odamlar. Haqiqiy voqealar.</p>
+
+    <div class="characters-grid">
+        <div class="char-card">
+            <div class="char-role lead">Asoschisi</div>
+            <div class="char-name">Ulug'bek — CEO</div>
+            <div class="char-title">Hammasini boshlagan odam</div>
+            <div class="char-desc">
+                Muammoni ko'rdi: O'zbekistondagi BYD ruscha va o'zbekchani tushunmaydi.
+                Qaror qildi — hech kim qilmasa, o'zim qilaman. Hammasini tashlab, jamoa yig'di,
+                4 soat uxlaydi. Har bir tiyinni qaytadan mahsulotga investitsiya qiladi.
+            </div>
+            <div class="char-quote">"Men tadbirkor emasman. Shunchaki buni hech kim qilmasligini ko'rib turolmadim."</div>
+        </div>
+
+        <div class="char-card">
+            <div class="char-role tech">CTO</div>
+            <div class="char-name">CTO</div>
+            <div class="char-title">Tajribali. Xonadagi yagona katta odam.</div>
+            <div class="char-desc">
+                Orqasida — yillar davomida IT tajriba. Istalgan kompaniyada yaxshi maosh olishi mumkin edi.
+                Lekin bu bolalarni tanladi, chunki ularda korporatsiyalarda yo'q narsani ko'rdi — olov.
+                Butun tizimning arxitektori. Betartiblikni kodga aylantiradigan odam.
+            </div>
+            <div class="char-quote">"Ko'p startaplar ko'rdim. Lekin bu bolalarni to'xtatib bo'lmaydi — faqat yordam berish mumkin."</div>
+        </div>
+
+        <div class="char-card">
+            <div class="char-role young">Jamoa</div>
+            <div class="char-name">Yosh dasturchilar</div>
+            <div class="char-title">Maktab o'quvchilari va talabalar. 16-22 yosh.</div>
+            <div class="char-desc">
+                Tunlari Java o'rganadilar. Kunduzin — maktab yoki universitet. Kechqurun — Android Studio
+                soat 3 gacha. "Ish grafigi" nima ekanligini bilishmaydi. Ular uchun bu — ish emas.
+                Bu — missiya. Kimdir tajriba uchun keldi. Oila uchun qoldi.
+            </div>
+            <div class="char-quote">"Onam kompyuter o'yin o'ynayapman deb o'ylaydi. Men esa kelajakni yaratyapman."</div>
+        </div>
+
+        <div class="char-card">
+            <div class="char-role villain">Antagonist</div>
+            <div class="char-name">Noma'lum shaxs / Qozog'istondan</div>
+            <div class="char-title">Telegram kanal. O'g'irlik. Qayta sotish.</div>
+            <div class="char-desc">
+                APK ni oldi, tekshiruvni buzdi, o'rnatish skriptini yozdi.
+                Telegram orqali $30-50 ga sotadi, narxi $100 bo'lgan narsani.
+                Uning uchun bu — oson pul. Jamoa uchun — pichoq.
+                100+ mashina. Har kuni. Jazosiz.
+            </div>
+            <div class="char-quote">"Nega pul to'lash kerak, yuklab olsa bo'ladi-ku?" — uning mijozlari</div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section id="timeline">
+<div class="container">
+    <div class="section-label">Xronologiya</div>
+    <h2 class="section-title">Jamoa yo'li</h2>
+    <div class="timeline">
+        <div class="tl-item"><div class="tl-year">Boshlanishi</div><div class="tl-title">G'oya tug'iladi</div><div class="tl-desc">BYD O'zbekistonga keladi. Multimedia — faqat xitoycha. Na ruscha, na o'zbekcha, na turkcha. Ulug'bek buni o'zgartirishga qaror qiladi.</div></div>
+        <div class="tl-item"><div class="tl-year">1-3 oy</div><div class="tl-title">Garaj va birinchi kodlar</div><div class="tl-desc">3 kishilik jamoa. Noutbuk, choy, uyqusizlik. BYD ning CAN-shina ulanishga birinchi urinishlar. Yuzlab xatolar. Google'da bitta javob yo'q.</div></div>
+        <div class="tl-item"><div class="tl-year">4-6 oy</div><div class="tl-title">Jamoa o'sadi</div><div class="tl-desc">Mish-mishlar tarqaladi. Maktab o'quvchilari keladi — o'rganishni xohlashadi. 10, keyin 15, keyin 20 kishi. Pul yo'q — tajriba va pizza bilan to'lashadi.</div></div>
+        <div class="tl-item"><div class="tl-year">7-9 oy</div><div class="tl-title">Birinchi ishlaydigan prototip</div><div class="tl-desc">Mashina birinchi marta "Oynani och" ni tushundi. Butun jamoa avtoturargohda BYD atrofida turadi. Kimdir yig'layapti.</div></div>
+        <div class="tl-item"><div class="tl-year">10-12 oy</div><div class="tl-title">Birinchi savdolar</div><div class="tl-desc">O'rnatish uchun $100. Birinchi mijozlar. Har bir dollar — qaytadan serverga, Azure'ga, domeinga. Foyda nol. Ishonch 100%.</div></div>
+        <div class="tl-item"><div class="tl-year">O'sish</div><div class="tl-title">Masshtablash</div><div class="tl-desc">500+ o'rnatish. SSE, streaming, OTA yangilanishlar. Mahsulot voyaga yetadi. Jamoa hali ham normal maosh olmayapti.</div></div>
+        <div class="tl-item"><div class="tl-year" style="color:var(--accent2)">Inqiroz</div><div class="tl-title">Piratlik</div><div class="tl-desc">Telegramda kanal paydo bo'ladi. O'rnatish skripti. Bir necha oyda 100 mashina. Daromad tushadi. Motivatsiya tushadi. Kimdir ketmoqchi.</div></div>
+        <div class="tl-item"><div class="tl-year">Hozir</div><div class="tl-title">Kurash</div><div class="tl-desc">Jamoa taslim bo'lmaydi. Himoya, server, huquqshunos, IP Center. O'z farzandi uchun urush.</div></div>
+    </div>
+</div>
+</section>
+
+<section id="episodes">
+<div class="container">
+    <div class="section-label">1-Fasl</div>
+    <h2 class="section-title">Epizodlar</h2>
+    <p class="section-desc">8 seriya. Birinchi kod satridan sud da'vosigacha. Har bir seriya — jamoaning hayotidan haqiqiy bob.</p>
+
+    <!-- EP 1 -->
+    <div class="episode" id="ep1">
+        <div class="episode-header"><div class="ep-number">01</div><div class="ep-info"><h3>GARAJ</h3><div class="ep-sub">Har bir buyuk tarix aqldan ozgan g'oyadan boshlanadi</div></div></div>
+        <div class="episode-body">
+            <div class="scene">
+                <div class="scene-heading">1-sahna</div>
+                <div class="scene-location">INT. BYD AVTOMOBIL — KUNDUZ</div>
+                <p>Yaqin plan: barmoq BYD rulidagi ovozli assistent tugmasini bosadi. Dinamikdan — xitoycha nutq. Haydovchi hech narsani tushunmaydi.</p>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek (kadr orqasida)</div><div class="line">O'ttiz ming dollarga mashina oldim. Va u meni tushunmaydi. Umuman. Tilsiz telefon sotib olgandek.</div></div>
+                <p>U telefonni oladi. Google'ga yozadi: "BYD voice control russian language". Nol natija.</p>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek (kadr orqasida)</div><div class="line">Shunda o'yladim: hech kim qilmagan bo'lsa... balki buni men qilishim kerakdir?</div></div>
+            </div>
+            <div class="scene">
+                <div class="scene-heading">2-sahna</div>
+                <div class="scene-location">INT. XONA / BIRINCHI OFIS — TUN</div>
+                <p>Tor xona. Stolda — noutbuk, simlar, choy, non. Ekranda — Android Studio. Uch kishi bitta monitor atrofida.</p>
+                <div class="montage">
+                    <div class="montage-title">Montaj: Birinchi kunlar</div>
+                    <ul>
+                        <li>Klaviaturadagi qo'llar. Soat 2:47.</li>
+                        <li>BYD hujjatlari xitoycha. Google Translate. Absurd tarjimalardan kulgi.</li>
+                        <li>Kompilyatsiya xatosi. Yana biri. Yana.</li>
+                        <li>Kimdir stol ustida uxlab qoldi. Boshqasi uni kurtka bilan yopdi.</li>
+                        <li>Oynada tong. Ular hali ham ishlayapti.</li>
+                    </ul>
+                </div>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">Nima qilayotganimizni bilmas edik. Haqiqatan. Biz shunchaki... boshladik. Maslahatchi yollashga pulimiz yo'q edi. BYD da tanishimiz yo'q edi. Bizda bitta noutbuk va qo'shnining Wi-Fi bor edi.</div></div>
+            </div>
+            <div class="emotional-beat">"Barcha buyuk kompaniyalar garajda boshlangan.<br>Bizda garaj ham yo'q edi."</div>
+        </div>
+    </div>
+
+    <!-- EP 2 -->
+    <div class="episode" id="ep2">
+        <div class="episode-header"><div class="ep-number">02</div><div class="ep-info"><h3>BIRINCHI OVOZ</h3><div class="ep-sub">Mashina birinchi marta tushungan lahza</div></div></div>
+        <div class="episode-body">
+            <div class="scene">
+                <div class="scene-heading">1-sahna</div>
+                <div class="scene-location">INT. ISH JOYI — TUN, 3:00</div>
+                <p>Noutbuk ekrani — yagona yorug'lik manbai. Azure Speech Services. Konfiguratsiya.</p>
+                <div class="dialogue"><div class="speaker tech">CTO</div><div class="line">Kutchi. Kutchi. Bosma... OK. Endi bos.</div></div>
+                <p>Jimlik. Hamma ekranga qaraydi. Logda — so'rov ketdi. Javob keldi. Lekin ovoz yo'q. Audio oqimda xato.</p>
+                <div class="dialogue"><div class="speaker young">Dasturchi</div><div class="line">Yana... Uchunchi kecha ketma-ket. Ertaga-chi?</div></div>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">Yo'q. Bugun. U gapirmagunicha ketmaymiz.</div></div>
+            </div>
+            <div class="scene">
+                <div class="scene-heading">2-sahna — Epizod kulminatsiyasi</div>
+                <div class="scene-location">INT. BYD AVTOMOBIL — TUN, 4:30</div>
+                <p>Avtoturargoh. Jimlik. Mashinada — uch kishi. Noutbuk bosh qurilmaga ulangan. Telefon video yozyapti — qo'llar titrayapti.</p>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">(mikrofonga, sekin, shivirlaydi)<br>Oynani och...</div></div>
+                <div class="direction">Pauza. Bir soniya. Ikki. Uch.</div>
+                <div class="direction">BYD oynasi sekin tushadi.</div>
+                <p>Jimlik. Keyin — qichqiriq. Kimdir panel bo'ylab uradi. Kimdir quchoqlaydi. Kamera titraydi. Kulgi va yig'iga o'xshash narsa eshitiladi.</p>
+                <div class="dialogue"><div class="speaker young">Dasturchi</div><div class="line">(kulgi orasida) ISHLAYAPTI! U ISHLAYAPTI! ONAMGA QO'NG'IROQ QILAMAN!</div></div>
+                <div class="dialogue"><div class="speaker tech">CTO</div><div class="line">(sekin, yaqin plan)<br>...To'rt oy. To'rt oy shu lahzaga yurdik.</div></div>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek (kadr orqasida)</div><div class="line">Bu hayotimdagi eng yaxshi lahza edi. Birinchi pul topganimiz emas. 500 mijoz bo'lganimiz emas. Ana shu. U bizni birinchi marta tushunganda.</div></div>
+            </div>
+            <div class="emotional-beat">Qora ekran. Oq matn:<br><br>"O'sha kechasi hech kim uyiga ketmadi.<br>Ular tongga qadar mashinada o'tirib, u bilan gaplashdilar."</div>
+        </div>
+    </div>
+
+    <!-- EP 3 -->
+    <div class="episode" id="ep3">
+        <div class="episode-header"><div class="ep-number">03</div><div class="ep-info"><h3>20 KISHI</h3><div class="ep-sub">Orzu jamoaga aylanganda</div></div></div>
+        <div class="episode-body">
+            <div class="scene">
+                <div class="scene-heading">1-sahna</div>
+                <div class="scene-location">INT. UNIVERSITET KORIDORI — KUNDUZ</div>
+                <p>Tanaffus. Talabalar o'tib ketyapti. Bir yigit (17 yosh) Ulug'bekka yaqinlashadi.</p>
+                <div class="dialogue"><div class="speaker young">Talaba</div><div class="line">Assalomu alaykum. Eshitdim, mashinalar uchun ovozli boshqaruv qilyapsiz. Men... yordam bermoqchiman. Java o'rganyapman. Hozircha faqat massivlar, lekin tez o'rganaman.</div></div>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">Buning evaziga nima xohlaysan?</div></div>
+                <div class="dialogue"><div class="speaker young">Talaba</div><div class="line">(pauza) ...Tajriba? Va... balki ba'zan pizza?</div></div>
+            </div>
+            <div class="scene">
+                <div class="scene-heading">2-sahna — Intervyular</div>
+                <div class="dialogue"><div class="speaker young">Dasturchi, 16 yosh</div><div class="line">Sinfdoshlarim o'yin o'ynaydi. Men esa kechasi o'ntada Android Studio ochib, SSE ulanishni debag qilaman. Bilasizmi? Menga bu zavq.</div></div>
+                <div class="dialogue"><div class="speaker young">Dasturchi, 19 yosh</div><div class="line">Onam deydi — o'qi, diplom ol. Men esa — ona, o'qiyapman. Har kuni. Faqat universitetda emas.</div></div>
+                <div class="dialogue"><div class="speaker young">Dasturchi, 22 yosh</div><div class="line">Bankda ish taklif qilishdi. Barqaror maosh. Rad etdim. Chunki u yerda oddiy dasturchi bo'laman. Bu yerda esa — ilgari bo'lmagan narsani yaratyapman.</div></div>
+                <div class="dialogue"><div class="speaker tech">CTO</div><div class="line">(jilmayib) Ularga qarab yigirma yil oldingi o'zimni ko'raman. Faqat ularda kuchliroq yonadi. Ancha kuchliroq.</div></div>
+            </div>
+            <div class="emotional-beat">"Bizni 20 kishi edi. O'rtacha yosh — o'n to'qqiz.<br>Ofis, maosh va biznes-rejamiz yo'q edi.<br>Lekin sotib bo'lmaydigan narsaga ega edik."</div>
+        </div>
+    </div>
+
+    <!-- EP 7 — KEY EPISODE -->
+    <div class="episode" id="ep7">
+        <div class="episode-header"><div class="ep-number">07</div><div class="ep-info"><h3>O'G'RILAR</h3><div class="ep-sub">Jamoa tarixidagi eng og'ir kun</div></div></div>
+        <div class="episode-body">
+            <div class="scene">
+                <div class="scene-heading">1-sahna</div>
+                <div class="scene-location">INT. ISH JOYI — ERTALAB</div>
+                <p>Oddiy ertalab. Kimdir choy quyadi. Ulug'bek telefonga qaraydi. Uning yuzi o'zgaradi.</p>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">(sekin) Bolalar... Kelinglar.</div></div>
+                <p>Telefon ekranida — Telegram kanal. Ularning APK si. Ularning mahsuloti. O'rnatish skripti bilan. Qozog'istondan noma'lum shaxs $30-50 ga sotayapti.</p>
+                <div class="direction">Jimlik. Yigirma kishi bitta telefon atrofida turadi. Hech kim gapirmaydi.</div>
+                <div class="dialogue"><div class="speaker young">Dasturchi, 17 yosh</div><div class="line">(ovozi titraydi) Bu... bu bizning kod-ku. Buni men yozdim. Mana shu qismini. Uch hafta. Uch hafta uxlamadim...</div></div>
+            </div>
+            <div class="scene">
+                <div class="scene-heading">2-sahna</div>
+                <p>Hissiyotlar kuchayadi. Kimdir g'azabda. Kimdir shokda.</p>
+                <div class="dialogue"><div class="speaker young">Dasturchi</div><div class="line">Yuz mashina? YUZ? Qanchaga sotayapti? O'ttiz dollarga? Biz yuz olamiz, va bu zo'rg'a xarajatlarni qoplaydi! Va u shunchaki... nusxa oldi?!</div></div>
+                <div class="dialogue"><div class="speaker tech">CTO</div><div class="line">(xotirjam, lekin ovozi titraydi)<br>O'tiraylik. Keling shunchaki... o'tirib o'ylaylik.</div></div>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">Ular install_hack.txt olishgan. Python skript. ADB root orqali bizning APK ni tizim qismida almashtiradi. Litsenziya tekshiruvini chetlab o'tadi. (pauza) Va bilasizmi eng og'rig'i nima? Ular nomini ham o'zgartirmagan. "XANAVI" qoldirishgan. O'zlarining mahsulotidek.</div></div>
+            </div>
+            <div class="scene">
+                <div class="scene-heading">3-sahna — Hissiy cho'qqi</div>
+                <div class="scene-location">EKS. BALKON — KECHQURUN</div>
+                <p>Ulug'bek yolg'iz. Toshkent ustida quyosh botishi.</p>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek (kameraga, yakka)</div><div class="line">Bilasizmi nima his qildim? G'azab emas. G'azab — keyinroq. Avval — uyat. Xuddi men noto'g'ri ish qilgandek. Xuddi himoya qilmaganim uchun men aybdordek.
+                <br><br>
+                Yigirma kishi. Maktab bolalari. Tunlari uxlamagan. Normal hayotdan voz kechgan.
+                <br><br>
+                Va qaysidir odam shunchaki ularning ishini oldi. Va sotyapti. Har kuni.
+                <br><br>
+                (uzun pauza)
+                <br><br>
+                Yuz mashina. Bu yarim yillik daromadimiz. Bu bir yillik server. Bu hech qachon to'lay olmagan maoshimiz.
+                <br><br>
+                Lekin bilasizmi? Biz to'xtamaymiz. Chunki to'xtasak — demak, u yutdi. Biz buning uchun uxlamagan emasmiz.</div></div>
+            </div>
+            <div class="emotional-beat">"Ular ilovani o'g'irlamadi.<br>Ular yigirma bolaning uyqusiz tunlarini o'g'irladi,<br>halol mehnat nimaga arziydi deb ishongan bolalarning."</div>
+        </div>
+    </div>
+
+    <!-- EP 8 -->
+    <div class="episode" id="ep8">
+        <div class="episode-header"><div class="ep-number">08</div><div class="ep-info"><h3>BIZ TASLIM BO'LMAYMIZ</h3><div class="ep-sub">Birinchi faslning finali. Kurash boshlanishi.</div></div></div>
+        <div class="episode-body">
+            <div class="scene">
+                <div class="scene-heading">1-sahna</div>
+                <div class="scene-location">INT. ISH JOYI — ERTASI KUN ERTALAB</div>
+                <p>Butun jamoa yig'ilgan. Oq doska. Markerlar. Doskada yozilgan: "REJA".</p>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">Kecha xafa bo'ldik. Bugun ish qilamiz. Uchta yo'nalish bor. Birinchi — himoya. Ikkinchi — qonun. Uchinchi — mahsulot. CTO, boshlang.</div></div>
+                <div class="dialogue"><div class="speaker tech">CTO</div><div class="line">Himoya. DeviceIntegrity — har bir nusxani qurilmaga bog'lash. Har ishga tushirishda server tekshiruvi. Haftalik ma'lumotlar bazasi rotatsiyasi. Noqonuniy nusxa — bir haftada o'lik.</div></div>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">Qonun. IP Centerga boramiz. Mualliflik huquqini ro'yxatdan o'tkazamiz. Keyin — IIV ga ariza. Jinoyat kodeksining 149-1 moddasi. 3 yilgacha. Biz hazillashmayapmiz.</div></div>
+                <div class="dialogue"><div class="speaker young">Dasturchi</div><div class="line">Mahsulot-chi?</div></div>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek</div><div class="line">Mahsulot yaxshiroq bo'ladi. Tezroq. Aqlliroq. Pirat kodni o'g'irlashi mumkin. Lekin jamoani o'g'irlay olmaydi. Ertaga yozadigan narsani o'g'irlay olmaydi.</div></div>
+            </div>
+            <div class="scene">
+                <div class="scene-heading">Yakuniy sahna</div>
+                <div class="scene-location">EKS. BINO TOMI — TOSHKENT USTIDA QUYOSH BOTISHI</div>
+                <p>Butun jamoa. Yigirma kishi. Tomda turishadi. Toshkent ufqqa qadar cho'zilgan.</p>
+                <div class="dialogue"><div class="speaker lead">Ulug'bek (kadr orqasida)</div><div class="line">Bizga deyishdi: tashlanglar. Bu imkonsiz. Maktab o'quvchilari avtomobillar uchun ovozli boshqaruv qila olmaydi.
+                <br><br>Biz qildik.
+                <br><br>Bizga deyishdi: sizni o'g'irlashadi, hech narsa qila olmaysiz.
+                <br><br>Bizni o'g'irlashdi. Va biz nimanidir qildik.
+                <br><br>Bizga deyishadi: katta kompaniya bo'lolmaysiz.
+                <br><br>(pauza, kamera har birining yuzini ko'rsatadi)
+                <br><br>Biz allaqachon katta kompaniyamiz. Shunchaki hali hamma bilmaydi.</div></div>
+            </div>
+            <div class="emotional-beat">
+                Qora ekran.<br><br>
+                "XANAVI Voice O'zbekistondagi 500+ BYD avtomobiliga o'rnatilgan."<br><br>
+                "Dasturchining o'rtacha yoshi — 19."<br><br>
+                "Har bir topilgan dollar mahsulotga qayta investitsiya qilinadi."<br><br>
+                "Piratlik bilan kurash davom etmoqda."<br><br>
+                <span style="color: var(--accent); font-weight: 700;">2-FASL — TEZDA</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+</section>
+
+<section id="themes">
+<div class="container">
+    <div class="section-label">Mavzular</div>
+    <h2 class="section-title">Bu serial aslida nima haqida</h2>
+    <div class="themes-grid">
+        <div class="theme-card"><h4 style="color:var(--accent)">Mehnatga huquq</h4><p>O'z qo'ling bilan yaratgan narsa — seniki. Patent bormi, yo'qmi, huquqshunos bormi, yo'qmi. Bu — seniki. Va hech kimning uni olishga haqqi yo'q.</p></div>
+        <div class="theme-card"><h4 style="color:var(--blue)">Yoshlik — zaiflik emas</h4><p>16 yoshli yigit noutbuk oldida butun korporatsiya qila olmaydigan narsani yaratishi mumkin. Chunki korporatsiyada byudjet bor, unda esa — motivatsiya. Ikkinchisi kuchliroq.</p></div>
+        <div class="theme-card"><h4 style="color:var(--green)">O'zbek startapi</h4><p>Silicon Valley yo'q. Venchur fondlar yo'q. Y Combinator mentorlar yo'q. Noutbuk, choy, non va "imkonsiz" so'zini bilmaydigan yigirma kishi bor.</p></div>
+        <div class="theme-card"><h4 style="color:var(--accent2)">Piratlik orzularni o'ldiradi</h4><p>Bu million yo'qotgan korporatsiya haqida emas. Bu uch hafta uxlamagan maktab o'quvchisi haqida, uning ishini bepul yuklab olishgan. Piratlik — "bepul" emas. Bu — boshqaning hisobiga.</p></div>
+        <div class="theme-card"><h4 style="color:var(--gold)">Qayta investitsiya — ishonch</h4><p>Har bir dollar qaytadan mahsulotga. Cho'ntakka emas. Ofisga emas. Kodga. Serverga. Orzuga. Bu biznes strategiyasi emas. Bu ertaga yaxshiroq bo'ladi degan ishonch harakati.</p></div>
+        <div class="theme-card"><h4 style="color:var(--text)">Oila, kompaniya emas</h4><p>Yigirma kishi bir-birini LinkedIn orqali emas, kim stol ortida uxlaganda qanday xurrak otishini bilish orqali taniydi. Bu hamkasblar emas. Bu — oila.</p></div>
+    </div>
+</div>
+</section>
+
+<section id="season2">
+<div class="container">
+    <div class="section-label">Keyingi</div>
+    <h2 class="section-title">2-Fasl: Adolat</h2>
+    <div class="finale-box">
+        <h3>2-fasl tizeri</h3>
+        <p style="text-align:left;max-width:100%">
+            <strong>1-epizod:</strong> "IP Center" — Mualliflik huquqini ro'yxatdan o'tkazish. Rasman.<br>
+            <strong>2-epizod:</strong> "Raqamli izlar" — Server dalillarni to'plashni boshlaydi.<br>
+            <strong>3-epizod:</strong> "Qizil ekran" — Pirat nusxalar bloklanadi. Piratlarning reaktsiyasi.<br>
+            <strong>4-epizod:</strong> "O'rtoq mayor" — IIV ga ariza. 149-1 modda.<br>
+            <strong>5-epizod:</strong> "$16,300" — Zarar hisob-kitobi. Advokatlar da'vo tayyorlaydi.<br>
+            <strong>6-epizod:</strong> "Telegram down" — DMCA. Pirat kanali o'chirildi.<br>
+            <strong>7-epizod:</strong> "Sud" — Yuzma-yuz uchrashgan kun.<br>
+            <strong>8-epizod:</strong> "Yangi kun" — XANAVI va jamoa uchun keyingi nima.
+        </p>
+    </div>
+</div>
+</section>
+
+<section style="padding:60px 0;border:none">
+<div class="container" style="text-align:center">
+    <p style="font-family:'Playfair Display',serif;font-size:1.8em;margin-bottom:16px">"Biz tunlari uxlamadik.<br>Pul uchun emas. Mashina bizni tushunishi uchun."</p>
+    <p style="color:var(--dim);margin-bottom:30px">Haqiqiy voqealar asosida. Toshkent, O'zbekiston. 2024-2026.</p>
+    <p style="color:#333;font-size:.85em">XANAVI Voice &copy; UluSoft — Barcha huquqlar himoyalangan<br>Story Bible v1.0 — 2026-yil fevral<br>Aloqa: tadjibaev.ulugbek@gmail.com</p>
+</div>
+</section>
+
+</body>
+</html>
