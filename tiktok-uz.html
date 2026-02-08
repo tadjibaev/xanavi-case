@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XANAVI — TikTok Series Production Guide (O'zbek)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #08080c;
+            --surface: #101018;
+            --surface2: #18182a;
+            --border: #1e1e2e;
+            --text: #e8e8ed;
+            --dim: #888899;
+            --accent: #ff2d55;
+            --tiktok: #25f4ee;
+            --tiktok2: #fe2c55;
+            --gold: #ffd700;
+            --blue: #4a9eff;
+            --green: #00d68f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(254, 44, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(37, 244, 238, 0.08) 0%, transparent 50%);
+        }
+
+        .hero-content { position: relative; z-index: 1; padding: 40px; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.15), rgba(37, 244, 238, 0.15));
+            border: 1px solid rgba(254, 44, 85, 0.3);
+            color: var(--tiktok);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5em, 7vw, 5em);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .line1 { color: var(--text); }
+        .hero h1 .line2 {
+            background: linear-gradient(135deg, var(--tiktok2), var(--tiktok));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-sub {
+            font-size: 1.2em;
+            color: var(--dim);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .num {
+            font-size: 2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--tiktok2), var(--tiktok));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-stat .label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--dim);
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--tiktok);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8em, 4vw, 2.8em);
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--dim);
+            font-size: 1.05em;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        /* FORMAT RULES */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .rule-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .rule-card h4 {
+            font-size: 1.05em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-card p {
+            color: var(--dim);
+            font-size: 0.9em;
+        }
+
+        .rule-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .rule-icon.pink { background: rgba(254, 44, 85, 0.15); }
+        .rule-icon.cyan { background: rgba(37, 244, 238, 0.15); }
+        .rule-icon.gold { background: rgba(255, 215, 0, 0.15); }
+
+        /* PHONE MOCKUP */
+        .phone-demo {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .phone-frame {
+            width: 240px;
+            min-height: 426px;
+            background: #000;
+            border-radius: 30px;
+            border: 3px solid #333;
+            padding: 12px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .phone-screen {
+            background: var(--surface);
+            border-radius: 20px;
+            height: 100%;
+            min-height: 400px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-visual {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .phone-visual .scene-desc {
+            font-size: 11px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        .phone-overlay-top {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            z-index: 2;
+        }
+
+        .phone-part-badge {
+            background: rgba(254, 44, 85, 0.9);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        .phone-time {
+            color: rgba(255,255,255,0.6);
+            font-size: 10px;
+        }
+
+        .phone-subtitle {
+            position: absolute;
+            bottom: 60px;
+            left: 10px;
+            right: 10px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .phone-subtitle .sub-text {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            line-height: 1.4;
+        }
+
+        .phone-subtitle .sub-text em {
+            color: var(--tiktok);
+            font-style: normal;
+        }
+
+        .phone-bottom {
+            padding: 10px 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .phone-bottom .username {
+            font-weight: 700;
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        .phone-bottom .caption {
+            font-size: 10px;
+            color: var(--dim);
+            line-height: 1.4;
+        }
+
+        .phone-bottom .tags {
+            font-size: 10px;
+            color: var(--tiktok);
+            margin-top: 2px;
+        }
+
+        .phone-sidebar {
+            position: absolute;
+            right: 8px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .phone-sidebar .sb-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .phone-sidebar .sb-count {
+            font-size: 9px;
+            color: white;
+            margin-top: -6px;
+        }
+
+        .phone-label {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tiktok);
+        }
+
+        .phone-label-sub {
+            text-align: center;
+            font-size: 11px;
+            color: var(--dim);
+        }
+
+        /* EPISODE CARDS */
+        .ep-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .ep-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ep-num {
+            font-size: 2em;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--tiktok2), var(--tiktok));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            min-width: 50px;
+        }
+
+        .ep-meta h3 {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .ep-meta .ep-sub {
+            color: var(--dim);
+            font-size: 0.85em;
+        }
+
+        .ep-body {
+            padding: 24px 28px;
+        }
+
+        /* PARTS */
+        .part {
+            background: var(--surface2);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .part:last-child { margin-bottom: 0; }
+
+        .part-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .part-badge {
+            background: var(--tiktok2);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        .part-duration {
+            font-size: 12px;
+            color: var(--dim);
+        }
+
+        .part-hook {
+            background: rgba(254, 44, 85, 0.08);
+            border-left: 3px solid var(--tiktok2);
+            padding: 10px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+
+        .part-hook .hook-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--tiktok2);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .part-hook .hook-text {
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .shot {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .shot-time {
+            font-size: 11px;
+            color: var(--tiktok);
+            font-weight: 700;
+            min-width: 42px;
+            padding-top: 2px;
+            font-family: monospace;
+        }
+
+        .shot-desc {
+            font-size: 0.9em;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        .shot-desc strong {
+            color: var(--text);
+        }
+
+        .shot-desc .text-overlay {
+            display: inline-block;
+            background: rgba(254, 44, 85, 0.12);
+            color: var(--tiktok2);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .shot-desc .subtitle-cue {
+            display: inline-block;
+            background: rgba(37, 244, 238, 0.1);
+            color: var(--tiktok);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .shot-desc .music-cue {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .shot-desc .sfx-cue {
+            display: inline-block;
+            background: rgba(74, 158, 255, 0.1);
+            color: var(--blue);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .cliffhanger {
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.1), rgba(37, 244, 238, 0.05));
+            border: 1px solid rgba(254, 44, 85, 0.2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .cliffhanger .ch-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--tiktok2);
+            font-weight: 700;
+        }
+
+        .cliffhanger .ch-text {
+            font-size: 0.95em;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* TIPS */
+        .tip-box {
+            background: rgba(37, 244, 238, 0.05);
+            border: 1px solid rgba(37, 244, 238, 0.15);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .tip-box h4 {
+            color: var(--tiktok);
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .tip-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tip-box li {
+            padding: 4px 0;
+            font-size: 0.9em;
+            color: var(--dim);
+        }
+
+        .tip-box li::before {
+            content: '>';
+            color: var(--tiktok);
+            margin-right: 8px;
+            font-weight: 700;
+        }
+
+        /* MUSIC TABLE */
+        .music-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        .music-table th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--surface2);
+            color: var(--dim);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .music-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--dim);
+        }
+
+        .music-table td:first-child {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* HASHTAGS */
+        .hashtag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .hashtag {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--tiktok);
+            font-weight: 500;
+        }
+
+        /* CHECKLIST */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .checklist .check {
+            color: var(--green);
+            font-weight: 700;
+            min-width: 20px;
+        }
+
+        .checklist .item-title {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .checklist .item-desc {
+            color: var(--dim);
+            font-size: 0.9em;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .phone-demo { flex-direction: column; align-items: center; }
+            .ep-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .ep-body { padding: 16px; }
+            .part { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">TikTok Series Format</div>
+        <h1>
+            <span class="line1">XANAVI:</span><br>
+            <span class="line2">Kodimizni o'g'irlashdi</span>
+        </h1>
+        <p class="hero-sub">
+            Koreya uslubidagi vertikal TikTok mini-serial uchun prodakshn-gayd.
+            24 qism. Har biri 60-90 soniya. Bitta hikoya — ko'z uzib bo'lmaydigan.
+        </p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="num">24</div>
+                <div class="label">Qism</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">60-90s</div>
+                <div class="label">Har biri</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">9:16</div>
+                <div class="label">Vertikal</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">8</div>
+                <div class="label">Ark</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== FORMAT RULES ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Format</div>
+    <h2 class="section-title">Koreya TikTok-formati qoidalari</h2>
+    <p class="section-desc">
+        Koreya vertikal doramalari — minimal vaqtda maksimal his-tuyg'u.
+        Har bir qism — kliffxengerli tugalangan hissiy zarba.
+    </p>
+
+    <div class="rules-grid">
+        <div class="rule-card">
+            <h4><span class="rule-icon pink">1</span> 1 soniyada xuk</h4>
+            <p>Birinchi kadr hamma narsani hal qiladi. Ekranda matn + his-tuyg'u. Tomoshabin 0.5 soniyada qaror qiladi — o'tkazish yoki ko'rish. Shok, savol yoki konflikt bilan boshlang. HECH QACHON "Salom, bu hikoya..." deb boshlamang.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon pink">2</span> 60-90 soniya MAX</h4>
+            <p>Oltin xronometraj. Bir daqiqadan kam — his-tuyg'u uchun oz. 90 dan ko'p — tomoshabin ketadi. Ideal — 70-80 soniya. Har bir soniya hisobda.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon pink">3</span> Kliffxenger DOIMO</h4>
+            <p>Har bir qism cho'qqida uziladi. Tomoshabin keyingisiga O'TISHI SHART. "2-qism profilda" — majburiy. Bu variant emas, bu format qonuni.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon cyan">4</span> Subtitrlar = 100%</h4>
+            <p>85% ovossiz ko'radi. Yirik oq subtitrlar qora chegarali. Kalit so'zlar — qizil yoki sariq rangda. Subtitrlar — tarjima emas, vizualning bir qismi.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon cyan">5</span> Ekranda matn</h4>
+            <p>Koreya uslubi: video ustidagi matnli overlay. "Ular bilishmadi, 6 oydan keyin..." — yirik, paydo bo'lish animatsiyasi bilan. Hikoyachi hissini yaratadi.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon cyan">6</span> Yaqin planlar</h4>
+            <p>Kadrlarning 70% — yuzlar. Ko'zlar, qo'llar, telefon ekranlari. 2 soniyadan ortiq umumiy plan yo'q. Tomoshabin qahramonning nafasini his qilishi kerak.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon gold">7</span> Musiqa = his-tuyg'u</h4>
+            <p>Drama uchun g'amgin pianino. Kod yozish uchun kuchayuvchi bit. Shok uchun jimlik + zarba. Musiqa har 15-20 soniyada o'zgaradi. Trend TikTok ovozlarini ishlating.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon gold">8</span> Vertikal 9:16</h4>
+            <p>FAQAT portret. Gorizontal kadrlar qirqiladi. Telefonda suring — bu tabiiyroq. iPhone 13+ yoki Samsung S22+ yetarli. Stabilizatsiya shart.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon gold">9</span> Joylash = strategiya</h4>
+            <p>Kuniga 1 qism. Ideal 19:00-21:00 mahalliy vaqt. Birinchi 3 qism — bir kunda (voronka). Birinchi qismni profilda mahkamlang.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ==================== VISUAL MOCKUP ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Vizual</div>
+    <h2 class="section-title">Ekranda qanday ko'rinadi</h2>
+
+    <div class="phone-demo">
+
+        <!-- Phone 1: Hook -->
+        <div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-visual" style="background: linear-gradient(180deg, #1a0a0a, #000);">
+                        <div class="phone-overlay-top">
+                            <span class="phone-part-badge">Part 1</span>
+                            <span class="phone-time">0:01</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="font-size: 18px; font-weight: 900; color: white; line-height: 1.3; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
+                                20 maktab o'quvchisi<br>
+                                <span style="color: #fe2c55;">bir yil uxlamadi</span><br>
+                                buni yaratish uchun
+                            </div>
+                        </div>
+                        <div class="phone-subtitle">
+                            <span class="sub-text"><em>Keyin kimdir hammasini bir kechada o'g'irladi</em></span>
+                        </div>
+                        <div class="phone-sidebar">
+                            <div class="sb-icon">&#9829;</div>
+                            <div class="sb-count">247K</div>
+                            <div class="sb-icon">&#128172;</div>
+                            <div class="sb-count">3.2K</div>
+                            <div class="sb-icon">&#8618;</div>
+                            <div class="sb-count">15K</div>
+                        </div>
+                    </div>
+                    <div class="phone-bottom">
+                        <div class="username">@xanavi.voice</div>
+                        <div class="caption">Biz BYD uchun ovozli boshqaruv yaratdik...</div>
+                        <div class="tags">#startap #o'g'irlashdi #dasturlash</div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-label">XUK (0:00-0:03)</div>
+            <div class="phone-label-sub">Matn + his-tuyg'u + intrига</div>
+        </div>
+
+        <!-- Phone 2: Drama -->
+        <div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-visual" style="background: linear-gradient(180deg, #0a0a1a, #000);">
+                        <div class="phone-overlay-top">
+                            <span class="phone-part-badge">Part 7</span>
+                            <span class="phone-time">0:42</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="scene-desc" style="color: #666;">
+                                [ Yaqin plan: asoschining yuzi.<br>
+                                U telefonga qarayapti.<br>
+                                Uning yuzi sekin o'zgaryapti.<br>
+                                Fon musiqasi to'xtaydi. ]
+                            </div>
+                        </div>
+                        <div class="phone-subtitle">
+                            <span class="sub-text">"Bolalar... <em>hammangiz keling</em>"</span>
+                        </div>
+                        <div class="phone-sidebar">
+                            <div class="sb-icon">&#9829;</div>
+                            <div class="sb-count">891K</div>
+                            <div class="sb-icon">&#128172;</div>
+                            <div class="sb-count">12K</div>
+                            <div class="sb-icon">&#8618;</div>
+                            <div class="sb-count">45K</div>
+                        </div>
+                    </div>
+                    <div class="phone-bottom">
+                        <div class="username">@xanavi.voice</div>
+                        <div class="caption">O'sha kun... #part7</div>
+                        <div class="tags">#startap #o'g'rilar #dasturchi</div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-label">DRAMA (0:30-0:60)</div>
+            <div class="phone-label-sub">Yaqin plan + jimlik + zarba</div>
+        </div>
+
+        <!-- Phone 3: Cliffhanger -->
+        <div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-visual" style="background: linear-gradient(180deg, #1a0005, #000);">
+                        <div class="phone-overlay-top">
+                            <span class="phone-part-badge">Part 7</span>
+                            <span class="phone-time">1:12</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="font-size: 16px; font-weight: 800; color: white; text-align: center; line-height: 1.4;">
+                                Ekranda —<br>
+                                <span style="color: #fe2c55; font-size: 20px;">bizning ilova</span><br>
+                                Telegram-kanalda<br>
+                                <span style="color: #666; font-size: 14px;">bepul</span>
+                            </div>
+                        </div>
+                        <div class="phone-subtitle">
+                            <span class="sub-text">Ular keyin nima qildi? <em>Part 8 &#8594;</em></span>
+                        </div>
+                        <div class="phone-sidebar">
+                            <div class="sb-icon">&#9829;</div>
+                            <div class="sb-count">891K</div>
+                            <div class="sb-icon">&#128172;</div>
+                            <div class="sb-count">12K</div>
+                            <div class="sb-icon">&#8618;</div>
+                            <div class="sb-count">45K</div>
+                        </div>
+                    </div>
+                    <div class="phone-bottom">
+                        <div class="username">@xanavi.voice</div>
+                        <div class="caption">8-qism allaqachon profilda...</div>
+                        <div class="tags">#kliffxenger #serial</div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-label">KLIFFXENGER (oxiri)</div>
+            <div class="phone-label-sub">Uzilish + "Part X profilda"</div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ==================== FULL SCRIPT ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">To'liq ssenariy</div>
+    <h2 class="section-title">24 qism — soniyama-soniya tartib</h2>
+    <p class="section-desc">
+        Har bir qism soniyalar bo'yicha belgilangan. Xuk, tana, kliffxenger.
+        Rang belgilari: <span class="text-overlay">ekranda matn</span>
+        <span class="subtitle-cue">subtitrlar</span>
+        <span class="music-cue">musiqa</span>
+        <span class="sfx-cue">tovush effekti</span>
+    </p>
+
+    <!-- ===== ARC 1: BOSHLANISH (Parts 1-3) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        ARK 1: BOSHLANISH</h3>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">01</div>
+            <div class="ep-meta">
+                <h3>"20 maktab o'quvchisi va bitta orzu"</h3>
+                <div class="ep-sub">75 sek | Jamoa bilan tanishuv</div>
+            </div>
+        </div>
+        <div class="ep-body">
+            <div class="part">
+                <div class="part-hook">
+                    <div class="hook-label">Xuk (birinchi 2 soniya)</div>
+                    <div class="hook-text">"Biz 16 yoshda edik. Bizda na pul, na ofis bor edi. Faqat noutbuk va qo'shnining Wi-Fi'i."</div>
+                </div>
+
+                <div class="shot">
+                    <div class="shot-time">0:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Biz 16 yoshda edik. Bizda hech narsa yo'q edi.</span> Qora ekran, matn zarba bilan paydo bo'ladi. <span class="sfx-cue">BOOM</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:03</div>
+                    <div class="shot-desc"><span class="music-cue">Tinch pianino, g'amgin</span> Yaqin plan: klaviaturadagi qo'llar. Ekran yorug'ligi yuzda. Tun.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:07</div>
+                    <div class="shot-desc"><strong>Kadr ortidagi ovoz (Ulug'bek — asoschisi):</strong> <span class="subtitle-cue">"O'zbekistonga BYD mashinalari keldi. Chiroyli. Zamonaviy. Lekin ular na ruscha, na o'zbekcha tushunishmas edi."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:15</div>
+                    <div class="shot-desc">Kadr: BYD saloni. Barmoq ovoz tugmasini bosadi. Dinamikdan — xitoycha nutq. <span class="text-overlay">Mashina seni tushunmaydi</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:20</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Va men o'yladim — agar hech kim qilmasa... men qilaman"</span> Yaqin plan: Ulug'bekning ko'zlari. Qat'iyat.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:27</div>
+                    <div class="shot-desc"><span class="music-cue">Bit kuchayadi</span> Tez montaj: ekrandagi kod / simlar / tunda stol atrofida 3 kishi / soat: 03:47</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:35</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Biz 5 ta bo'ldik. Keyin 10 ta. Keyin 20 ta."</span> Yuzlar — birin-ketin. Yosh. 16, 17, 19 yoshda.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:42</div>
+                    <div class="shot-desc"><span class="text-overlay">O'rtacha yosh — 19</span> <span class="text-overlay">Maosh — 0</span> <span class="text-overlay">Motivatsiya — cheksiz</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:50</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Oyim o'yin o'ynayapman deb o'ylaydi. Aslida men kelajak yaratyapman."</span> Yosh dasturchining tabassumi.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:58</div>
+                    <div class="shot-desc"><span class="music-cue">Musiqa keskin to'xtaydi</span> Qora ekran.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:00</div>
+                    <div class="shot-desc"><span class="text-overlay">8 oydan keyin mashina bizni birinchi marta tushundi.</span> 2 sek pauza.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:05</div>
+                    <div class="shot-desc"><span class="text-overlay" style="color: var(--tiktok2);">Bir yildan keyin esa — kimdir hammasini o'g'irladi.</span> <span class="sfx-cue">BOOM</span></div>
+                </div>
+
+                <div class="cliffhanger">
+                    <div class="ch-label">Kliffxenger</div>
+                    <div class="ch-text">"2-qism — mashina birinchi marta qanday gaplashdi. Link profilda."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">02</div>
+            <div class="ep-meta">
+                <h3>"Oynani och"</h3>
+                <div class="ep-sub">80 sek | Mashina birinchi marta tushungan lahza</div>
+            </div>
+        </div>
+        <div class="ep-body">
+            <div class="part">
+                <div class="part-hook">
+                    <div class="hook-label">Xuk</div>
+                    <div class="hook-text">"Ertalab 4:30. Avtoturargoh. Biz mashinada o'tirib, tugmani bosishdan qo'rqardik."</div>
+                </div>
+
+                <div class="shot">
+                    <div class="shot-time">0:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Ertalab 4:30. 4 oylik ish. 1 ta imkoniyat.</span> <span class="sfx-cue">Soat tiqillashi</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:04</div>
+                    <div class="shot-desc">Kadr: qorong'u avtoturargoh. Bitta mashina. Salondan yorug'lik. <span class="music-cue">Tinch ambient, taranglik</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:10</div>
+                    <div class="shot-desc">Ichkarida: uch kishi. Noutbuk bosh qurilmaga ulangan. Simlar. Qo'llar titreydi. <span class="subtitle-cue">"Bosma... Xo'p. Bos."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:18</div>
+                    <div class="shot-desc"><strong>Yaqin plan: Ulug'bekning lablari.</strong> Shivirlab: <span class="subtitle-cue">"Oynani och..."</span> <span class="music-cue">Musiqa to'xtaydi</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:22</div>
+                    <div class="shot-desc"><strong>JIMLIK. 3 soniya.</strong> Yaqin plan: yuzlar. Kutish. Hech kim nafas olmaydi.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:25</div>
+                    <div class="shot-desc"><span class="sfx-cue">Oyna ko'targich motori ovozi</span> Oyna sekin tushadi. <span class="music-cue">PORTLASH — epik musiqa</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:28</div>
+                    <div class="shot-desc"><strong>BAQIRIQ. KO'Z YOSHI. QUCHOQLASH.</strong> Kimdir rulni uradi. Kimdir do'stini quchoqlaydi. Kamera titreydi — bu HAQIQIY.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:35</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"ISHLAYAPTI! U ISHLAYAPTI!"</span> <span class="text-overlay">4 oy. 0 soat uyqu. 1 lahza.</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:42</div>
+                    <div class="shot-desc">Sekinlashtirilgan: CTO ning yuzi. Ko'zlari yiltillaydi. <span class="subtitle-cue">"To'rt oy biz shu lahzaga yurdik."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:52</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Biz mashinada tong otguncha o'tirdik. Va shunchaki... u bilan gaplashdik."</span> Oynadan tong.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Bu hayotimdagi eng yaxshi kun edi.</span> Pauza. <span class="text-overlay" style="color: var(--tiktok2);">Lekin oxirgisi emas.</span></div>
+                </div>
+
+                <div class="cliffhanger">
+                    <div class="ch-label">Kliffxenger</div>
+                    <div class="ch-text">"3-qism — birinchi $100. Va nima uchun uni ovqatga sarflamadik."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">03</div>
+            <div class="ep-meta">
+                <h3>"$100"</h3>
+                <div class="ep-sub">70 sek | Mahsulotga qaytgan birinchi pullar</div>
+            </div>
+        </div>
+        <div class="ep-body">
+            <div class="part">
+                <div class="part-hook">
+                    <div class="hook-label">Xuk</div>
+                    <div class="hook-text">"Birinchi mijoz $100 to'ladi. 20 kishi 8 oy ishlagan. Bu soatiga $0.02."</div>
+                </div>
+
+                <div class="shot">
+                    <div class="shot-time">0:00</div>
+                    <div class="shot-desc"><span class="text-overlay">$100. 20 kishi. 8 oy.</span> <span class="text-overlay">= Kishi boshiga soatiga $0.02</span> <span class="sfx-cue">Kassa ovozi</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:05</div>
+                    <div class="shot-desc">Mijoz BYD ga o'tiradi: <span class="subtitle-cue">"Konditsionerni yoq."</span> Konditsioner yonadi. Mijozning yuzi — shok. <span class="subtitle-cue">"Buni O'ZINGIZ qildingizmi?!"</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:18</div>
+                    <div class="shot-desc">Yaqin plan: stolda $100 lik banknot. 20 juft ko'z unga qaraydi. <span class="music-cue">Iliq pianino</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:25</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Xo'sh... pitsa? Nihoyat normal pitsa?"</span> Kulgi.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:30</div>
+                    <div class="shot-desc"><span class="music-cue">Musiqa biroz g'amginlashadi</span> Ulug'bek: <span class="subtitle-cue">"Yo'q. Bu serverga ketadi. Azure API pullik. Har bir so'rov — bizning pulimiz."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:42</div>
+                    <div class="shot-desc">Yuzlar o'zgaradi. Hafsalasi pir bo'lish. Lekin hamma bosh irg'aydi. <span class="text-overlay">Har bir tiyin — mahsulotga qaytadi</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:50</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Do'stim shaverma do'kon ochdi. 5 marta ko'p topadi."</span> Pauza. Tabassum. <span class="subtitle-cue">"Lekin uning jamoasi yo'q."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Biz pul topmaymiz. Biz investitsiya qilamiz.</span> <span class="text-overlay" style="color: var(--tiktok2);">Kimdir biz uchun pul topishga qaror qilgunicha...</span></div>
+                </div>
+
+                <div class="cliffhanger">
+                    <div class="ch-label">Kliffxenger</div>
+                    <div class="ch-text">"4-qism — biz qanday uxlamadik. Umuman."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ARC 2: NARX (Parts 4-6) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        ARK 2: ORZUNING NARXI</h3>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">04</div>
+            <div class="ep-meta">
+                <h3>"3 soat uyqu"</h3>
+                <div class="ep-sub">75 sek | Uyqusiz tunlar</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"O'qituvchi nima uchun darsda uxlayapsan deb so'radi. Men ertalab 4 gacha CAN-bus protokolni debug qilganimni aytmadim."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Men 17 yoshdaman. 3 soat uxlayman.</span> Yaqin plan: qizargan ko'zlar. <span class="sfx-cue">Budilnik ovozi</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc">Taymlapss: devordagi soat. 22:00 → 00:00 → 02:00 → 04:00. Noutbuk oldidagi odam qimirlamaydi. <span class="music-cue">Lo-fi bit</span></div></div>
+            <div class="shot"><div class="shot-time">0:15</div><div class="shot-desc">Intervyu-montaj: <span class="subtitle-cue">"Men 4 soat uxlayman" / "Ba'zan 3" / "Baholarim tushdi" / "Oyim xavotirlanadi"</span></div></div>
+            <div class="shot"><div class="shot-time">0:28</div><div class="shot-desc"><span class="subtitle-cue">"Qiz do'stim dedi: sen shu ilovaga uylanib ketding."</span> Pauza. <span class="subtitle-cue">"Bir oydan keyin ajrashdik."</span> <span class="music-cue">Pianino, g'amgin</span></div></div>
+            <div class="shot"><div class="shot-time">0:40</div><div class="shot-desc">Kimdir stol ustida uxlab qolgan. Boshqasi uni kurtka bilan yopadi. <span class="text-overlay">Oila, kompaniya emas</span></div></div>
+            <div class="shot"><div class="shot-time">0:50</div><div class="shot-desc"><span class="subtitle-cue">"Ba'zan o'ylayman — arzirmikin? Keyin mashinadagi o'sha lahzani eslayaman..."</span> Charchoq orasidan tabassum.</div></div>
+            <div class="shot"><div class="shot-time">1:00</div><div class="shot-desc"><span class="text-overlay">Har bir kod satrining ortida — kimningdir bolasining uyqusiz tuni.</span> <span class="text-overlay" style="color: var(--tiktok2);">Dunyoni o'zgartira olaman deb ishongan.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"5-qism — hamma narsani o'zgartirgan onaning qo'ng'irog'i."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">05</div>
+            <div class="ep-meta">
+                <h3>"Onam qo'ng'iroq qilyapti"</h3>
+                <div class="ep-sub">70 sek | Eng his-tuyg'uli qism</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"Onam kechasi 2 da qo'ng'iroq qildi. Men allaqachon uxlayapman deb yolg'on aytdim. Ekranda esa — kundagi 47-chi bug."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Kechasi 2:00. Onam qo'ng'iroq qilyapti.</span> Qorong'uda telefon ekrani yonadi. <span class="music-cue">Tinch, samimiy</span></div></div>
+            <div class="shot"><div class="shot-time">0:06</div><div class="shot-desc">Onaning ovozi (telefon orqali): <span class="subtitle-cue">"O'g'lim, qachon normal ovqat yeysan? Qo'shni aytdi — to'rt gacha chiroq o'chmaydi..."</span></div></div>
+            <div class="shot"><div class="shot-time">0:18</div><div class="shot-desc"><span class="subtitle-cue">"Ona, hamma narsa yaxshi. Bizda allaqachon 200 ta mijoz bor. Tez orada yaxshiroq bo'ladi."</span></div></div>
+            <div class="shot"><div class="shot-time">0:25</div><div class="shot-desc">Onaning ovozi: <span class="subtitle-cue">"Sen buni menga yarim yildan beri aytasan..."</span> <span class="music-cue">Pianino kuchayadi</span></div></div>
+            <div class="shot"><div class="shot-time">0:32</div><div class="shot-desc">Telefonni qo'yadi. Uzoq ekranga qaraydi. Ekranda — Excel. Daromad: $600. Xarajat: $580. <span class="text-overlay">Foyda: $20</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="text-overlay">20 kishiga $20 = kishi boshiga $1</span> Pauza. <span class="text-overlay">Oyiga.</span></div></div>
+            <div class="shot"><div class="shot-time">0:50</div><div class="shot-desc">U Excel ni yopadi. Android Studio ni ochadi. Ishlashda davom etadi. <span class="subtitle-cue">"Mening boshqa tanlovim yo'q. Bu biznes emas. Bu — men o'zim."</span></div></div>
+            <div class="shot"><div class="shot-time">1:02</div><div class="shot-desc"><span class="text-overlay">Ular bilishmadi, 3 oydan keyin kimdir yaratgan hamma narsasini o'g'irlashini.</span> <span class="sfx-cue">Zarba</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"6-qism — 500 ta o'rnatish. Biz g'alaba qildik deb o'yladik."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">06</div>
+            <div class="ep-meta">
+                <h3>"500 ta mashina"</h3>
+                <div class="ep-sub">65 sek | Qulash oldidagi muvaffaqiyat cho'qqisi</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"O'zbekistondagi 500 ta mashina biz tufayli ruscha gaplashadi. Biz buni muvaffaqiyat deb o'yladik."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">500+ avtomobil. Bizning ilova.</span> <span class="music-cue">Tantanali musiqa, epik</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc">Montaj: Toshkent ko'chalarida BYD mashinalar. Birin-ketin. Shaharning chiroyli kadrlari.</div></div>
+            <div class="shot"><div class="shot-time">0:12</div><div class="shot-desc"><span class="subtitle-cue">"Navigatsiyani yoq" / "Onamga qo'ng'iroq qil" / "Ob-havo qanday?"</span> Mashinalar tushunadi. Haydovchilar tabassum qiladi.</div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc">Jamoa: high-five, kulgi. <span class="subtitle-cue">"Biz buni qildik. Toshkentdan 20 maktab o'quvchisi BYD qila olmagan ishni qildi."</span></div></div>
+            <div class="shot"><div class="shot-time">0:35</div><div class="shot-desc"><span class="music-cue">Musiqa sekinlasha boshlaydi...</span> <span class="text-overlay">Lekin kimdir bizni kuzatyotgan edi.</span></div></div>
+            <div class="shot"><div class="shot-time">0:40</div><div class="shot-desc"><span class="text-overlay">Kimdir qaror qildi: "Nima uchun yaratish kerak, agar o'g'irlash mumkin bo'lsa?"</span> <span class="music-cue">Musiqa to'xtaydi</span> <span class="sfx-cue">Bo'g'iq zarba</span></div></div>
+            <div class="shot"><div class="shot-time">0:48</div><div class="shot-desc">Qora ekran. Miltillovchi kursor. <span class="text-overlay" style="color: var(--tiktok2);">Telegram-kanal. Bizning APK. Bepul.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"7-qism — biz ko'rgan kun. Eng og'ir kun."</div></div>
+        </div></div>
+    </div>
+
+    <!-- ===== ARC 3: O'G'IRLIK (Parts 7-12) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        ARK 3: O'G'RILAR (kulminatsiya — maksimum qismlar)</h3>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">07</div>
+            <div class="ep-meta">
+                <h3>"Bolalar... keling"</h3>
+                <div class="ep-sub">80 sek | Piratlik kanali ko'rilgan kun</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">Yaqin plan: Ulug'bekning yuzi. U telefonga qaraydi. Uning yuzi O'ZGARADI. So'zsiz. 3 soniya.</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><strong>MATNSIZ. MUSIQASIZ.</strong> Yaqin plan: yuz. Qo'ldagi telefon. Ifoda tinchlikdan shokka o'zgaradi. <span class="sfx-cue">Faqat nafas olish</span></div></div>
+            <div class="shot"><div class="shot-time">0:04</div><div class="shot-desc"><span class="subtitle-cue">"Bolalar... keling."</span> Tinch ovoz. Hamma o'giriladi.</div></div>
+            <div class="shot"><div class="shot-time">0:08</div><div class="shot-desc">20 kishi bitta telefon atrofiga yig'iladi. <span class="music-cue">Past gul, kuchayuvchi</span></div></div>
+            <div class="shot"><div class="shot-time">0:12</div><div class="shot-desc">Telefon ekrani (kamera yaqinlashadi): Telegram-kanal. Ularning ikonkasi. Ularning nomi. O'rnatish skripti. Narx: $30.</div></div>
+            <div class="shot"><div class="shot-time">0:18</div><div class="shot-desc"><span class="text-overlay">Bizning ilova. Bizning kod. Begona Telegram.</span></div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc"><strong>JIMLIK.</strong> Yaqin plan: yuzlar. Birin-ketin. Shok. G'azab. Og'riq. Tushunmaslik.</div></div>
+            <div class="shot"><div class="shot-time">0:30</div><div class="shot-desc">Yosh dasturchi (17 yosh), ovozi titraydi: <span class="subtitle-cue">"Bu... bu mening kodim-ku. Mana shu qismini. Men uch hafta uxlamadim..."</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="music-cue">G'amgin pianino</span> <span class="subtitle-cue">"Ular 30 dollarga sotadi. Biz 100 olamiz, va bu xarajatlarni zo'rg'a qoplaydi."</span></div></div>
+            <div class="shot"><div class="shot-time">0:55</div><div class="shot-desc"><span class="text-overlay">100 mashina. Bizning kod. Begonalarning puli.</span> <span class="text-overlay">$10,000 o'g'irlangan.</span></div></div>
+            <div class="shot"><div class="shot-time">1:05</div><div class="shot-desc"><span class="text-overlay" style="color: var(--tiktok2);">Va eng og'rig'i...</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"8-qism — o'sha kanalda ko'rgan eng og'riqli narsa."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">08</div>
+            <div class="ep-meta">
+                <h3>"Rahmat aytishyapti... lekin kimga?"</h3>
+                <div class="ep-sub">65 sek | O'g'rining mijozlari BIZNING ishimiz uchun UNGA rahmat aytishyapti</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"Ular UNGA rahmat aytishardi. BIZNING ishimiz uchun. Bizning uyqusiz tunlarimiz uchun."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">"Rahmat! Zo'r ish!"</span> Telegramdagi skrinshot. <span class="sfx-cue">Yurak urishi</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc">Skroll: xabar ketidan xabar. <span class="text-overlay">"Originaldan yaxshiroq!"</span> <span class="text-overlay">"5 ta do'stimga o'rnatdim!"</span> <span class="text-overlay">"Top! Mukammal ishlaydi!"</span></div></div>
+            <div class="shot"><div class="shot-time">0:15</div><div class="shot-desc"><span class="subtitle-cue">"Ular hatto nomini o'zgartirmadilar. XANAVI ni qoldirdilar. Go'yoki bu UNING mahsuloti."</span></div></div>
+            <div class="shot"><div class="shot-time">0:25</div><div class="shot-desc">Ulug'bek balkonda yolg'iz. Quyosh botishi. <span class="music-cue">G'amgin, sekin</span></div></div>
+            <div class="shot"><div class="shot-time">0:30</div><div class="shot-desc"><span class="subtitle-cue">"Bilasizmi, men nima his qildim? G'azab emas. Uyat. Go'yoki bu MEN aybdorman, himoya qilmaganim uchun."</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="text-overlay">20 bola tunlari uxlamadi.</span> <span class="text-overlay">Kimdir esa buni 30 soniyada yuklab oldi.</span></div></div>
+            <div class="shot"><div class="shot-time">0:50</div><div class="shot-desc"><span class="subtitle-cue">"Lekin biz to'xtamaymiz. Chunki agar to'xtsak — demak, u g'alaba qilgan."</span> Kameraga qaraydi. Ko'zlarida qat'iyat.</div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"9-qism — biz KIM qilganini topdik. Va QANDAY."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">09</div>
+            <div class="ep-meta">
+                <h3>"install_hack.txt"</h3>
+                <div class="ep-sub">70 sek | Ular buni qanday qilgan — texnik detektiv qismi</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"Bizning CTO ularning skriptini topdi. 50 qator kod — bir yillik ishimizni yo'q qilgan."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">50 qator. 1 skript. Bir yillik ish yo'q qilindi.</span> Kod bilan ekran. <span class="music-cue">Xavotirli bit</span></div></div>
+            <div class="shot"><div class="shot-time">0:06</div><div class="shot-desc">CTO noutbuk oldida: <span class="subtitle-cue">"Mana. fix_app.txt. U bitta mashinadan yuzlabiga ma'lumot klonlaydi."</span></div></div>
+            <div class="shot"><div class="shot-time">0:16</div><div class="shot-desc"><span class="text-overlay">1 ta to'lov → 100 nusxa</span> Animatsiya: bitta ikonka yuzlabiga ko'payadi.</div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc"><span class="subtitle-cue">"Lekin skriptda o'z izini qoldirgan. Telegram-belgisini."</span> <span class="text-overlay">Qozog'istondan noma'lum shaxs, 08.02.2026, 0:47</span></div></div>
+            <div class="shot"><div class="shot-time">0:32</div><div class="shot-desc"><span class="text-overlay">U o'zining buzg'unligiga imzo qo'ygan.</span> Ironiya. <span class="sfx-cue">Dramatik zarba</span></div></div>
+            <div class="shot"><div class="shot-time">0:40</div><div class="shot-desc"><span class="subtitle-cue">"Python-skript ADB root orqali tizim bo'limida bizning APK ni almashtiradi. Litsenziyani chetlab o'tadi."</span></div></div>
+            <div class="shot"><div class="shot-time">0:52</div><div class="shot-desc"><span class="text-overlay">Biz KIM ekanini bilamiz. Biz QANDAY ekanini bilamiz. Bitta narsa qoldi...</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"10-qism — $16,300 zarar. Va 149-1-modda. 3 yilgacha."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">10</div>
+            <div class="ep-meta">
+                <h3>"149-1-modda"</h3>
+                <div class="ep-sub">70 sek | Huquqiy zarba — qonun bo'yicha bu qancha turadi</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"Piratlik bepul deb o'ylaysizmi? Yo'q. Bu 3 yilgacha qamoq va $100,000 jarima."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Piratlik ≠ bepul</span> <span class="text-overlay" style="color: var(--tiktok2);">Piratlik = 3 yilgacha</span> <span class="sfx-cue">Sudya bolg'asi zarba</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc"><span class="text-overlay">To'g'ridan-to'g'ri zarar: $16,300</span> Raqamlar birin-ketin paydo bo'ladi. <span class="music-cue">Tarang bit</span></div></div>
+            <div class="shot"><div class="shot-time">0:12</div><div class="shot-desc"><span class="text-overlay">O'zbekiston: 149-1-modda → 3 yilgacha</span> <span class="text-overlay">Rossiya: 146-modda → 6 yilgacha</span></div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc"><span class="subtitle-cue">"Rossiya qonuni bo'yicha — har bir nusxa 10,000 dan 5,000,000 rublgacha."</span> <span class="text-overlay">100 nusxa × 5,000,000 = ...</span></div></div>
+            <div class="shot"><div class="shot-time">0:35</div><div class="shot-desc"><span class="text-overlay" style="font-size: 1.2em; color: var(--tiktok2);">Maksimum $5,000,000</span> <span class="sfx-cue">Zarba</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="subtitle-cue">"U mijozlarga $100 tejadi. Endi esa ularning har biri $2,500 yo'qotish xavfi ostida."</span></div></div>
+            <div class="shot"><div class="shot-time">0:52</div><div class="shot-desc"><span class="text-overlay">$100 tejading — $2,500 yo'qotasan.</span> <span class="text-overlay">Foydali bitimdimi?</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"11-qism — biz dalillar to'plashni boshladik. Jimgina."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">11</div>
+            <div class="ep-meta">
+                <h3>"Jimgina ov"</h3>
+                <div class="ep-sub">70 sek | Server loggeri piratlarning IP sini yig'adi</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"Bizning ilovani yoqadigan har bir pirat — o'z IP sini qoldiradi. Ular bilishmaydi, biz kuzatyapmiz."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Ular ko'rinmas deb o'ylashyapti.</span> Server ekrani. Loglar yuguradi. <span class="music-cue">Kiber-bit, tarang</span></div></div>
+            <div class="shot"><div class="shot-time">0:08</div><div class="shot-desc"><span class="text-overlay">IP: 195.xxx.xxx.42 — Toshkent</span> <span class="text-overlay">IP: 91.xxx.xxx.15 — Samarqand</span> <span class="text-overlay">IP: 178.xxx.xxx.88 — ...</span></div></div>
+            <div class="shot"><div class="shot-time">0:16</div><div class="shot-desc"><span class="subtitle-cue">"Biz server uchun middleware yozdik. Har bir so'rov — IP, vaqt, qurilma. Hammasi yoziladi."</span></div></div>
+            <div class="shot"><div class="shot-time">0:28</div><div class="shot-desc"><span class="subtitle-cue">"Ular bizning serverga keladi. Biznikiga. Va o'z izlarini qoldiradi."</span></div></div>
+            <div class="shot"><div class="shot-time">0:38</div><div class="shot-desc"><span class="text-overlay">IP → Provayder → IIV → Ism va manzil</span></div></div>
+            <div class="shot"><div class="shot-time">0:48</div><div class="shot-desc"><span class="subtitle-cue">"Biz har bir o'g'irlangan nusxa qayerdaligini bilamiz. Va shunchaki... kutyapmiz."</span> CTO ning tabassumi.</div></div>
+            <div class="shot"><div class="shot-time">0:58</div><div class="shot-desc"><span class="text-overlay" style="color: var(--tiktok2);">Keyin esa biz tugmani bosdik.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"12-qism — qizil tugma. Kill switch."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">12</div>
+            <div class="ep-meta">
+                <h3>"Kill Switch"</h3>
+                <div class="ep-sub">75 sek | Piratlik nusxalari o'la boshlaydi</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Xuk</div>
+                <div class="hook-text">"Yakshanba, ertalab 5:10. Avtomatik tekshiruv. 100 ta piratlik nusxa — o'lik."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Yakshanba. 5:10 AM.</span> <span class="text-overlay" style="color: var(--tiktok2);">Kill Switch faollashtirildi.</span> <span class="sfx-cue">Sirena, past</span></div></div>
+            <div class="shot"><div class="shot-time">0:06</div><div class="shot-desc">Ekran: dashbord. Xaritadagi nuqtalar o'chishni boshlaydi. Bir. Ikki. O'n. <span class="music-cue">Kuchayuvchi elektron bit</span></div></div>
+            <div class="shot"><div class="shot-time">0:15</div><div class="shot-desc"><span class="subtitle-cue">"Har hafta ilova bazani tekshiradi. Baza yo'q — ilova yo'q. Abadiy."</span></div></div>
+            <div class="shot"><div class="shot-time">0:25</div><div class="shot-desc"><span class="text-overlay">Catch-22</span> <span class="subtitle-cue">"Bizning serverni bloklaysiz — baza o'chiriladi. Bloklamasangiz — biz sizni bloklaymiz."</span></div></div>
+            <div class="shot"><div class="shot-time">0:38</div><div class="shot-desc">Piratlik mashinaning ekrani: ilova ochiladi → <span class="text-overlay" style="color: var(--tiktok2); font-size: 1.1em;">Qizil ekran. "Noqonuniy nusxa."</span></div></div>
+            <div class="shot"><div class="shot-time">0:48</div><div class="shot-desc"><span class="subtitle-cue">"Bugun 7 ta. Ular bazani yuklab ololmaydi. Ilova bloklangan."</span> Jamoa ekran oldida. Tinch qoniqish.</div></div>
+            <div class="shot"><div class="shot-time">0:58</div><div class="shot-desc"><span class="text-overlay">Piratlik nusxa uchun maksimum 7 kun umr.</span> <span class="text-overlay">Keyin — tamom.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Kliffxenger</div><div class="ch-text">"13-qism — lekin pirat ham taslim bo'lmadi. U javob zarba berdi."</div></div>
+        </div></div>
+    </div>
+
+    <!-- ===== ARC 4: KURASH (Parts 13-18) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        ARKLAR 4-6: qolgan qismlarning qisqacha tavsifi</h3>
+
+    <div class="tip-box">
+        <h4>13-24 qismlar — Outline</h4>
+        <ul>
+            <li><strong>Part 13:</strong> "Javob zarba" — pirat himoyani chetlab o'tishga harakat qiladi, /etc/hosts blokirovka, yangi skriptlar</li>
+            <li><strong>Part 14:</strong> "Biz aqlliroqmiz" — DeviceIntegrity, apparatga bog'lash, har bir APK noyob</li>
+            <li><strong>Part 15:</strong> "IP Center" — intellektual mulk markaziga tashrif, ro'yxatga olish</li>
+            <li><strong>Part 16:</strong> "70 sahifa kod" — depozit uchun manba kodini chop etamiz</li>
+            <li><strong>Part 17:</strong> "Ariza" — IIV, 149-1-modda, rasmiy murojaat</li>
+            <li><strong>Part 18:</strong> "Telegram DMCA" — shikoyat, kanal o'chirildi</li>
+            <li><strong>Part 19:</strong> "Ular bizni topdi" — piratlar tahdid yozadi, bosim</li>
+            <li><strong>Part 20:</strong> "Biz qo'rqmaymiz" — jamoaning ommaviy bayonoti</li>
+            <li><strong>Part 21:</strong> "Mijozlar qaytishyapti" — sobiq piratlar litsenziya sotib oladi</li>
+            <li><strong>Part 22:</strong> "Yangilanish" — himoyali yangi versiya, chiroyli, kuchli</li>
+            <li><strong>Part 23:</strong> "Tom" — butun jamoa tomda, Toshkent ustida quyosh botishi</li>
+            <li><strong>Part 24:</strong> "Biz taslim bo'lmaymiz" — final, xabar, 2-mavsum tizeri</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<!-- ==================== PRODUCTION TIPS ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Prodakshn</div>
+    <h2 class="section-title">Qanday suratga olish kerak</h2>
+
+    <div class="rules-grid">
+        <div class="rule-card">
+            <h4>Kamera</h4>
+            <p>iPhone / Samsung portret rejimda. 4K 30fps. DJI OM yoki Zhiyun orqali stabilizatsiya. Intervyu uchun shtativ. His-tuyg'uli lahzalar uchun qo'lda — tebranish = tabiiylik.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Yorug'lik</h4>
+            <p>Tabiiy + manba sifatida noutbuk ekrani. Tungi sahnalar — FAQAT ekran yorug'ligi. Bu kod yozishning "o'sha" muhitini yaratadi. Intervyu uchun halqa chiroq.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Ovoz</h4>
+            <p>Petlichka SHART (Boya BY-M1, $15). Klaviatura ovozi — alohida yozib, montajga qo'shing. Jimlik musiqadan muhimroq.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Montaj</h4>
+            <p>CapCut / Premiere Rush / DaVinci. Har 2-4 soniyada kadr almashinuvi. Kalit iboralarda zoom-in. His-tuyg'ularda slow-mo. Montaj o'tishlarida speed ramp.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Subtitrlar</h4>
+            <p>CapCut Auto Captions → qo'lda tuzatish. Shrift: qalin, sans-serif. O'lcham: telefonda o'qiladigan. Kalit so'zlar — qizil. Ismlar — havorang.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Ekranda matn</h4>
+            <p>Paydo bo'lish: typewriter-effekt yoki zarba bilan fade-in. Joylashuv: yuqori uchdan bir yoki markaz. HECH QACHON yuzni yopmang. Shrift: Inter Black yoki Montserrat Bold.</p>
+        </div>
+    </div>
+
+    <h3 style="margin: 40px 0 20px;">Musiqa va ovozlar</h3>
+
+    <table class="music-table">
+        <tr>
+            <th>Kayfiyat</th>
+            <th>Nima ishlatish kerak</th>
+            <th>Qayerda</th>
+        </tr>
+        <tr>
+            <td>G'am / Og'riq</td>
+            <td>Tinch pianino, koreya OST</td>
+            <td>Parts 4, 5, 7, 8</td>
+        </tr>
+        <tr>
+            <td>Taranglik</td>
+            <td>Low drone + heartbeat</td>
+            <td>Parts 7, 9, 11</td>
+        </tr>
+        <tr>
+            <td>Tantana / Umid</td>
+            <td>Epic orchestral build-up</td>
+            <td>Parts 2, 6, 12, 24</td>
+        </tr>
+        <tr>
+            <td>Kod yozish / Ish</td>
+            <td>Lo-fi beats, tinch elektron</td>
+            <td>Parts 1, 3, 4, 14</td>
+        </tr>
+        <tr>
+            <td>Shok / Zarba</td>
+            <td>Jimlik → BOOM (bass drop)</td>
+            <td>Parts 6, 7, 10, 12</td>
+        </tr>
+        <tr>
+            <td>Jimlik</td>
+            <td>Faqat ambient + nafas</td>
+            <td>Parts 7 (xuk), 8</td>
+        </tr>
+    </table>
+
+    <div class="tip-box">
+        <h4>Viruslik uchun TikTok ovozlari</h4>
+        <ul>
+            <li>Trend TikTok ovozlarini fon sifatida ishlating — algoritm mashhur audio bilan videoni targ'ib qiladi</li>
+            <li>Original ovoz "XANAVI Series" — barcha qismlar bog'langan bo'lishi uchun o'z ovozingizni yarating</li>
+            <li>Boshida koreya OST (doramalar) — darhol kerakli muhitni yaratadi</li>
+            <li>Qidiring: "Sad Korean Piano", "Epic Trailer Music", "Dramatic Reveal Sound"</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<!-- ==================== POSTING STRATEGY ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Strategiya</div>
+    <h2 class="section-title">Qanday joylash kerak</h2>
+
+    <div class="rules-grid">
+        <div class="rule-card">
+            <h4 style="color: var(--tiktok2);">1-kun: Bomba</h4>
+            <p>1-3 qismlarni birdan joylang. Oraliq 2-3 soat. Voronka yarating. 1-qismni profilda mahkamlang. Bu sizning "pilot" — u hamma narsani hal qiladi.</p>
+        </div>
+        <div class="rule-card">
+            <h4 style="color: var(--tiktok);">2-7 kunlar: Bittadan</h4>
+            <p>Kuniga 1 qism. Mahalliy vaqt bilan 19:00-21:00. Har bir qism — oldingisining kliffxengeriga javob. Izohlar: HAMMASIGA javob bering.</p>
+        </div>
+        <div class="rule-card">
+            <h4 style="color: var(--gold);">Crosspost</h4>
+            <p>TikTok + Instagram Reels + YouTube Shorts. Bitta kontent — uchta platforma. YouTube Shorts da "XANAVI Series" playlistiga qo'shing.</p>
+        </div>
+        <div class="rule-card">
+            <h4 style="color: var(--green);">Engagement</h4>
+            <p>Har bir videoda savol bering: "Siz nima qilardingiz?" / "Bu adolatlimi?" Izohlar = algoritm. Munozara qo'zg'ang.</p>
+        </div>
+    </div>
+
+    <h3 style="margin: 40px 0 20px;">Xeshteglar</h3>
+
+    <div class="hashtag-cloud">
+        <span class="hashtag">#startap</span>
+        <span class="hashtag">#dasturchi</span>
+        <span class="hashtag">#dasturlash</span>
+        <span class="hashtag">#o'g'irlashdi</span>
+        <span class="hashtag">#piratlik</span>
+        <span class="hashtag">#maktab_o'quvchilari</span>
+        <span class="hashtag">#bydcar</span>
+        <span class="hashtag">#o'zbekiston</span>
+        <span class="hashtag">#toshkent</span>
+        <span class="hashtag">#IT</span>
+        <span class="hashtag">#android</span>
+        <span class="hashtag">#coding</span>
+        <span class="hashtag">#startuplife</span>
+        <span class="hashtag">#hikoyachilik</span>
+        <span class="hashtag">#serial</span>
+        <span class="hashtag">#part1</span>
+        <span class="hashtag">#xanavi</span>
+        <span class="hashtag">#devlife</span>
+        <span class="hashtag">#taslimbo'lmaymiz</span>
+        <span class="hashtag">#adolat</span>
+    </div>
+
+    <div class="tip-box">
+        <h4>Viral triggerlar</h4>
+        <ul>
+            <li><strong>"Maktab o'quvchilari vs Piratlar"</strong> — avlodlar konflikti, jamoa yoshi hayratda qoldiradi</li>
+            <li><strong>"Soatiga $0.02"</strong> — zarbali raqam</li>
+            <li><strong>"Oyim o'yin o'ynayapman deb o'ylaydi"</strong> — har bir o'smir o'zini taniydi</li>
+            <li><strong>"Bir yilda qilganni 30 soniyada o'g'irlashdi"</strong> — adolatsizlik = viruslik</li>
+            <li><strong>"3 yilgacha qamoq"</strong> — qonun qo'rqitadi, odamlar ogohlantirish sifatida ulashadi</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<!-- ==================== EQUIPMENT CHECKLIST ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Jihozlar</div>
+    <h2 class="section-title">Minimal to'plam</h2>
+    <p class="section-desc">Byudjet: $50-200. Qimmat jihozlar kerak emas — tabiiylik sifatdan muhimroq.</p>
+
+    <ul class="checklist">
+        <li><span class="check">+</span><div><div class="item-title">Smartfon (iPhone 12+ yoki Samsung S21+)</div><div class="item-desc">4K video, portret rejim. Ehtimol allaqachon bor.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Petlichka mikrofon ($10-15)</div><div class="item-desc">Boya BY-M1 yoki analog. Intervyu uchun juda muhim.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Mini-shtativ ($10-15)</div><div class="item-desc">Statik intervyu va ekran kadrlari uchun.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Stabilizator (ixtiyoriy, $80-100)</div><div class="item-desc">DJI OM 5/6 yoki Zhiyun Smooth 5. Silliq harakatlar uchun.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">CapCut (bepul)</div><div class="item-desc">Montaj, subtitrlar, matn, effektlar — hammasi bir joyda. To'g'ridan-to'g'ri telefonda.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Halqa chiroq ($15-20)</div><div class="item-desc">Intervyu uchun. Yumshoq yorug'lik, yuzga yoqimli.</div></div></li>
+    </ul>
+</div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<section style="padding: 80px 0; border: none;">
+<div class="container" style="text-align: center;">
+    <div style="background: linear-gradient(135deg, rgba(254, 44, 85, 0.1), rgba(37, 244, 238, 0.08)); border: 1px solid rgba(254, 44, 85, 0.2); border-radius: 20px; padding: 50px 30px; margin-bottom: 40px;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 2em; margin-bottom: 16px;">
+            "Biz tunlari uxlamadik, kimdir buni<br>
+            <span style="background: linear-gradient(135deg, var(--tiktok2), var(--tiktok)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">30 soniyada yuklab olsin deb</span>"
+        </h3>
+        <p style="color: var(--dim); font-size: 1.1em;">24 qism. 1 hikoya. Befarq qolishga 0 imkoniyat.</p>
+    </div>
+
+    <p style="color: #333; font-size: 0.85em;">
+        XANAVI Voice &copy; UluSoft<br>
+        TikTok Series Production Guide v1.0 — February 2026<br>
+        @xanavi.voice
+    </p>
+</div>
+</section>
+
+</body>
+</html>
