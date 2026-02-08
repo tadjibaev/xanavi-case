@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XANAVI vs Pirates - Case Materials</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 700px;
+            width: 90%;
+            padding: 40px;
+        }
+        .badge {
+            display: inline-block;
+            background: #dc3545;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: #13131a;
+            border: 1px solid #2a2a3a;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.15);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+        }
+        .card.red::before { background: linear-gradient(180deg, #ff6b6b, #dc3545); }
+        .card.orange::before { background: linear-gradient(180deg, #ffa500, #ff6b00); }
+        .card-icon {
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            color: #888;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .card-arrow {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            color: #444;
+            transition: all 0.3s;
+        }
+        .card:hover .card-arrow { color: #ff6b6b; transform: translateY(-50%) translateX(4px); }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #444;
+            font-size: 0.85em;
+        }
+        .footer span { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge">Confidential</div>
+        <h1>XANAVI Voice</h1>
+        <p class="subtitle">Anti-Piracy Case Materials</p>
+
+        <a href="case.html" class="card red">
+            <div class="card-icon">&#9878;</div>
+            <div class="card-title">Case File</div>
+            <div class="card-desc">
+                Full case documentation: incident timeline, technical forensics,
+                suspect identification, legal framework (UZ/RU/KZ),
+                evidence checklist, and court filing templates.
+            </div>
+            <div class="card-arrow">&#8594;</div>
+        </a>
+
+        <a href="damages.html" class="card orange">
+            <div class="card-icon">&#128176;</div>
+            <div class="card-title">Damages Calculation</div>
+            <div class="card-desc">
+                Financial impact analysis: direct damages ($16,300),
+                criminal liability (up to 6 years), civil claims
+                ($10K&ndash;$5M per Russia Art. 1301), per-user liability.
+            </div>
+            <div class="card-arrow">&#8594;</div>
+        </a>
+
+        <div class="footer">
+            XANAVI Voice &copy; UluSoft &mdash; <span>All rights reserved</span><br>
+            Prepared: February 2026
+        </div>
+    </div>
+</body>
+</html>

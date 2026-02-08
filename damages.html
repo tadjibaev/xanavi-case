@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расчёт ущерба и правовые последствия — Xanavi Voice</title>
+    <style>
+        :root {
+            --dark: #0d1117;
+            --darker: #010409;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --red: #f85149;
+            --red-bg: rgba(248,81,73,0.1);
+            --orange: #d29922;
+            --orange-bg: rgba(210,153,34,0.1);
+            --green: #3fb950;
+            --green-bg: rgba(63,185,80,0.1);
+            --blue: #58a6ff;
+            --blue-bg: rgba(88,166,255,0.1);
+            --purple: #bc8cff;
+            --purple-bg: rgba(188,140,255,0.1);
+            --yellow: #e3b341;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .page { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+        /* ===== HEADER ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d0000 50%, #1a0505 100%);
+            border: 1px solid #f8514933;
+            border-radius: 16px;
+            padding: 48px 40px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(248,81,73,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--red);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #f85149, #ff7b72);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .sub { color: var(--text-dim); font-size: 16px; }
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .hero-stat {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .hero-stat .num {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--red);
+        }
+        .hero-stat .label {
+            font-size: 12px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2 .icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .section h3 {
+            font-size: 16px;
+            color: var(--text-dim);
+            margin: 24px 0 12px 0;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .section h3:first-of-type { border-top: none; padding-top: 0; margin-top: 16px; }
+
+        /* ===== CALCULATION BLOCKS ===== */
+        .calc {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 12px 0;
+            font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        .calc .line {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+        .calc .line.total {
+            border-top: 2px solid var(--border);
+            margin-top: 8px;
+            padding-top: 10px;
+            font-weight: 700;
+        }
+        .calc .desc { color: var(--text-dim); }
+        .calc .val { color: var(--yellow); font-weight: 600; }
+        .calc .val.red { color: var(--red); }
+        .calc .val.green { color: var(--green); }
+        .calc .comment { color: #484f58; font-style: italic; }
+
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--darker);
+            color: var(--text-dim);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* ===== TAGS ===== */
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .tag.red { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+        .tag.orange { background: var(--orange-bg); color: var(--orange); border: 1px solid rgba(210,153,34,0.3); }
+        .tag.green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+        .tag.blue { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); }
+        .tag.purple { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(188,140,255,0.3); }
+
+        /* ===== ALERT BOXES ===== */
+        .alert {
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid;
+        }
+        .alert.danger {
+            background: var(--red-bg);
+            border-color: var(--red);
+        }
+        .alert.warning {
+            background: var(--orange-bg);
+            border-color: var(--orange);
+        }
+        .alert.info {
+            background: var(--blue-bg);
+            border-color: var(--blue);
+        }
+        .alert strong { display: block; margin-bottom: 4px; }
+
+        /* ===== COMPARISON GRID ===== */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .compare-card {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+        }
+        .compare-card.worst {
+            border-color: var(--red);
+            box-shadow: 0 0 20px rgba(248,81,73,0.1);
+        }
+        .compare-card .country {
+            font-size: 13px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .compare-card .article {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--blue);
+        }
+        .compare-card .penalty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+        }
+        .compare-card .penalty .icon-sm {
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .compare-card .big-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--red);
+            margin: 16px 0 4px 0;
+        }
+        .compare-card .big-label {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        /* ===== TIMELINE BAR ===== */
+        .timeline-bar {
+            display: flex;
+            margin: 20px 0;
+            height: 48px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .timeline-bar .segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            padding: 0 12px;
+            white-space: nowrap;
+        }
+
+        /* ===== TOTAL BOX ===== */
+        .total-box {
+            background: linear-gradient(135deg, #1a0a0a, #2d0000);
+            border: 2px solid var(--red);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin: 24px 0;
+        }
+        .total-box .label {
+            font-size: 14px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .total-box .amount {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #f85149, #ff7b72, #ffa198);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 8px 0;
+        }
+        .total-box .detail {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        /* ===== SCENARIO CARDS ===== */
+        .scenario {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 12px 0;
+        }
+        .scenario .title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-dim);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+            margin-top: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-stats { grid-template-columns: repeat(2, 1fr); }
+            .compare-grid { grid-template-columns: 1fr; }
+            .hero { padding: 32px 24px; }
+            .hero h1 { font-size: 24px; }
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            .section, .compare-card, .calc { border-color: #ccc; background: #f9f9f9; }
+            .hero { background: #f0f0f0 !important; }
+            .hero h1 { -webkit-text-fill-color: #c00; }
+            .tag { border: 1px solid #999; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- ==================== HERO ==================== -->
+    <div class="hero">
+        <div class="hero-badge">Расчёт ущерба</div>
+        <h1>Правовые последствия незаконного копирования Xanavi Voice</h1>
+        <div class="sub">Детальный расчёт убытков и ответственности для суда и правоохранительных органов</div>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="num">100</div>
+                <div class="label">Пиратских установок</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">$100</div>
+                <div class="label">Лицензия / авто</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">$5/мес</div>
+                <div class="label">Расходы / авто</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">6 мес</div>
+                <div class="label">Период нарушения</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 1. DIRECT DAMAGES ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--orange-bg);">1</span>
+            Расчёт прямых убытков правообладателя
+        </h2>
+
+        <h3>1.1. Упущенная выгода</h3>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">Количество незаконных установок</span>
+                <span class="val">100 шт</span>
+            </div>
+            <div class="line">
+                <span class="desc">Стоимость одной лицензии</span>
+                <span class="val">$100</span>
+            </div>
+            <div class="line total">
+                <span class="desc">Упущенная выгода (лицензии)</span>
+                <span class="val red">$10,000</span>
+            </div>
+        </div>
+
+        <h3>1.2. Расходы на инфраструктуру (Azure TTS + сервер)</h3>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">Расходы на одно устройство в месяц</span>
+                <span class="val">$5</span>
+            </div>
+            <div class="line">
+                <span class="desc">Количество устройств</span>
+                <span class="val">100</span>
+            </div>
+            <div class="line">
+                <span class="desc">Период незаконного использования</span>
+                <span class="val">6 месяцев</span>
+            </div>
+            <div class="line total">
+                <span class="desc">Серверные расходы (100 &times; $5 &times; 6)</span>
+                <span class="val red">$3,000</span>
+            </div>
+        </div>
+
+        <h3>1.3. Расходы на расследование и защиту</h3>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">Техническое расследование (~40 часов &times; $30)</span>
+                <span class="val">$1,200</span>
+            </div>
+            <div class="line">
+                <span class="desc">Разработка защитных мер (~20 часов &times; $30)</span>
+                <span class="val">$600</span>
+            </div>
+            <div class="line">
+                <span class="desc">Ротация API-ключей, изменение инфраструктуры</span>
+                <span class="val">$500</span>
+            </div>
+            <div class="line">
+                <span class="desc">Юридические расходы (адвокат, нотариус, регистрация ПО)</span>
+                <span class="val">$1,000</span>
+            </div>
+            <div class="line total">
+                <span class="desc">Расходы на расследование и защиту</span>
+                <span class="val red">$3,300</span>
+            </div>
+        </div>
+
+        <div class="total-box">
+            <div class="label">Итого прямые убытки правообладателя</div>
+            <div class="amount">$16,300</div>
+            <div class="detail">
+                ~210,270,000 сум (Узбекистан) &nbsp;|&nbsp;
+                ~1,630,000 руб (Россия) &nbsp;|&nbsp;
+                ~8,150,000 тенге (Казахстан)
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 2. CRIMINAL LIABILITY ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--red-bg);">2</span>
+            Уголовная ответственность нарушителя
+        </h2>
+
+        <div class="alert danger">
+            <strong>Отягчающие обстоятельства в данном деле:</strong>
+            Распространение через интернет (Telegram) + коммерческий характер (извлечение дохода) +
+            обход технических средств защиты (Virbox DRM) + массовый характер (100+ установок)
+        </div>
+
+        <div class="compare-grid">
+            <!-- Uzbekistan -->
+            <div class="compare-card">
+                <div class="country">Узбекистан</div>
+                <div class="article">ст. 149-1 ч.2 УК РУз</div>
+                <div class="penalty">
+                    <span class="icon-sm">&#9961;</span>
+                    <span>Штраф 100-150 БРВ</span>
+                </div>
+                <div class="penalty">
+                    <span class="icon-sm">&#128176;</span>
+                    <span>41.2 - 61.8 млн сум</span>
+                </div>
+                <div class="penalty">
+                    <span class="icon-sm" style="color:var(--text-dim)">~</span>
+                    <span style="color:var(--text-dim)">$3,200 - $4,800</span>
+                </div>
+                <div class="big-number">3 года</div>
+                <div class="big-label">Максимальный срок лишения свободы</div>
+            </div>
+
+            <!-- Russia -->
+            <div class="compare-card worst">
+                <div class="country">Россия</div>
+                <div class="article">ст. 146 ч.3 УК РФ</div>
+                <div class="alert danger" style="margin: 8px 0; padding: 8px 12px; font-size: 12px;">
+                    $16,300 = ~1,630,000 руб &gt; 1,000,000 руб<br>
+                    = ОСОБО КРУПНЫЙ РАЗМЕР
+                </div>
+                <div class="penalty">
+                    <span class="icon-sm">&#128176;</span>
+                    <span>Штраф до 500,000 руб</span>
+                </div>
+                <div class="big-number">6 лет</div>
+                <div class="big-label">Максимальный срок лишения свободы</div>
+            </div>
+
+            <!-- Kazakhstan -->
+            <div class="compare-card">
+                <div class="country">Казахстан</div>
+                <div class="article">ст. 198 ч.3 УК РК</div>
+                <div class="penalty">
+                    <span class="icon-sm">&#128176;</span>
+                    <span>Штраф до 5,000 МРП</span>
+                </div>
+                <div class="penalty">
+                    <span class="icon-sm" style="color:var(--text-dim)">~</span>
+                    <span style="color:var(--text-dim)">~$36,500</span>
+                </div>
+                <div class="big-number">5 лет</div>
+                <div class="big-label">Максимальный срок лишения свободы</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 3. CIVIL LIABILITY ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--blue-bg);">3</span>
+            Гражданско-правовая ответственность (иск о компенсации)
+        </h2>
+
+        <!-- UZ -->
+        <h3>3.1. Узбекистан — ст. 14 Закона «О правовой охране программ для ЭВМ»</h3>
+        <div class="alert info">
+            <strong>Статутная компенсация — без доказывания убытков:</strong>
+            От 20 до 1,000 минимальных размеров заработной платы (на усмотрение суда)
+        </div>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">МРЗП (2025)</span>
+                <span class="val">1,120,000 сум (~$87)</span>
+            </div>
+            <div class="line">
+                <span class="desc">Минимум: 20 &times; МРЗП</span>
+                <span class="val">22,400,000 сум (~$1,740)</span>
+            </div>
+            <div class="line">
+                <span class="desc">Максимум: 1,000 &times; МРЗП</span>
+                <span class="val red">1,120,000,000 сум (~$86,800)</span>
+            </div>
+            <div class="line" style="margin-top: 12px;">
+                <span class="desc comment">+ возмещение реальных убытков ($16,300)</span>
+                <span class="val comment">дополнительно</span>
+            </div>
+            <div class="line">
+                <span class="desc comment">+ конфискация контрафакта и оборудования (ст. 66)</span>
+                <span class="val comment">дополнительно</span>
+            </div>
+        </div>
+
+        <!-- RU -->
+        <h3>3.2. Россия — ст. 1301 ГК РФ (три варианта на выбор истца)</h3>
+
+        <div class="scenario">
+            <div class="title"><span class="tag red">ВАРИАНТ А</span> Фиксированная компенсация ЗА КАЖДУЮ КОПИЮ</div>
+            <div class="calc" style="margin-top: 12px;">
+                <div class="line">
+                    <span class="desc">Количество нарушений (каждая установка = отдельное)</span>
+                    <span class="val">100</span>
+                </div>
+                <div class="line">
+                    <span class="desc">Диапазон компенсации за 1 нарушение</span>
+                    <span class="val">10,000 - 5,000,000 руб</span>
+                </div>
+                <div class="line" style="margin-top: 8px;">
+                    <span class="desc">Минимум: 100 &times; 10,000 руб</span>
+                    <span class="val">1,000,000 руб (~$10,000)</span>
+                </div>
+                <div class="line">
+                    <span class="desc">Реалистично: 100 &times; 50,000-100,000 руб</span>
+                    <span class="val green">5-10 млн руб ($50,000-$100,000)</span>
+                </div>
+                <div class="line total">
+                    <span class="desc">Максимум: 100 &times; 5,000,000 руб</span>
+                    <span class="val red">500,000,000 руб ($5,000,000)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <div class="title"><span class="tag orange">ВАРИАНТ Б</span> Двукратная стоимость контрафакта</div>
+            <div class="calc" style="margin-top: 12px;">
+                <div class="line">
+                    <span class="desc">Стоимость контрафактных копий: 100 &times; $100</span>
+                    <span class="val">$10,000</span>
+                </div>
+                <div class="line total">
+                    <span class="desc">Компенсация: 2 &times; $10,000</span>
+                    <span class="val red">$20,000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <div class="title"><span class="tag blue">ВАРИАНТ В</span> Двукратный размер роялти</div>
+            <div class="calc" style="margin-top: 12px;">
+                <div class="line">
+                    <span class="desc">Лицензии: 100 &times; $100</span>
+                    <span class="val">$10,000</span>
+                </div>
+                <div class="line">
+                    <span class="desc">Обслуживание: 100 &times; $5 &times; 6 мес</span>
+                    <span class="val">$3,000</span>
+                </div>
+                <div class="line total">
+                    <span class="desc">Компенсация: 2 &times; ($10,000 + $3,000)</span>
+                    <span class="val red">$26,000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert warning">
+            <strong>Рекомендация: Вариант А — самый выгодный.</strong>
+            Российские суды обычно присуждают 50,000-100,000 руб за копию при коммерческом нарушении.
+            При 100 установках это <strong>$50,000-$100,000</strong>.
+        </div>
+
+        <!-- KZ -->
+        <h3>3.3. Казахстан — статутная компенсация</h3>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">1 МРП (2025)</span>
+                <span class="val">3,692 тенге (~$7.30)</span>
+            </div>
+            <div class="line">
+                <span class="desc">Минимум: 100 МРП</span>
+                <span class="val">369,200 тенге (~$730)</span>
+            </div>
+            <div class="line total">
+                <span class="desc">Максимум: 15,000 МРП</span>
+                <span class="val red">55,380,000 тенге (~$110,000)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 4. TOTAL LIABILITY ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--red-bg);">4</span>
+            Совокупная ответственность нарушителя
+        </h2>
+
+        <h3>4.1. Сводная таблица</h3>
+        <table>
+            <tr>
+                <th>Вид ответственности</th>
+                <th>Узбекистан</th>
+                <th>Россия</th>
+                <th>Казахстан</th>
+            </tr>
+            <tr>
+                <td><strong>Уголовная статья</strong></td>
+                <td>149-1 ч.2 УК</td>
+                <td>146 ч.3 УК <span class="tag red">ОСО. КРУПНЫЙ</span></td>
+                <td>198 ч.3 УК</td>
+            </tr>
+            <tr>
+                <td><strong>Лишение свободы</strong></td>
+                <td style="color: var(--red); font-weight:700;">до 3 лет</td>
+                <td style="color: var(--red); font-weight:700;">до 6 лет</td>
+                <td style="color: var(--red); font-weight:700;">до 5 лет</td>
+            </tr>
+            <tr>
+                <td><strong>Уголовный штраф</strong></td>
+                <td>~$3,200-$4,800</td>
+                <td>~$5,000</td>
+                <td>~$36,500</td>
+            </tr>
+            <tr>
+                <td><strong>Гражданский иск (мин.)</strong></td>
+                <td>$1,740</td>
+                <td>$10,000</td>
+                <td>$730</td>
+            </tr>
+            <tr>
+                <td><strong>Гражданский иск (реально)</strong></td>
+                <td style="color: var(--orange); font-weight:700;">$15,000 - $86,800</td>
+                <td style="color: var(--red); font-weight:700;">$50,000 - $100,000</td>
+                <td style="color: var(--orange); font-weight:700;">$30,000 - $110,000</td>
+            </tr>
+            <tr>
+                <td><strong>Гражданский иск (макс.)</strong></td>
+                <td>$86,800</td>
+                <td style="color: var(--red); font-weight:700;">$5,000,000</td>
+                <td>$110,000</td>
+            </tr>
+            <tr>
+                <td><strong>Конфискация</strong></td>
+                <td>Копии + оборудование</td>
+                <td>Копии + оборудование</td>
+                <td>Копии + оборудование</td>
+            </tr>
+        </table>
+
+        <h3>4.2. Максимальная совокупная ответственность</h3>
+
+        <div class="total-box">
+            <div class="label">Максимальная компенсация при 100 установках (Россия, ст. 1301 ГК)</div>
+            <div class="amount">$5,000,000</div>
+            <div class="detail">
+                100 нарушений &times; 5,000,000 руб за каждое<br>
+                + до 6 лет лишения свободы + штраф 500,000 руб
+            </div>
+        </div>
+
+        <div class="total-box" style="border-color: var(--orange);">
+            <div class="label">Реалистичная компенсация (средний исход в суде)</div>
+            <div class="amount" style="background: linear-gradient(90deg, var(--orange), var(--yellow));">$50,000 - $100,000</div>
+            <div class="detail">
+                100 нарушений &times; 50,000-100,000 руб за каждое (ст. 1301 ГК РФ)<br>
+                + прямые убытки $16,300 + конфискация оборудования
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 5. INSTALLER LIABILITY ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--purple-bg);">5</span>
+            Ответственность установщика (автосервис)
+        </h2>
+
+        <div class="alert danger">
+            <strong>Коммерческое распространение контрафакта — отягчающее обстоятельство</strong>
+            Если «Улугбек» взимает плату за установку, это квалифицируется как извлечение дохода
+            от незаконного использования объекта авторского права.
+        </div>
+
+        <h3>5.1. Доход установщика</h3>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">Предполагаемая цена установки</span>
+                <span class="val">~$80 / авто</span>
+            </div>
+            <div class="line">
+                <span class="desc">Количество установок</span>
+                <span class="val">100</span>
+            </div>
+            <div class="line total">
+                <span class="desc">Незаконный доход установщика</span>
+                <span class="val red">~$8,000</span>
+            </div>
+            <div class="line" style="margin-top: 8px;">
+                <span class="desc comment">По ст. 14 Закона — подлежит взысканию в пользу правообладателя</span>
+                <span class="val comment"></span>
+            </div>
+        </div>
+
+        <h3>5.2. Что конфискуется у установщика (ст. 66)</h3>
+        <table>
+            <tr>
+                <th>Объект</th>
+                <th>Основание</th>
+                <th>Последствие</th>
+            </tr>
+            <tr>
+                <td>Все контрафактные копии APK</td>
+                <td>Контрафактные экземпляры произведений</td>
+                <td>Уничтожение или передача правообладателю</td>
+            </tr>
+            <tr>
+                <td>Компьютеры, ноутбуки</td>
+                <td>Оборудование для изготовления контрафакта</td>
+                <td>Конфискация</td>
+            </tr>
+            <tr>
+                <td>ADB-кабели, USB-носители</td>
+                <td>Материалы для установки</td>
+                <td>Конфискация</td>
+            </tr>
+            <tr>
+                <td>Диагностическое оборудование</td>
+                <td>Использовалось для root-доступа к ГУ</td>
+                <td>Конфискация как вещдок</td>
+            </tr>
+            <tr>
+                <td>Головное устройство авто (при наличии)</td>
+                <td>Содержит контрафактные копии</td>
+                <td>Изъятие как вещественное доказательство</td>
+            </tr>
+        </table>
+
+        <h3>5.3. Совокупные последствия для установщика</h3>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">Уголовный штраф (УК РУз)</span>
+                <span class="val">$3,200 - $4,800</span>
+            </div>
+            <div class="line">
+                <span class="desc">Гражданский иск (компенсация)</span>
+                <span class="val">$15,000 - $86,800</span>
+            </div>
+            <div class="line">
+                <span class="desc">Взыскание незаконного дохода</span>
+                <span class="val">$8,000</span>
+            </div>
+            <div class="line">
+                <span class="desc">Конфискация оборудования</span>
+                <span class="val">$2,000 - $10,000</span>
+            </div>
+            <div class="line">
+                <span class="desc">Судебные расходы истца (взыскиваются с ответчика)</span>
+                <span class="val">$1,000 - $3,000</span>
+            </div>
+            <div class="line total">
+                <span class="desc">ИТОГО финансовые потери установщика</span>
+                <span class="val red">$29,200 - $112,600</span>
+            </div>
+            <div class="line" style="margin-top: 12px;">
+                <span class="desc" style="color: var(--red); font-weight: 700;">+ лишение свободы</span>
+                <span class="val red">до 3 лет (РУз) / до 6 лет (РФ)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 6. PER USER ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--orange-bg);">6</span>
+            Ответственность каждого пользователя пиратской копии
+        </h2>
+
+        <div class="alert warning">
+            <strong>Каждый, кто установил контрафактную копию — нарушитель авторских прав.</strong>
+            Использование заведомо контрафактного экземпляра программы является незаконным.
+        </div>
+
+        <h3>6.1. Что грозит каждому пользователю</h3>
+        <table>
+            <tr>
+                <th>Последствие</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td><span class="tag red">Уголовное</span></td>
+                <td>Использование заведомо контрафактного ПО — ст. 149-1 УК РУз.<br>
+                    Если пользователь знал, что копия нелегальная (а при установке через Telegram это очевидно).</td>
+            </tr>
+            <tr>
+                <td><span class="tag orange">Гражданский иск</span></td>
+                <td>Правообладатель может подать иск к каждому пользователю индивидуально.<br>
+                    Компенсация: стоимость лицензии ($100) + убытки + моральный вред.</td>
+            </tr>
+            <tr>
+                <td><span class="tag blue">Изъятие ГУ</span></td>
+                <td>Головное устройство может быть изъято как вещественное доказательство
+                    на время следствия и суда (месяцы). Автомобиль без ГУ = нет навигации,
+                    климат-контроля, мультимедиа.</td>
+            </tr>
+            <tr>
+                <td><span class="tag purple">Свидетель</span></td>
+                <td>Как минимум — вызов в качестве свидетеля по уголовному делу.
+                    Обязан явиться, дать показания, предоставить доступ к устройству.</td>
+            </tr>
+        </table>
+
+        <h3>6.2. Финансовый расчёт для одного пользователя</h3>
+        <div class="calc">
+            <div class="line">
+                <span class="desc">Стоимость лицензии (которую не заплатил)</span>
+                <span class="val">$100</span>
+            </div>
+            <div class="line">
+                <span class="desc">Стоимость обслуживания (6 мес &times; $5)</span>
+                <span class="val">$30</span>
+            </div>
+            <div class="line">
+                <span class="desc">Гражданская компенсация (если суд присудит)</span>
+                <span class="val">$170 - $870</span>
+            </div>
+            <div class="line">
+                <span class="desc">Расходы на адвоката (пользователя)</span>
+                <span class="val">$500 - $1,500</span>
+            </div>
+            <div class="line">
+                <span class="desc">Потеря времени (суд, следствие)</span>
+                <span class="val">непредсказуемо</span>
+            </div>
+            <div class="line total">
+                <span class="desc">ИТОГО потери пользователя</span>
+                <span class="val red">$800 - $2,500</span>
+            </div>
+            <div class="line" style="margin-top: 8px;">
+                <span class="desc comment">Сэкономил $100 на лицензии — потерял $800-$2,500 + нервы + время</span>
+                <span class="val comment"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 7. VISUAL SUMMARY ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--green-bg);">7</span>
+            Наглядная сводка
+        </h2>
+
+        <h3>7.1. Масштаб ответственности</h3>
+        <table>
+            <tr>
+                <th></th>
+                <th>Установщик<br>(«Улугбек»)</th>
+                <th>Каждый пользователь<br>(100 человек)</th>
+            </tr>
+            <tr>
+                <td><strong>Уголовное наказание</strong></td>
+                <td style="color: var(--red);">До 3-6 лет тюрьмы</td>
+                <td>Штраф / условный срок</td>
+            </tr>
+            <tr>
+                <td><strong>Финансовые потери</strong></td>
+                <td style="color: var(--red); font-weight:700;">$29,000 - $112,600</td>
+                <td>$800 - $2,500 каждый</td>
+            </tr>
+            <tr>
+                <td><strong>Конфискация</strong></td>
+                <td>Всё оборудование</td>
+                <td>ГУ может быть изъято</td>
+            </tr>
+            <tr>
+                <td><strong>Репутация</strong></td>
+                <td>Судимость</td>
+                <td>Вызов в суд</td>
+            </tr>
+        </table>
+
+        <h3>7.2. Что пират «сэкономил» vs что потеряет</h3>
+        <div class="compare-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="compare-card" style="text-align: center;">
+                <div class="country" style="color: var(--green);">«Сэкономил»</div>
+                <div class="big-number" style="color: var(--green);">$100</div>
+                <div class="big-label">Стоимость лицензии</div>
+            </div>
+            <div class="compare-card worst" style="text-align: center;">
+                <div class="country" style="color: var(--red);">Потеряет</div>
+                <div class="big-number">$800+</div>
+                <div class="big-label">Штраф + компенсация + адвокат<br>+ изъятие ГУ + время в суде</div>
+            </div>
+        </div>
+
+        <div class="compare-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="compare-card" style="text-align: center;">
+                <div class="country" style="color: var(--green);">Установщик «заработал»</div>
+                <div class="big-number" style="color: var(--green);">$8,000</div>
+                <div class="big-label">100 установок &times; ~$80</div>
+            </div>
+            <div class="compare-card worst" style="text-align: center;">
+                <div class="country" style="color: var(--red);">Установщик потеряет</div>
+                <div class="big-number">$29,000+</div>
+                <div class="big-label">Штраф + иск + конфискация<br>+ до 3 лет лишения свободы</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 8. LEGAL BASIS ==================== -->
+    <div class="section">
+        <h2>
+            <span class="icon" style="background: var(--blue-bg);">8</span>
+            Правовые основания
+        </h2>
+
+        <table>
+            <tr>
+                <th>Закон / статья</th>
+                <th>Применение в данном деле</th>
+            </tr>
+            <tr>
+                <td>Закон РУз «О правовой охране программ для ЭВМ и баз данных» (1994)</td>
+                <td>Ст. 14 — способы защиты; ст. 15 — ответственность. Компенсация 20-1000 МРЗП</td>
+            </tr>
+            <tr>
+                <td>Закон РУз «Об авторском праве и смежных правах» (ЗРУ-42, 2006)</td>
+                <td>Ст. 65 — гражданско-правовые способы защиты; ст. 66 — конфискация контрафакта</td>
+            </tr>
+            <tr>
+                <td>Уголовный кодекс РУз — ст. 149-1 (ред. 10.11.2025)</td>
+                <td>Ч.2 — через интернет, группа лиц. Штраф 100-150 БРВ или до 3 лет</td>
+            </tr>
+            <tr>
+                <td>Гражданский кодекс РФ — ст. 1261</td>
+                <td>Программы для ЭВМ = объекты авторского права (литературные произведения)</td>
+            </tr>
+            <tr>
+                <td>Гражданский кодекс РФ — ст. 1301</td>
+                <td>Компенсация 10,000-5,000,000 руб за каждое нарушение ИЛИ 2&times; стоимость</td>
+            </tr>
+            <tr>
+                <td>Уголовный кодекс РФ — ст. 146 ч.3</td>
+                <td>Особо крупный размер (&gt;1 млн руб). До 6 лет + штраф до 500,000 руб</td>
+            </tr>
+            <tr>
+                <td>ФЗ-133 от 12.06.2024 (РФ)</td>
+                <td>Пороги: крупный &gt;100,000 руб, особо крупный &gt;1,000,000 руб</td>
+            </tr>
+            <tr>
+                <td>Уголовный кодекс РК — ст. 198 ч.3</td>
+                <td>Группа лиц, крупный размер. До 5 лет + штраф до 5,000 МРП</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <div class="footer">
+        <p><strong>КОНФИДЕНЦИАЛЬНО</strong> | Расчёт подготовлен: 08.02.2026</p>
+        <p>Xanavi Voice &copy; 2024-2026 | Пакет: com.ulusoft.bydvoice</p>
+        <p style="margin-top: 8px;">Настоящий документ предназначен для использования в качестве приложения к исковому заявлению<br>
+        и заявлению в правоохранительные органы. Все расчёты основаны на действующем законодательстве.</p>
+    </div>
+
+</div>
+</body>
+</html>

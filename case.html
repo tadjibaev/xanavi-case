@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Досье: Xanavi Voice — Незаконное копирование и распространение ПО</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --danger: #b71c1c;
+            --success: #1b5e20;
+            --warning: #e65100;
+            --info: #0277bd;
+            --bg: #fafafa;
+            --card: #ffffff;
+            --border: #e0e0e0;
+            --text: #212121;
+            --text-secondary: #616161;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), #283593);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header .subtitle { opacity: 0.9; font-size: 16px; }
+        .header .case-number {
+            margin-top: 16px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 6px;
+            display: inline-block;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .header .classification {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--danger);
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .toc h2 { color: var(--primary); margin-bottom: 16px; font-size: 20px; }
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+        }
+        .toc a {
+            color: var(--info);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: block;
+            transition: background 0.2s;
+        }
+        .toc a:hover { background: #e3f2fd; }
+        .toc .section-num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 24px;
+        }
+        .section h2 {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary);
+        }
+        .section h3 {
+            color: var(--text);
+            font-size: 17px;
+            margin: 20px 0 10px 0;
+        }
+        .section h4 {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin: 16px 0 8px 0;
+        }
+
+        /* Cards */
+        .card {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+        }
+        .card.danger { border-left-color: var(--danger); background: #fce4ec; }
+        .card.success { border-left-color: var(--success); background: #e8f5e9; }
+        .card.warning { border-left-color: var(--warning); background: #fff3e0; }
+        .card.info { border-left-color: var(--info); background: #e1f5fe; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f8f9fa; }
+        tr:hover { background: #e8eaf6; }
+
+        /* Code */
+        code {
+            background: #263238;
+            color: #80cbc4;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Cascadia Code', 'Fira Code', monospace;
+            font-size: 13px;
+        }
+        pre {
+            background: #263238;
+            color: #eeffff;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'Cascadia Code', 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        pre .comment { color: #546e7a; }
+        pre .string { color: #c3e88d; }
+        pre .keyword { color: #c792ea; }
+        pre .key { color: #89ddff; }
+
+        /* Timeline */
+        .timeline { position: relative; padding-left: 40px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 20px;
+            width: 13px;
+            height: 13px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        .timeline-item.critical::before { background: var(--danger); box-shadow: 0 0 0 2px var(--danger); }
+        .timeline-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .timeline-title { font-weight: 600; margin: 4px 0; }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; }
+        .checklist li {
+            padding: 10px 16px;
+            margin: 6px 0;
+            background: #f5f5f5;
+            border-radius: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .checklist .check {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Role badges */
+        .role {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .role.dev { background: #e8eaf6; color: var(--primary); }
+        .role.legal { background: #fce4ec; color: var(--danger); }
+        .role.mgmt { background: #e8f5e9; color: var(--success); }
+        .role.sec { background: #fff3e0; color: var(--warning); }
+
+        /* Evidence tag */
+        .evidence-tag {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        /* Priority indicator */
+        .priority {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .priority.critical { background: var(--danger); color: white; }
+        .priority.high { background: var(--warning); color: white; }
+        .priority.medium { background: #ffd54f; color: #333; }
+        .priority.low { background: #e0e0e0; color: #333; }
+
+        /* Grid layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .header { padding: 24px; }
+            .section { padding: 20px; }
+        }
+
+        /* Print styles */
+        @media print {
+            body { padding: 0; background: white; }
+            .section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+            .header { background: #1a237e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            pre { white-space: pre-wrap; }
+        }
+
+        .fingerprint {
+            font-family: monospace;
+            word-break: break-all;
+            background: #263238;
+            color: #ffcc80;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: block;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ==================== HEADER ==================== -->
+        <div class="header">
+            <div class="classification">КОНФИДЕНЦИАЛЬНО</div>
+            <h1>ДОСЬЕ: Незаконное копирование и распространение ПО</h1>
+            <div class="subtitle">Xanavi Voice — голосовой ассистент для автомобилей BYD</div>
+            <div class="case-number">
+                Дата инцидента: 06.02.2026 &nbsp;|&nbsp; Дата обнаружения: 08.02.2026 &nbsp;|&nbsp; Правообладатель: ООО «Xanavi» / Ulusoft
+            </div>
+        </div>
+
+        <!-- ==================== TABLE OF CONTENTS ==================== -->
+        <div class="toc">
+            <h2>Содержание</h2>
+            <div class="toc-grid">
+                <a href="#section1"><span class="section-num">1</span> Краткое описание инцидента</a>
+                <a href="#section2"><span class="section-num">2</span> Хронология событий</a>
+                <a href="#section3"><span class="section-num">3</span> Техническая экспертиза</a>
+                <a href="#section4"><span class="section-num">4</span> Идентификация подозреваемых</a>
+                <a href="#section5"><span class="section-num">5</span> Правовая база (СНГ)</a>
+                <a href="#section6"><span class="section-num">6</span> Расчёт ущерба</a>
+                <a href="#section7"><span class="section-num">7</span> Доказательная база</a>
+                <a href="#section8"><span class="section-num">8</span> Серверные контрмеры</a>
+                <a href="#section9"><span class="section-num">9</span> План действий по ролям</a>
+                <a href="#section10"><span class="section-num">10</span> Шаблоны заявлений</a>
+                <a href="#section11"><span class="section-num">11</span> Контактная информация</a>
+            </div>
+        </div>
+
+        <!-- ==================== 1. INCIDENT SUMMARY ==================== -->
+        <div class="section" id="section1">
+            <h2>1. Краткое описание инцидента</h2>
+
+            <div class="card danger">
+                <strong>Суть:</strong> Неустановленные лица осуществили несанкционированное копирование (клонирование лицензии)
+                коммерческого приложения «Xanavi Voice» (пакет <code>com.ulusoft.bydvoice</code>) и организовали его
+                незаконное распространение через мессенджер Telegram для установки на головные устройства автомобилей BYD.
+            </div>
+
+            <h3>Что было похищено</h3>
+            <table>
+                <tr>
+                    <th>Объект</th>
+                    <th>Описание</th>
+                    <th>Критичность</th>
+                </tr>
+                <tr>
+                    <td>Лицензионные данные</td>
+                    <td>USER_ID, токены авторизации, ключи шифрования из SharedPreferences</td>
+                    <td><span class="priority critical">КРИТИЧЕСКАЯ</span></td>
+                </tr>
+                <tr>
+                    <td>APK-файл приложения</td>
+                    <td><code>voice.apk</code> (289 МБ), защищён Virbox Protector</td>
+                    <td><span class="priority critical">КРИТИЧЕСКАЯ</span></td>
+                </tr>
+                <tr>
+                    <td>Базы данных команд</td>
+                    <td>commands_ru.sqlite, commands_tr.sqlite, commands_uz.sqlite, commands_ky.sqlite</td>
+                    <td><span class="priority high">ВЫСОКАЯ</span></td>
+                </tr>
+                <tr>
+                    <td>Файлы DRM-защиты</td>
+                    <td>Virbox Protector: l5e7186e3.so, vbp.dex</td>
+                    <td><span class="priority high">ВЫСОКАЯ</span></td>
+                </tr>
+                <tr>
+                    <td>Azure API-ключ</td>
+                    <td>Ключ подписки Cognitive Services TTS (захардкожен в приложении)</td>
+                    <td><span class="priority high">ВЫСОКАЯ</span></td>
+                </tr>
+            </table>
+
+            <h3>Метод атаки</h3>
+            <p>Клонирование лицензии через ADB с root-доступом к головному устройству BYD. Код приложения <strong>не был модифицирован</strong> — атакующие скопировали данные авторизации с легитимного устройства и распространяют инструкции по их установке на другие устройства.</p>
+        </div>
+
+        <!-- ==================== 2. TIMELINE ==================== -->
+        <div class="section" id="section2">
+            <h2>2. Хронология событий</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">До 06.02.2026</div>
+                    <div class="timeline-title">Подготовительный этап</div>
+                    <p>Злоумышленники получили физический доступ к головному устройству BYD с установленным легитимным приложением Xanavi Voice. Предположительно — через автосервис или дилерский центр.</p>
+                </div>
+
+                <div class="timeline-item critical">
+                    <div class="timeline-date">06.02.2026, ~13:23 UTC</div>
+                    <div class="timeline-title">Кража данных авторизации</div>
+                    <p>Последняя активность легитимного пользователя (LAST_ONLINE_DATE: <code>1770384206346</code> = 06.02.2026 13:23:26 UTC). После этого момента данные были скопированы с устройства.</p>
+                </div>
+
+                <div class="timeline-item critical">
+                    <div class="timeline-date">07.02.2026 — 08.02.2026</div>
+                    <div class="timeline-title">Создание инструментов клонирования</div>
+                    <p>Созданы скрипты <code>install_hack.txt</code> (Python, установка APK как системного) и <code>fix_app.txt</code> (Batch, клонирование данных). Скрипты написаны на русском языке с комментариями.</p>
+                </div>
+
+                <div class="timeline-item critical">
+                    <div class="timeline-date">08.02.2026, 00:47</div>
+                    <div class="timeline-title">Распространение через Telegram</div>
+                    <p>Пользователь <strong>«Улугбек»</strong> опубликовал инструкции в Telegram. Метка времени вставлена в файл <code>fix_app.txt</code>, строка 117: <code>Улугбек, [08.02.2026 0:47]</code></p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">08.02.2026</div>
+                    <div class="timeline-title">Обнаружение инцидента</div>
+                    <p>Правообладатель обнаружил факт распространения и начал расследование.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 3. TECHNICAL FORENSICS ==================== -->
+        <div class="section" id="section3">
+            <h2>3. Техническая экспертиза <span class="role dev">Для программистов</span></h2>
+
+            <h3>3.1. Анализ инструментов атаки</h3>
+
+            <h4>Файл: <code>install_hack.txt</code> — скрипт установки APK</h4>
+            <div class="card info">
+                <strong>Тип:</strong> Python-скрипт<br>
+                <strong>Функция:</strong> Замена системного APK в <code>/system/priv-app/BydVoice/BydVoice.apk</code><br>
+                <strong>Метод:</strong> ADB root + remount → копирование через <code>/data/local/tmp</code><br>
+                <strong>Особенности:</strong> Создаёт резервную копию оригинала (backup), комментарии на русском языке
+            </div>
+            <pre><span class="comment"># Ключевые команды из скрипта атаки:</span>
+adb root
+adb remount
+adb push "voice.apk" /data/local/tmp/voice.apk
+adb shell cp /data/local/tmp/voice.apk /system/priv-app/BydVoice/BydVoice.apk
+adb shell chmod 644 /system/priv-app/BydVoice/BydVoice.apk</pre>
+
+            <h4>Файл: <code>fix_app.txt</code> — скрипт клонирования данных</h4>
+            <div class="card info">
+                <strong>Тип:</strong> Windows Batch-скрипт (.bat)<br>
+                <strong>Функция:</strong> Полное клонирование данных приложения на новое устройство<br>
+                <strong>Шагов:</strong> 9 этапов (очистка → создание директорий → SharedPreferences → базы → Virbox → права → запуск)<br>
+                <strong>Ключевая улика:</strong> Строка 117 содержит Telegram-метку <code>Улугбек, [08.02.2026 0:47]</code>
+            </div>
+
+            <p>Полный перечень копируемых файлов:</p>
+            <table>
+                <tr><th>Категория</th><th>Файлы</th><th>Назначение</th></tr>
+                <tr>
+                    <td>SharedPreferences</td>
+                    <td><code>global_keys.xml</code>, <code>WeekPrefs.xml</code>, <code>WebViewChromiumPrefs.xml</code></td>
+                    <td>Авторизация, токены, настройки</td>
+                </tr>
+                <tr>
+                    <td>Базы данных</td>
+                    <td><code>commands_ru.sqlite</code>, <code>commands_tr.sqlite</code>, <code>commands_uz.sqlite</code>, <code>commands_ky.sqlite</code>, <code>events.db</code></td>
+                    <td>Голосовые команды для всех языков</td>
+                </tr>
+                <tr>
+                    <td>Virbox DRM</td>
+                    <td><code>.ss/l5e7186e3.so</code>, <code>.ss/vbp.dex</code></td>
+                    <td>Файлы лицензии Virbox Protector</td>
+                </tr>
+                <tr>
+                    <td>Служебные</td>
+                    <td><code>INSTALLATION</code>, <code>profileInstalled</code>, <code>androidx.work.workdb</code></td>
+                    <td>Идентификаторы установки, планировщик задач</td>
+                </tr>
+            </table>
+
+            <h3>3.2. Украденные учётные данные</h3>
+            <div class="card danger">
+                <strong>ВНИМАНИЕ:</strong> Следующие данные были извлечены из файла <code>global_keys.xml</code> скомпрометированного устройства
+                и являются вещественными доказательствами.
+            </div>
+
+            <table>
+                <tr><th>Параметр</th><th>Значение</th><th>Описание</th></tr>
+                <tr>
+                    <td>USER_ID</td>
+                    <td><code>$2b$12$enTfKDnfr7Kk77rY/zuYuOCLFxG2nMltGxzjKy5YywrR.cOBKgKom</code></td>
+                    <td>bcrypt-хэш идентификатора пользователя</td>
+                </tr>
+                <tr>
+                    <td>CACHED_ENCRYPTION_KEY</td>
+                    <td><code>600d88ba93bbc36b1b29eb67cadc7bb38dd476536275b52696fe3ae726</code></td>
+                    <td>Кэшированный ключ шифрования баз</td>
+                </tr>
+                <tr>
+                    <td>HASH_FILE</td>
+                    <td><code>bca9739d233835a5816c27ad0235d3cb09e521e944ad2b1492453c41d5990c18</code></td>
+                    <td>SHA-256 хэш файла базы данных</td>
+                </tr>
+                <tr>
+                    <td>SUBSCRIPTION_KEY</td>
+                    <td><code>1c32486cb20e40b39e137a73621b2574</code></td>
+                    <td>Azure Cognitive Services API-ключ</td>
+                </tr>
+                <tr>
+                    <td>LAST_ONLINE_DATE</td>
+                    <td><code>1770384206346</code> (06.02.2026 13:23:26 UTC)</td>
+                    <td>Последняя активность до кражи</td>
+                </tr>
+                <tr>
+                    <td>APP_LOCALE</td>
+                    <td><code>tr</code> (турецкий)</td>
+                    <td>Язык интерфейса жертвы</td>
+                </tr>
+                <tr>
+                    <td>REAL_CAR_MODEL</td>
+                    <td><code>7</code></td>
+                    <td>Модель автомобиля BYD</td>
+                </tr>
+            </table>
+
+            <h3>3.3. Цифровые подписи и идентификаторы APK</h3>
+
+            <table>
+                <tr><th>Параметр</th><th>Значение</th></tr>
+                <tr>
+                    <td>Имя пакета</td>
+                    <td><code>com.ulusoft.bydvoice</code></td>
+                </tr>
+                <tr>
+                    <td>Метка приложения</td>
+                    <td>RED voice</td>
+                </tr>
+                <tr>
+                    <td>Субъект сертификата</td>
+                    <td><code>CN=Xanavi Voice, O=Xanavi, L=Tashkent, ST=Toshkent, C=uz</code></td>
+                </tr>
+                <tr>
+                    <td>SHA-256 отпечаток сертификата</td>
+                    <td><span class="fingerprint">A2:AF:25:69:03:2D:5D:35:7F:29:3E:83:BB:71:96:CD:8F:93:AA:4F:0C:9D:53:5F:21:95:66:13:1A:35:75:C4</span></td>
+                </tr>
+                <tr>
+                    <td>Файл подписи</td>
+                    <td><code>META-INF/KEY0.RSA</code></td>
+                </tr>
+                <tr>
+                    <td>Git commit (в APK)</td>
+                    <td><code>c56e4d15ad26abc65dc6ff1c15a4f9e084beb40b</code></td>
+                </tr>
+                <tr>
+                    <td>Virbox .so SHA-256</td>
+                    <td><span class="fingerprint">36d4f86df39bc48d501b8ecd3706d18272d85d1e1193532fb701340a0dfb8b98</span></td>
+                </tr>
+                <tr>
+                    <td>DRM-защита</td>
+                    <td>Virbox Protector (шифрование DEX-кода)</td>
+                </tr>
+                <tr>
+                    <td>Размер APK</td>
+                    <td>289 МБ</td>
+                </tr>
+            </table>
+
+            <h3>3.4. Серверная инфраструктура (не скомпрометирована)</h3>
+            <div class="card success">
+                <strong>Вывод экспертизы:</strong> Серверные эндпоинты, URL-адреса и OTA-механизм обновления <strong>не были заменены</strong>.
+                Пиратская копия использует оригинальные серверы правообладателя.
+            </div>
+
+            <table>
+                <tr><th>Эндпоинт</th><th>URL</th><th>Использование пиратом</th></tr>
+                <tr><td>Авторизация</td><td><code>https://rtexecute.com/ch?v=</code></td><td>Обходится через клонированный USER_ID</td></tr>
+                <tr><td>Токен управления авто</td><td><code>https://rtexecute.com/car-token</code></td><td>Работает с украденным userId</td></tr>
+                <tr><td>Голосовой ассистент</td><td><code>https://rtexecute.com/assistant/stream</code></td><td>Работает с украденным userId</td></tr>
+                <tr><td>SSE-управление</td><td><code>https://rtexecute.com/car-sse</code></td><td>Работает с украденным carToken</td></tr>
+                <tr><td>Проверка при запуске</td><td><code>https://rtexecute.com/switch-check-up</code></td><td>Получает ключ шифрования</td></tr>
+                <tr><td>Скачивание БД (первичное)</td><td><code>https://rtexecute.com/switch-check-first</code></td><td>Скачивает базы команд</td></tr>
+                <tr><td>Скачивание БД (еженедельное)</td><td><code>https://rtexecute.com/switch-check</code></td><td>Еженедельное обновление</td></tr>
+                <tr><td>OTA-обновления</td><td><code>http://admin.xanavi.uz/updates/update-uniz.xml</code></td><td>Может быть заблокировано пиратом</td></tr>
+                <tr><td>Azure TTS</td><td><code>uaenorth.tts.speech.microsoft.com</code></td><td>Использует украденный API-ключ</td></tr>
+            </table>
+        </div>
+
+        <!-- ==================== 4. SUSPECT IDENTIFICATION ==================== -->
+        <div class="section" id="section4">
+            <h2>4. Идентификация подозреваемых <span class="role legal">Для юристов</span></h2>
+
+            <h3>4.1. Известные данные</h3>
+            <table>
+                <tr><th>Параметр</th><th>Значение</th><th>Источник</th></tr>
+                <tr>
+                    <td>Имя / псевдоним</td>
+                    <td><strong>Улугбек</strong></td>
+                    <td><code>fix_app.txt</code>, строка 117: <code>Улугбек, [08.02.2026 0:47]</code></td>
+                </tr>
+                <tr>
+                    <td>Канал распространения</td>
+                    <td>Telegram-канал <code>@xanaviuz</code></td>
+                    <td>Код приложения: <code>LoginActivity.java</code>, строка 211: <code>https://t.me/xanaviuz</code></td>
+                </tr>
+                <tr>
+                    <td>Время публикации</td>
+                    <td>08.02.2026, 00:47 (локальное время)</td>
+                    <td>Telegram-метка в <code>fix_app.txt</code></td>
+                </tr>
+                <tr>
+                    <td>Язык общения</td>
+                    <td>Русский</td>
+                    <td>Комментарии в скриптах</td>
+                </tr>
+                <tr>
+                    <td>Предполагаемая локация</td>
+                    <td>Узбекистан (Ташкент)</td>
+                    <td>Канал с суффиксом «uz», турецкий язык жертвы, BYD-рынок</td>
+                </tr>
+            </table>
+
+            <h3>4.2. Цифровые следы для установления личности</h3>
+            <div class="card warning">
+                <strong>Действия для правоохранительных органов:</strong>
+            </div>
+            <ul class="checklist">
+                <li><span class="check"></span>Запрос в Telegram на раскрытие данных владельца канала <code>@xanaviuz</code> и пользователя «Улугбек» (через суд или правоохранительные органы)</li>
+                <li><span class="check"></span>Анализ серверных логов <code>rtexecute.com</code>: IP-адреса, User-Agent, временные метки запросов с украденным USER_ID</li>
+                <li><span class="check"></span>Анализ логов Azure Cognitive Services: запросы с украденным SUBSCRIPTION_KEY</li>
+                <li><span class="check"></span>Мониторинг Telegram-канала: скриншоты публикаций, список подписчиков, история сообщений</li>
+                <li><span class="check"></span>Анализ метаданных файлов: временные метки создания <code>install_hack.txt</code> и <code>fix_app.txt</code></li>
+            </ul>
+
+            <h3>4.3. SQL-запросы для выявления всех скомпрометированных аккаунтов</h3>
+            <div class="card info">
+                <strong>Для серверной команды:</strong> Выполнить на базе данных <code>rtexecute.com</code>
+            </div>
+
+<pre><span class="comment">-- 1. Один USER_ID с нескольких IP-адресов (последние 48 часов)</span>
+<span class="keyword">SELECT</span> user_id, <span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> ip_address) <span class="keyword">AS</span> ip_count,
+       GROUP_CONCAT(<span class="keyword">DISTINCT</span> ip_address) <span class="keyword">AS</span> ips
+<span class="keyword">FROM</span> api_logs
+<span class="keyword">WHERE</span> endpoint <span class="keyword">IN</span> (<span class="string">'/switch-check-up'</span>, <span class="string">'/assistant/stream'</span>)
+  <span class="keyword">AND</span> timestamp > NOW() - <span class="keyword">INTERVAL</span> 48 HOUR
+<span class="keyword">GROUP BY</span> user_id
+<span class="keyword">HAVING</span> ip_count > 2
+<span class="keyword">ORDER BY</span> ip_count <span class="keyword">DESC</span>;
+
+<span class="comment">-- 2. Новые IP-адреса после кражи (6 февраля 2026)</span>
+<span class="keyword">SELECT</span> user_id, ip_address, user_agent, timestamp
+<span class="keyword">FROM</span> api_logs
+<span class="keyword">WHERE</span> timestamp > <span class="string">'2026-02-06 00:00:00'</span>
+  <span class="keyword">AND</span> ip_address <span class="keyword">NOT IN</span> (
+    <span class="keyword">SELECT DISTINCT</span> ip_address <span class="keyword">FROM</span> api_logs
+    <span class="keyword">WHERE</span> user_id = api_logs.user_id
+      <span class="keyword">AND</span> timestamp < <span class="string">'2026-02-06 00:00:00'</span>
+  );
+
+<span class="comment">-- 3. Параллельные SSE-подключения (один userId = одно устройство)</span>
+<span class="keyword">SELECT</span> user_id, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> active_connections
+<span class="keyword">FROM</span> active_sse_connections
+<span class="keyword">GROUP BY</span> user_id
+<span class="keyword">HAVING</span> active_connections > 1;
+
+<span class="comment">-- 4. Конкретный украденный USER_ID — все обращения</span>
+<span class="keyword">SELECT</span> ip_address, endpoint, timestamp, user_agent
+<span class="keyword">FROM</span> api_logs
+<span class="keyword">WHERE</span> user_id = <span class="string">'$2b$12$enTfKDnfr7Kk77rY/zuYuOCLFxG2nMltGxzjKy5YywrR.cOBKgKom'</span>
+<span class="keyword">ORDER BY</span> timestamp <span class="keyword">DESC</span>
+<span class="keyword">LIMIT</span> 1000;</pre>
+        </div>
+
+        <!-- ==================== 5. LEGAL FRAMEWORK ==================== -->
+        <div class="section" id="section5">
+            <h2>5. Правовая база <span class="role legal">Для юристов</span></h2>
+
+            <div class="card info">
+                <strong>Важно:</strong> Исходный код программы для ЭВМ в странах СНГ защищается <strong>авторским правом</strong> (как литературное произведение),
+                а не патентом. Программы «как таковые» не являются патентоспособными объектами. Авторское право возникает автоматически
+                с момента создания произведения, но добровольная государственная регистрация значительно упрощает доказывание в суде.
+            </div>
+
+            <h3>5.1. Республика Узбекистан (основная юрисдикция)</h3>
+            <table>
+                <tr><th>Параметр</th><th>Описание</th></tr>
+                <tr>
+                    <td>Основной закон</td>
+                    <td>Закон «Об авторском праве и смежных правах» (ЗРУ-42 от 20.07.2006)</td>
+                </tr>
+                <tr>
+                    <td>Специальный закон</td>
+                    <td>Закон «О правовой охране программ для ЭВМ и баз данных»</td>
+                </tr>
+                <tr>
+                    <td>Уголовная статья</td>
+                    <td><strong>Статья 149-1 УК РУз</strong> (новая редакция с 10.11.2025, Закон ЗРУ-1080)</td>
+                </tr>
+                <tr>
+                    <td>Наказание (базовое)</td>
+                    <td>Штраф 50-100 БРВ (~$1,600-$3,200) или <strong>до 2 лет лишения свободы</strong></td>
+                </tr>
+                <tr>
+                    <td>Наказание (отягчённое)</td>
+                    <td>Группа лиц, использование интернета, значительный ущерб:<br>
+                        Штраф 100-150 БРВ (~$4,800) или <strong>до 3 лет лишения свободы</strong></td>
+                </tr>
+                <tr>
+                    <td>Гражданский иск</td>
+                    <td>Ст. 65 Закона об авторском праве + ст. 11, 1040 ГК РУз:<br>
+                        — Компенсация убытков и упущенной выгоды<br>
+                        — Статутная компенсация (без доказывания убытков)<br>
+                        — Конфискация контрафакта (ст. 66)<br>
+                        — Моральный вред</td>
+                </tr>
+                <tr>
+                    <td>Орган регистрации</td>
+                    <td>Центр интеллектуальной собственности при Министерстве юстиции РУз<br>
+                        Адрес: Ташкент, район Хадра, 33<br>
+                        Тел: +998 71 232-50-50 | Сайт: <code>www.ima.uz</code></td>
+                </tr>
+                <tr>
+                    <td>Срок регистрации</td>
+                    <td><strong>10 рабочих дней</strong> (с 2025 — электронная подача)</td>
+                </tr>
+                <tr>
+                    <td>БРВ (с 01.08.2025)</td>
+                    <td>1 БРВ = 412,000 сум (~$32 USD)</td>
+                </tr>
+            </table>
+
+            <h3>5.2. Российская Федерация</h3>
+            <table>
+                <tr><th>Параметр</th><th>Описание</th></tr>
+                <tr>
+                    <td>Основной закон</td>
+                    <td>Часть IV Гражданского кодекса РФ (ст. 1261 — программы = литературные произведения)</td>
+                </tr>
+                <tr>
+                    <td>Уголовная статья</td>
+                    <td><strong>Статья 146 УК РФ</strong></td>
+                </tr>
+                <tr>
+                    <td>Наказание (ч. 2)</td>
+                    <td>Незаконное использование в крупном размере (>100,000 руб):<br>
+                        <strong>До 2 лет лишения свободы</strong></td>
+                </tr>
+                <tr>
+                    <td>Наказание (ч. 3)</td>
+                    <td>Группа лиц, особо крупный размер (>1,000,000 руб), использование должностного положения:<br>
+                        <strong>До 6 лет лишения свободы</strong> + штраф до 500,000 руб</td>
+                </tr>
+                <tr>
+                    <td>Гражданский иск (ст. 1301 ГК)</td>
+                    <td>На выбор правообладателя:<br>
+                        — <strong>10,000 - 5,000,000 руб</strong> (фиксированная компенсация)<br>
+                        — Двукратная стоимость контрафакта<br>
+                        — Двукратный размер роялти</td>
+                </tr>
+                <tr>
+                    <td>Орган регистрации</td>
+                    <td>Роспатент | Пошлина: 5,000 руб</td>
+                </tr>
+            </table>
+
+            <h3>5.3. Республика Казахстан</h3>
+            <table>
+                <tr><th>Параметр</th><th>Описание</th></tr>
+                <tr>
+                    <td>Уголовная статья</td>
+                    <td><strong>Статья 198 УК РК</strong></td>
+                </tr>
+                <tr>
+                    <td>Наказание (ч. 3)</td>
+                    <td>Группа лиц, крупный размер:<br>
+                        <strong>До 5 лет лишения свободы</strong></td>
+                </tr>
+                <tr>
+                    <td>Наказание (ч. 4)</td>
+                    <td>Преступная группа:<br>
+                        <strong>3-6 лет лишения свободы</strong></td>
+                </tr>
+                <tr>
+                    <td>Гражданский иск</td>
+                    <td>Статутная компенсация: 100-15,000 МРП (~$730-$108,720)</td>
+                </tr>
+            </table>
+
+            <h3>5.4. Отягчающие обстоятельства в данном деле</h3>
+            <div class="card danger">
+                <strong>Квалифицирующие признаки, усиливающие наказание:</strong>
+                <ul style="margin-top: 8px;">
+                    <li><strong>Использование интернета</strong> (Telegram) для распространения — отягчающее по ст. 149-1 ч.2 УК РУз</li>
+                    <li><strong>Группа лиц</strong> — скрипты подготовлены одним лицом, распространены через канал</li>
+                    <li><strong>Коммерческий характер</strong> — незаконное получение доступа к платной услуге</li>
+                    <li><strong>Обход технических средств защиты</strong> (Virbox Protector) — дополнительно ст. 65 Закона об авторском праве</li>
+                    <li><strong>Продолжающееся правонарушение</strong> — распространение через Telegram продолжается</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ==================== 6. DAMAGES CALCULATION ==================== -->
+        <div class="section" id="section6">
+            <h2>6. Расчёт ущерба <span class="role legal">Для юристов</span> <span class="role mgmt">Для руководства</span></h2>
+
+            <h3>6.1. Прямые убытки</h3>
+            <table>
+                <tr><th>Статья убытков</th><th>Описание</th><th>Как рассчитать</th></tr>
+                <tr>
+                    <td>Упущенная выгода</td>
+                    <td>Стоимость лицензии × количество пиратских установок</td>
+                    <td>Цена лицензии (_____ USD) × количество уникальных IP в логах</td>
+                </tr>
+                <tr>
+                    <td>Расходы на Azure TTS</td>
+                    <td>Стоимость API-вызовов с украденным ключом</td>
+                    <td>Azure Portal → Usage → фильтр по дате после 06.02.2026</td>
+                </tr>
+                <tr>
+                    <td>Серверные расходы</td>
+                    <td>Нагрузка на rtexecute.com от пиратских устройств</td>
+                    <td>Доля запросов с пиратских IP × стоимость инфраструктуры</td>
+                </tr>
+                <tr>
+                    <td>Расходы на расследование</td>
+                    <td>Время разработчиков на анализ и защиту</td>
+                    <td>Часы × ставка</td>
+                </tr>
+                <tr>
+                    <td>Расходы на юридические услуги</td>
+                    <td>Адвокаты, нотариус, регистрация ПО</td>
+                    <td>Фактические расходы</td>
+                </tr>
+            </table>
+
+            <h3>6.2. Косвенные убытки</h3>
+            <table>
+                <tr><th>Статья</th><th>Описание</th></tr>
+                <tr><td>Репутационный ущерб</td><td>Подрыв доверия клиентов, девальвация продукта</td></tr>
+                <tr><td>Утрата конкурентного преимущества</td><td>Раскрытие архитектуры приложения конкурентам</td></tr>
+                <tr><td>Компрометация API-ключей</td><td>Необходимость ротации Azure ключа, изменения инфраструктуры</td></tr>
+                <tr><td>Нарушение безопасности</td><td>Компрометация данных клиента-жертвы (USER_ID, VIN-код)</td></tr>
+            </table>
+
+            <h3>6.3. Формула расчёта для суда</h3>
+<pre><span class="comment">// Общий ущерб = Прямые убытки + Косвенные убытки</span>
+
+Прямые убытки:
+  Упущенная выгода     = Цена_лицензии × N_пиратских_установок
+  Azure расходы         = Сумма_из_Azure_Portal (после 06.02.2026)
+  Серверные расходы     = (Пиратские_запросы / Всего_запросов) × Месячная_стоимость_сервера
+  Расследование         = Часы_разработчиков × Ставка_час
+  Юридические расходы   = Фактические_расходы
+
+Статутная компенсация (альтернатива — на выбор):
+  Узбекистан: по решению суда (без доказывания размера)
+  Россия: от 10,000 до 5,000,000 руб (ст. 1301 ГК РФ)
+  Казахстан: от 100 до 15,000 МРП</pre>
+        </div>
+
+        <!-- ==================== 7. EVIDENCE ==================== -->
+        <div class="section" id="section7">
+            <h2>7. Доказательная база <span class="role legal">Для юристов</span> <span class="role dev">Для программистов</span></h2>
+
+            <h3>7.1. Цифровые вещественные доказательства</h3>
+            <div class="card warning">
+                <strong>Все доказательства должны быть:</strong> (а) нотариально заверены, (б) сохранены на неизменяемом носителе (DVD-R, WORM),
+                (в) с указанием SHA-256 хэшей для подтверждения целостности.
+            </div>
+
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Доказательство</th>
+                    <th>Файл</th>
+                    <th>Роль</th>
+                    <th>Статус</th>
+                </tr>
+                <tr>
+                    <td>Д-1</td>
+                    <td>Скрипт установки APK как системного</td>
+                    <td><code>install_hack.txt</code></td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td><span class="evidence-tag">ПОЛУЧЕНО</span></td>
+                </tr>
+                <tr>
+                    <td>Д-2</td>
+                    <td>Скрипт клонирования данных (с Telegram-меткой «Улугбек»)</td>
+                    <td><code>fix_app.txt</code></td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td><span class="evidence-tag">ПОЛУЧЕНО</span></td>
+                </tr>
+                <tr>
+                    <td>Д-3</td>
+                    <td>Украденные SharedPreferences</td>
+                    <td><code>global_keys.xml</code></td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td><span class="evidence-tag">ПОЛУЧЕНО</span></td>
+                </tr>
+                <tr>
+                    <td>Д-4</td>
+                    <td>Распространяемый APK-файл</td>
+                    <td><code>voice.apk</code> (289 МБ)</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td><span class="evidence-tag">ПОЛУЧЕНО</span></td>
+                </tr>
+                <tr>
+                    <td>Д-5</td>
+                    <td>Скриншоты Telegram-канала @xanaviuz</td>
+                    <td>Скриншоты + URL</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>НУЖНО СОБРАТЬ</td>
+                </tr>
+                <tr>
+                    <td>Д-6</td>
+                    <td>Нотариальный осмотр Telegram-канала</td>
+                    <td>Протокол нотариуса</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>НУЖНО ЗАКАЗАТЬ</td>
+                </tr>
+                <tr>
+                    <td>Д-7</td>
+                    <td>Серверные логи rtexecute.com (пиратские IP)</td>
+                    <td>Экспорт логов</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>НУЖНО СОБРАТЬ</td>
+                </tr>
+                <tr>
+                    <td>Д-8</td>
+                    <td>Статистика Azure (расход по украденному ключу)</td>
+                    <td>Выписка из Azure Portal</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>НУЖНО СОБРАТЬ</td>
+                </tr>
+                <tr>
+                    <td>Д-9</td>
+                    <td>Свидетельство о регистрации ПО</td>
+                    <td>Свидетельство Минюст РУз</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>НУЖНО ПОДАТЬ</td>
+                </tr>
+                <tr>
+                    <td>Д-10</td>
+                    <td>Исходный код приложения (для подтверждения авторства)</td>
+                    <td>Git-репозиторий с историей коммитов</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>ЕСТЬ</td>
+                </tr>
+                <tr>
+                    <td>Д-11</td>
+                    <td>Заключение технической экспертизы</td>
+                    <td>Настоящий документ + экспертное заключение</td>
+                    <td><span class="role dev">ПРОГ</span> <span class="role legal">ЮРИСТ</span></td>
+                    <td>В ПОДГОТОВКЕ</td>
+                </tr>
+                <tr>
+                    <td>Д-12</td>
+                    <td>Клонированные базы данных команд</td>
+                    <td><code>commands_*.sqlite</code>, <code>events.db</code></td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td><span class="evidence-tag">ПОЛУЧЕНО</span></td>
+                </tr>
+                <tr>
+                    <td>Д-13</td>
+                    <td>Клонированные файлы Virbox DRM</td>
+                    <td><code>l5e7186e3.so</code>, <code>vbp.dex</code></td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td><span class="evidence-tag">ПОЛУЧЕНО</span></td>
+                </tr>
+            </table>
+
+            <h3>7.2. Хэши доказательств (для подтверждения целостности)</h3>
+            <div class="card info">
+                <strong>Команда для генерации:</strong> <code>certutil -hashfile &lt;filename&gt; SHA256</code> (Windows)
+                или <code>sha256sum &lt;filename&gt;</code> (Linux)
+            </div>
+            <table>
+                <tr><th>Файл</th><th>SHA-256 (рассчитать и заполнить)</th></tr>
+                <tr><td>install_hack.txt</td><td class="fingerprint" style="display:table-cell">__________________ (заполнить)</td></tr>
+                <tr><td>fix_app.txt</td><td class="fingerprint" style="display:table-cell">__________________ (заполнить)</td></tr>
+                <tr><td>global_keys.xml</td><td class="fingerprint" style="display:table-cell">__________________ (заполнить)</td></tr>
+                <tr><td>voice.apk</td><td class="fingerprint" style="display:table-cell">__________________ (заполнить)</td></tr>
+                <tr><td>commands_ru.sqlite</td><td class="fingerprint" style="display:table-cell">__________________ (заполнить)</td></tr>
+                <tr><td>commands_tr.sqlite</td><td class="fingerprint" style="display:table-cell">__________________ (заполнить)</td></tr>
+            </table>
+        </div>
+
+        <!-- ==================== 8. SERVER COUNTERMEASURES ==================== -->
+        <div class="section" id="section8">
+            <h2>8. Технические контрмеры <span class="role dev">Для программистов</span> <span class="role sec">Безопасность</span></h2>
+
+            <h3>8.1. Немедленные серверные действия</h3>
+
+            <table>
+                <tr>
+                    <th>Приоритет</th>
+                    <th>Эндпоинт</th>
+                    <th>Действие</th>
+                    <th>Эффект</th>
+                </tr>
+                <tr>
+                    <td><span class="priority critical">P0</span></td>
+                    <td><code>/switch-check-up</code></td>
+                    <td>Вернуть HTTP 403 для заблокированных userId</td>
+                    <td>Приложение сбрасывает USER_ID → полная деаутентификация</td>
+                </tr>
+                <tr>
+                    <td><span class="priority critical">P0</span></td>
+                    <td><code>/switch-check-first</code></td>
+                    <td>Вернуть HTTP 403 для заблокированных userId</td>
+                    <td>Базы удалены (blockApp) → скачивание заблокировано → приложение мертво</td>
+                </tr>
+                <tr>
+                    <td><span class="priority critical">P0</span></td>
+                    <td><code>/switch-check</code></td>
+                    <td>Вернуть HTTP 403 для заблокированных userId</td>
+                    <td>Еженедельное обновление БД заблокировано</td>
+                </tr>
+                <tr>
+                    <td><span class="priority high">P1</span></td>
+                    <td><code>/assistant/stream</code></td>
+                    <td>Вернуть HTTP 403 для заблокированных userId</td>
+                    <td>Голосовой ассистент не работает</td>
+                </tr>
+                <tr>
+                    <td><span class="priority high">P1</span></td>
+                    <td><code>/car-token</code></td>
+                    <td>Вернуть HTTP 403 для заблокированных userId</td>
+                    <td>Управление автомобилем через SSE невозможно</td>
+                </tr>
+                <tr>
+                    <td><span class="priority high">P1</span></td>
+                    <td>Azure Portal</td>
+                    <td>Ротация ключа <code>1c32486cb20e40b39e137a73621b2574</code></td>
+                    <td>TTS не работает на ВСЕХ старых APK (захардкожен)</td>
+                </tr>
+            </table>
+
+            <h3>8.2. Механизм еженедельного kill-switch</h3>
+            <div class="card success">
+                <strong>Встроенный механизм самоуничтожения пиратской копии:</strong><br><br>
+                Каждое воскресенье в 5:10 (<code>WeeklyTaskManager</code>) приложение:
+                <ol style="margin-top: 8px;">
+                    <li><code>blockApp()</code> → <strong>удаляет все базы данных</strong> (<code>localCache.deleteDatabases()</code>)</li>
+                    <li>Отправляет запрос к <code>/switch-check-first</code> для скачивания новых баз</li>
+                    <li>Если сервер возвращает 403 → базы не скачаны → <code>unblockApp()</code> не вызывается</li>
+                    <li>Приложение навсегда заблокировано с экраном «Пожалуйста подождите...»</li>
+                </ol>
+                <br>
+                <strong>Максимальное время жизни пиратской копии: 7 дней.</strong>
+            </div>
+
+            <h3>8.3. Пример серверного кода блокировки</h3>
+<pre><span class="comment">// Node.js / Express — middleware для всех эндпоинтов</span>
+
+<span class="keyword">const</span> blockedUserIds = <span class="keyword">new</span> Set([
+  <span class="string">'$2b$12$enTfKDnfr7Kk77rY/zuYuOCLFxG2nMltGxzjKy5YywrR.cOBKgKom'</span>,
+  <span class="comment">// ... другие скомпрометированные userId</span>
+]);
+
+<span class="keyword">function</span> checkBlockedUser(req, res, next) {
+  <span class="keyword">const</span> userId = req.body?.userId || req.query?.userId;
+
+  <span class="keyword">if</span> (userId && blockedUserIds.has(userId)) {
+    <span class="comment">// Логируем для доказательной базы</span>
+    logger.warn(<span class="string">'BLOCKED pirate access'</span>, {
+      userId,
+      ip: req.ip,
+      endpoint: req.path,
+      userAgent: req.headers[<span class="string">'user-agent'</span>],
+      timestamp: <span class="keyword">new</span> Date().toISOString()
+    });
+
+    <span class="keyword">return</span> res.status(403).json({
+      error: <span class="string">'access_denied'</span>,
+      message: <span class="string">'Доступ заблокирован. Использование контрафактного ПО '</span>
+             + <span class="string">'преследуется по ст. 149-1 УК РУз.'</span>
+    });
+  }
+
+  next();
+}
+
+<span class="comment">// Применить ко всем эндпоинтам</span>
+app.use(<span class="string">'/switch-check-up'</span>, checkBlockedUser);
+app.use(<span class="string">'/switch-check-first'</span>, checkBlockedUser);
+app.use(<span class="string">'/switch-check'</span>, checkBlockedUser);
+app.use(<span class="string">'/assistant/stream'</span>, checkBlockedUser);
+app.use(<span class="string">'/car-token'</span>, checkBlockedUser);
+app.use(<span class="string">'/car-sse'</span>, checkBlockedUser);</pre>
+
+            <h3>8.4. Защита в новой версии APK (клиентская)</h3>
+            <table>
+                <tr><th>Защита</th><th>Файл</th><th>Описание</th></tr>
+                <tr>
+                    <td>Проверка подписи APK</td>
+                    <td><code>DeviceIntegrity.java</code> (новый)</td>
+                    <td>SHA-256 отпечаток сертификата сверяется при каждом запуске</td>
+                </tr>
+                <tr>
+                    <td>Привязка к устройству (TEE)</td>
+                    <td><code>DeviceIntegrity.java</code></td>
+                    <td>Аппаратный deviceId через Android Keystore EC-ключ</td>
+                </tr>
+                <tr>
+                    <td>X-Device-Id заголовок</td>
+                    <td><code>HttpClientSingleton.java</code></td>
+                    <td>OkHttp-интерцептор добавляет deviceId ко всем запросам</td>
+                </tr>
+                <tr>
+                    <td>Проверка BootReceiver</td>
+                    <td><code>BootReceiver.java</code></td>
+                    <td>Добавить проверку подписи перед запуском OverlayService</td>
+                </tr>
+                <tr>
+                    <td>Certificate Pinning</td>
+                    <td><code>HttpClientSingleton.java</code></td>
+                    <td>Закрепление сертификата rtexecute.com (против MITM)</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- ==================== 9. ACTION PLAN ==================== -->
+        <div class="section" id="section9">
+            <h2>9. План действий по ролям</h2>
+
+            <h3>9.1. НЕМЕДЛЕННО (1-2 дня) <span class="priority critical">КРИТИЧЕСКОЕ</span></h3>
+            <table>
+                <tr><th>#</th><th>Действие</th><th>Роль</th><th>Срок</th></tr>
+                <tr>
+                    <td>1</td>
+                    <td>Заблокировать украденный USER_ID на всех серверных эндпоинтах (вернуть 403)</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>Сегодня</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Экспортировать серверные логи rtexecute.com за период 06.02-08.02.2026 и далее</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>Сегодня</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Сделать скриншоты Telegram-канала @xanaviuz (все публикации, участники, описание)</td>
+                    <td><span class="role sec">БЕЗОП</span></td>
+                    <td>Сегодня</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Рассчитать SHA-256 хэши всех доказательств (install_hack.txt, fix_app.txt, voice.apk и др.)</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>Сегодня</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Сохранить все доказательства на неизменяемый носитель (DVD-R или WORM)</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>Завтра</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Ротировать Azure TTS ключ в Azure Portal</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>Сегодня</td>
+                </tr>
+            </table>
+
+            <h3>9.2. НЕДЕЛЯ 1 <span class="priority high">ВЫСОКИЙ</span></h3>
+            <table>
+                <tr><th>#</th><th>Действие</th><th>Роль</th><th>Срок</th></tr>
+                <tr>
+                    <td>7</td>
+                    <td>Подать заявку на регистрацию ПО в Центр ИС при Минюсте РУз</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>Пн-Вт</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Заказать нотариальный осмотр Telegram-канала @xanaviuz</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>Пн-Ср</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Подготовить и выпустить обновлённый APK с DeviceIntegrity + уведомлением</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>До пт</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Обновить OTA XML на admin.xanavi.uz, указав новую версию</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>После #9</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Выполнить SQL-запросы для выявления ВСЕХ скомпрометированных аккаунтов</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>Ср-Чт</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Получить выписку из Azure Portal о расходах по украденному ключу</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                    <td>До пт</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Найти адвоката, специализирующегося на IP/IT-праве в Ташкенте</td>
+                    <td><span class="role mgmt">РУКОВ</span></td>
+                    <td>Пн-Ср</td>
+                </tr>
+            </table>
+
+            <h3>9.3. НЕДЕЛЯ 2-3 <span class="priority medium">СРЕДНИЙ</span></h3>
+            <table>
+                <tr><th>#</th><th>Действие</th><th>Роль</th><th>Срок</th></tr>
+                <tr>
+                    <td>14</td>
+                    <td>Получить свидетельство о регистрации ПО (10 рабочих дней)</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>~2 недели</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Подготовить заявление в правоохранительные органы (ст. 149-1 УК РУз)</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>После #14</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Подать заявление в Управление по борьбе с экономическими преступлениями МВД РУз</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>После #15</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Уведомить Telegram (Abuse Report) о канале @xanaviuz</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>Параллельно</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Подготовить гражданский иск о возмещении убытков</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                    <td>После #16</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>Уведомить Virbox (Senseshield) о компрометации лицензии</td>
+                    <td><span class="role mgmt">РУКОВ</span></td>
+                    <td>Параллельно</td>
+                </tr>
+            </table>
+
+            <h3>9.4. ДОЛГОСРОЧНЫЕ МЕРЫ <span class="priority low">ПЛАНОВЫЙ</span></h3>
+            <table>
+                <tr><th>#</th><th>Действие</th><th>Роль</th></tr>
+                <tr>
+                    <td>20</td>
+                    <td>Перевести Azure TTS ключ на серверный прокси (не хардкодить в APK)</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>Перевести OTA-обновления на HTTPS через rtexecute.com (не admin.xanavi.uz по HTTP)</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>Добавить серверную валидацию deviceId на ВСЕХ эндпоинтах</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>Добавить Certificate Pinning для rtexecute.com</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>Добавить проверку авторизации в BootReceiver перед запуском OverlayService</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>Зарегистрировать ПО в Роспатент (если есть пользователи в РФ)</td>
+                    <td><span class="role legal">ЮРИСТ</span></td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>Уменьшить оффлайн-лимит с 30 до 3-5 дней</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>Хранить OFFLINE_DAYS_COUNT в Android Keystore (не в SharedPreferences)</td>
+                    <td><span class="role dev">ПРОГ</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- ==================== 10. TEMPLATES ==================== -->
+        <div class="section" id="section10">
+            <h2>10. Шаблоны заявлений <span class="role legal">Для юристов</span></h2>
+
+            <h3>10.1. Заявление в правоохранительные органы (ст. 149-1 УК РУз)</h3>
+            <div class="card" style="background: #fff; border: 1px solid #ccc; padding: 24px; font-family: 'Times New Roman', serif; line-height: 1.8;">
+                <p style="text-align: right;">
+                    Начальнику Управления по борьбе с<br>
+                    экономическими преступлениями<br>
+                    ГУВД г. Ташкента<br><br>
+                    от _________________________________<br>
+                    (ФИО заявителя / наименование организации)<br>
+                    Адрес: _____________________________<br>
+                    Тел: _______________________________<br>
+                </p>
+                <br>
+                <p style="text-align: center; font-weight: bold; font-size: 16px;">ЗАЯВЛЕНИЕ</p>
+                <p style="text-align: center;">о совершении преступления, предусмотренного<br>
+                статьёй 149-1 Уголовного кодекса Республики Узбекистан</p>
+                <br>
+                <p style="text-indent: 40px;">
+                    Я, _______________ (ФИО), являюсь руководителем / правообладателем программы для ЭВМ
+                    «Xanavi Voice» (пакет <code>com.ulusoft.bydvoice</code>), зарегистрированной в Центре интеллектуальной
+                    собственности при Министерстве юстиции Республики Узбекистан (свидетельство № _______ от _______).
+                </p>
+                <p style="text-indent: 40px;">
+                    Настоящим заявляю, что 06-08 февраля 2026 года неустановленное лицо, действующее под именем
+                    «Улугбек» в мессенджере Telegram, осуществило:
+                </p>
+                <ol style="margin-left: 60px;">
+                    <li>Несанкционированное копирование (клонирование) лицензионных данных программы «Xanavi Voice»
+                        с головного устройства автомобиля BYD;</li>
+                    <li>Создание специализированных скриптов (<code>install_hack.txt</code>, <code>fix_app.txt</code>) для
+                        автоматизированного обхода технических средств защиты (Virbox Protector);</li>
+                    <li>Незаконное распространение контрафактных копий программы через Telegram-канал
+                        <code>@xanaviuz</code> (дата публикации: 08.02.2026, 00:47).</li>
+                </ol>
+                <p style="text-indent: 40px;">
+                    Указанные действия подпадают под признаки преступления, предусмотренного ст. 149-1 ч.2 УК РУз
+                    (незаконное использование объектов авторского права с использованием сети Интернет).
+                </p>
+                <p style="text-indent: 40px;">
+                    <strong>Прошу:</strong>
+                </p>
+                <ol style="margin-left: 60px;">
+                    <li>Возбудить уголовное дело по признакам преступления, предусмотренного ст. 149-1 УК РУз;</li>
+                    <li>Установить личность пользователя Telegram «Улугбек», администратора канала @xanaviuz;</li>
+                    <li>Направить запрос в Telegram FZ-LLC о раскрытии данных владельца канала;</li>
+                    <li>Принять меры к пресечению дальнейшего распространения контрафактных копий.</li>
+                </ol>
+                <br>
+                <p style="text-indent: 40px;"><strong>Приложения:</strong></p>
+                <ol style="margin-left: 60px;">
+                    <li>Свидетельство о регистрации ПО № _______ от _______ (копия)</li>
+                    <li>Протокол нотариального осмотра Telegram-канала @xanaviuz</li>
+                    <li>Файлы скриптов атаки (install_hack.txt, fix_app.txt) на CD/DVD-R</li>
+                    <li>Файл украденных учётных данных (global_keys.xml) с SHA-256 хэшами</li>
+                    <li>Заключение технической экспертизы</li>
+                    <li>Распечатка серверных логов с IP-адресами пиратских подключений</li>
+                    <li>Расчёт материального ущерба</li>
+                </ol>
+                <br>
+                <p>Дата: «___» ___________ 2026 г. &nbsp;&nbsp;&nbsp;&nbsp; Подпись: _______________</p>
+            </div>
+
+            <h3>10.2. Жалоба в Telegram (Abuse Report)</h3>
+            <div class="card info">
+                <strong>Куда:</strong> <code>abuse@telegram.org</code> или через <code>https://telegram.org/support</code><br>
+                <strong>Тема:</strong> Copyright Infringement Report — @xanaviuz channel<br>
+            </div>
+            <div class="card" style="background: #fff; border: 1px solid #ccc; padding: 20px; font-family: monospace; font-size: 13px; white-space: pre-wrap;">Subject: DMCA / Copyright Infringement Report — @xanaviuz
+
+Dear Telegram Abuse Team,
+
+I am writing to report copyright infringement on the Telegram channel @xanaviuz.
+
+1. COPYRIGHTED WORK:
+   - Software: "Xanavi Voice" (com.ulusoft.bydvoice)
+   - Registration: Certificate No. _______ issued by the Intellectual Property
+     Center under the Ministry of Justice of the Republic of Uzbekistan
+   - Copyright holder: _____________ / Xanavi / Ulusoft
+
+2. INFRINGING CONTENT:
+   - Channel: https://t.me/xanaviuz
+   - Content: Distribution of cracked copies of our commercial software,
+     including installation scripts and stolen license data
+   - Date of infringement: February 8, 2026
+
+3. EVIDENCE:
+   - The channel distributes tools (install_hack.txt, fix_app.txt) that
+     bypass our DRM protection (Virbox Protector) and clone license data
+   - A user named "Улугбек" posted the instructions on 2026-02-08 at 00:47
+
+4. GOOD FAITH STATEMENT:
+   I have a good faith belief that use of the material in the manner
+   complained of is not authorized by the copyright owner, its agent,
+   or the law.
+
+5. ACCURACY STATEMENT:
+   The information in this notification is accurate, and under penalty
+   of perjury, I am the copyright owner or authorized to act on behalf
+   of the copyright owner.
+
+Contact: _______________
+Phone: ________________
+Email: ________________
+
+Signed: _______________
+Date: February __, 2026</div>
+
+            <h3>10.3. Заявление на регистрацию ПО (Минюст РУз)</h3>
+            <div class="card info">
+                <strong>Куда:</strong> Центр интеллектуальной собственности при Министерстве юстиции РУз<br>
+                <strong>Адрес:</strong> Ташкент, район Хадра, 33<br>
+                <strong>Сайт:</strong> <code>www.ima.uz</code> — подача электронная<br>
+                <strong>Срок рассмотрения:</strong> 10 рабочих дней<br>
+            </div>
+            <div class="card">
+                <strong>Необходимые документы:</strong>
+                <ol style="margin-top: 8px;">
+                    <li>Заявление установленной формы (на сайте ima.uz)</li>
+                    <li>Копия исходного кода (или характерного фрагмента)</li>
+                    <li>Описание функциональности программы</li>
+                    <li>Сведения об авторе/правообладателе</li>
+                    <li>Документ об оплате пошлины</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- ==================== 11. CONTACTS ==================== -->
+        <div class="section" id="section11">
+            <h2>11. Контактная информация</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Центр интеллектуальной собственности (Узбекистан)</h4>
+                    <p>Адрес: Ташкент, район Хадра, 33</p>
+                    <p>Тел: +998 71 232-50-50</p>
+                    <p>Сайт: www.ima.uz</p>
+                </div>
+                <div class="card">
+                    <h4>Роспатент (Россия)</h4>
+                    <p>Адрес: Москва, Бережковская наб., 30, корп. 1</p>
+                    <p>Тел: +7 495 531-63-18</p>
+                    <p>Сайт: rospatent.gov.ru</p>
+                </div>
+                <div class="card">
+                    <h4>Qazpatent / НИИС (Казахстан)</h4>
+                    <p>Адрес: Астана</p>
+                    <p>Сайт: qazpatent.kz</p>
+                </div>
+                <div class="card">
+                    <h4>Telegram Abuse</h4>
+                    <p>Email: abuse@telegram.org</p>
+                    <p>Форма: telegram.org/support</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FOOTER ==================== -->
+        <div style="text-align: center; padding: 30px; color: var(--text-secondary); font-size: 13px;">
+            <p><strong>КОНФИДЕНЦИАЛЬНО</strong></p>
+            <p>Документ подготовлен: 08.02.2026</p>
+            <p>Версия: 1.0</p>
+            <p>Данный документ содержит конфиденциальную информацию и предназначен исключительно для внутреннего использования
+               правообладателем и его юридическими представителями.</p>
+        </div>
+
+    </div>
+</body>
+</html>
