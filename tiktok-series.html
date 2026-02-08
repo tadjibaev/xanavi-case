@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XANAVI — TikTok Series Production Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #08080c;
+            --surface: #101018;
+            --surface2: #18182a;
+            --border: #1e1e2e;
+            --text: #e8e8ed;
+            --dim: #888899;
+            --accent: #ff2d55;
+            --tiktok: #25f4ee;
+            --tiktok2: #fe2c55;
+            --gold: #ffd700;
+            --blue: #4a9eff;
+            --green: #00d68f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(254, 44, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(37, 244, 238, 0.08) 0%, transparent 50%);
+        }
+
+        .hero-content { position: relative; z-index: 1; padding: 40px; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.15), rgba(37, 244, 238, 0.15));
+            border: 1px solid rgba(254, 44, 85, 0.3);
+            color: var(--tiktok);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5em, 7vw, 5em);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .line1 { color: var(--text); }
+        .hero h1 .line2 {
+            background: linear-gradient(135deg, var(--tiktok2), var(--tiktok));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-sub {
+            font-size: 1.2em;
+            color: var(--dim);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .num {
+            font-size: 2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--tiktok2), var(--tiktok));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-stat .label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--dim);
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--tiktok);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8em, 4vw, 2.8em);
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--dim);
+            font-size: 1.05em;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        /* FORMAT RULES */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .rule-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .rule-card h4 {
+            font-size: 1.05em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-card p {
+            color: var(--dim);
+            font-size: 0.9em;
+        }
+
+        .rule-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .rule-icon.pink { background: rgba(254, 44, 85, 0.15); }
+        .rule-icon.cyan { background: rgba(37, 244, 238, 0.15); }
+        .rule-icon.gold { background: rgba(255, 215, 0, 0.15); }
+
+        /* PHONE MOCKUP */
+        .phone-demo {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .phone-frame {
+            width: 240px;
+            min-height: 426px;
+            background: #000;
+            border-radius: 30px;
+            border: 3px solid #333;
+            padding: 12px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .phone-screen {
+            background: var(--surface);
+            border-radius: 20px;
+            height: 100%;
+            min-height: 400px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-visual {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .phone-visual .scene-desc {
+            font-size: 11px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        .phone-overlay-top {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            z-index: 2;
+        }
+
+        .phone-part-badge {
+            background: rgba(254, 44, 85, 0.9);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        .phone-time {
+            color: rgba(255,255,255,0.6);
+            font-size: 10px;
+        }
+
+        .phone-subtitle {
+            position: absolute;
+            bottom: 60px;
+            left: 10px;
+            right: 10px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .phone-subtitle .sub-text {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            line-height: 1.4;
+        }
+
+        .phone-subtitle .sub-text em {
+            color: var(--tiktok);
+            font-style: normal;
+        }
+
+        .phone-bottom {
+            padding: 10px 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .phone-bottom .username {
+            font-weight: 700;
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        .phone-bottom .caption {
+            font-size: 10px;
+            color: var(--dim);
+            line-height: 1.4;
+        }
+
+        .phone-bottom .tags {
+            font-size: 10px;
+            color: var(--tiktok);
+            margin-top: 2px;
+        }
+
+        .phone-sidebar {
+            position: absolute;
+            right: 8px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .phone-sidebar .sb-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .phone-sidebar .sb-count {
+            font-size: 9px;
+            color: white;
+            margin-top: -6px;
+        }
+
+        .phone-label {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tiktok);
+        }
+
+        .phone-label-sub {
+            text-align: center;
+            font-size: 11px;
+            color: var(--dim);
+        }
+
+        /* EPISODE CARDS */
+        .ep-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .ep-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ep-num {
+            font-size: 2em;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--tiktok2), var(--tiktok));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            min-width: 50px;
+        }
+
+        .ep-meta h3 {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .ep-meta .ep-sub {
+            color: var(--dim);
+            font-size: 0.85em;
+        }
+
+        .ep-body {
+            padding: 24px 28px;
+        }
+
+        /* PARTS */
+        .part {
+            background: var(--surface2);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .part:last-child { margin-bottom: 0; }
+
+        .part-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .part-badge {
+            background: var(--tiktok2);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        .part-duration {
+            font-size: 12px;
+            color: var(--dim);
+        }
+
+        .part-hook {
+            background: rgba(254, 44, 85, 0.08);
+            border-left: 3px solid var(--tiktok2);
+            padding: 10px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+
+        .part-hook .hook-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--tiktok2);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .part-hook .hook-text {
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .shot {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .shot-time {
+            font-size: 11px;
+            color: var(--tiktok);
+            font-weight: 700;
+            min-width: 42px;
+            padding-top: 2px;
+            font-family: monospace;
+        }
+
+        .shot-desc {
+            font-size: 0.9em;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        .shot-desc strong {
+            color: var(--text);
+        }
+
+        .shot-desc .text-overlay {
+            display: inline-block;
+            background: rgba(254, 44, 85, 0.12);
+            color: var(--tiktok2);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .shot-desc .subtitle-cue {
+            display: inline-block;
+            background: rgba(37, 244, 238, 0.1);
+            color: var(--tiktok);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .shot-desc .music-cue {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .shot-desc .sfx-cue {
+            display: inline-block;
+            background: rgba(74, 158, 255, 0.1);
+            color: var(--blue);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .cliffhanger {
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.1), rgba(37, 244, 238, 0.05));
+            border: 1px solid rgba(254, 44, 85, 0.2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .cliffhanger .ch-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--tiktok2);
+            font-weight: 700;
+        }
+
+        .cliffhanger .ch-text {
+            font-size: 0.95em;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* TIPS */
+        .tip-box {
+            background: rgba(37, 244, 238, 0.05);
+            border: 1px solid rgba(37, 244, 238, 0.15);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .tip-box h4 {
+            color: var(--tiktok);
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .tip-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tip-box li {
+            padding: 4px 0;
+            font-size: 0.9em;
+            color: var(--dim);
+        }
+
+        .tip-box li::before {
+            content: '>';
+            color: var(--tiktok);
+            margin-right: 8px;
+            font-weight: 700;
+        }
+
+        /* MUSIC TABLE */
+        .music-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        .music-table th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--surface2);
+            color: var(--dim);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .music-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--dim);
+        }
+
+        .music-table td:first-child {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* HASHTAGS */
+        .hashtag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .hashtag {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--tiktok);
+            font-weight: 500;
+        }
+
+        /* CHECKLIST */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .checklist .check {
+            color: var(--green);
+            font-weight: 700;
+            min-width: 20px;
+        }
+
+        .checklist .item-title {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .checklist .item-desc {
+            color: var(--dim);
+            font-size: 0.9em;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .phone-demo { flex-direction: column; align-items: center; }
+            .ep-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .ep-body { padding: 16px; }
+            .part { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">TikTok Series Format</div>
+        <h1>
+            <span class="line1">XANAVI:</span><br>
+            <span class="line2">Украли наш код</span>
+        </h1>
+        <p class="hero-sub">
+            Продакшн-гайд для вертикального мини-сериала в стиле корейских TikTok-дорам.
+            24 части. 60-90 секунд каждая. Одна история, от которой невозможно оторваться.
+        </p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="num">24</div>
+                <div class="label">Частей</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">60-90с</div>
+                <div class="label">Каждая</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">9:16</div>
+                <div class="label">Вертикаль</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">8</div>
+                <div class="label">Арок</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== FORMAT RULES ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Формат</div>
+    <h2 class="section-title">Правила корейского TikTok-формата</h2>
+    <p class="section-desc">
+        Корейские вертикальные дорамы — это максимум эмоций за минимум времени.
+        Каждая часть — законченный эмоциональный удар с клиффхэнгером.
+    </p>
+
+    <div class="rules-grid">
+        <div class="rule-card">
+            <h4><span class="rule-icon pink">1</span> Хук за 1 секунду</h4>
+            <p>Первый кадр решает всё. Текст на экране + эмоция. Зритель решает за 0.5 секунды — листать или смотреть. Начинайте с шока, вопроса или конфликта. НИКОГДА не начинайте с "Привет, это история о..."</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon pink">2</span> 60-90 секунд MAX</h4>
+            <p>Золотой хронометраж. Меньше минуты — мало для эмоции. Больше 90 — зритель уходит. Идеально 70-80 секунд. Каждая секунда на счету.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon pink">3</span> Клиффхэнгер ВСЕГДА</h4>
+            <p>Каждая часть обрывается на пике. Зритель ДОЛЖЕН перейти к следующей. "Часть 2 в профиле" — обязательно. Это не опция, это закон формата.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon cyan">4</span> Субтитры = 100%</h4>
+            <p>85% смотрят без звука. Крупные белые субтитры с чёрной обводкой. Ключевые слова — красным или жёлтым. Субтитры — это не перевод, это часть визуала.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon cyan">5</span> Текст на экране</h4>
+            <p>Корейский стиль: текстовые оверлеи поверх видео. "Они не знали, что через 6 месяцев..." — крупно, с анимацией появления. Создаёт ощущение рассказчика.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon cyan">6</span> Крупные планы</h4>
+            <p>70% кадров — лица. Глаза, руки, экраны телефонов. Никаких общих планов дольше 2 секунд. Зритель должен чувствовать дыхание героя.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon gold">7</span> Музыка = эмоция</h4>
+            <p>Грустное пианино для драмы. Нарастающий бит для кодинга. Тишина + удар для шока. Музыка меняется каждые 15-20 секунд. Используйте трендовые TikTok-звуки.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon gold">8</span> Вертикаль 9:16</h4>
+            <p>ТОЛЬКО портрет. Горизонтальные кадры кропаются. Снимайте на телефон — это аутентичнее. iPhone 13+ или Samsung S22+ достаточно. Стабилизация обязательна.</p>
+        </div>
+        <div class="rule-card">
+            <h4><span class="rule-icon gold">9</span> Выкладка = стратегия</h4>
+            <p>1 часть в день. Идеально 19:00-21:00 по местному времени. Первые 3 части — в один день (воронка). Закрепить первую часть в профиле.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ==================== VISUAL MOCKUP ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Визуал</div>
+    <h2 class="section-title">Как это выглядит на экране</h2>
+
+    <div class="phone-demo">
+
+        <!-- Phone 1: Hook -->
+        <div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-visual" style="background: linear-gradient(180deg, #1a0a0a, #000);">
+                        <div class="phone-overlay-top">
+                            <span class="phone-part-badge">Part 1</span>
+                            <span class="phone-time">0:01</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="font-size: 18px; font-weight: 900; color: white; line-height: 1.3; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
+                                20 школьников<br>
+                                <span style="color: #fe2c55;">не спали год</span><br>
+                                чтобы сделать это
+                            </div>
+                        </div>
+                        <div class="phone-subtitle">
+                            <span class="sub-text"><em>А потом кто-то украл всё за одну ночь</em></span>
+                        </div>
+                        <div class="phone-sidebar">
+                            <div class="sb-icon">&#9829;</div>
+                            <div class="sb-count">247K</div>
+                            <div class="sb-icon">&#128172;</div>
+                            <div class="sb-count">3.2K</div>
+                            <div class="sb-icon">&#8618;</div>
+                            <div class="sb-count">15K</div>
+                        </div>
+                    </div>
+                    <div class="phone-bottom">
+                        <div class="username">@xanavi.voice</div>
+                        <div class="caption">Мы создали голосовое управление для BYD...</div>
+                        <div class="tags">#стартап #украли #разработка</div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-label">ХУК (0:00-0:03)</div>
+            <div class="phone-label-sub">Текст + эмоция + интрига</div>
+        </div>
+
+        <!-- Phone 2: Drama -->
+        <div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-visual" style="background: linear-gradient(180deg, #0a0a1a, #000);">
+                        <div class="phone-overlay-top">
+                            <span class="phone-part-badge">Part 7</span>
+                            <span class="phone-time">0:42</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div class="scene-desc" style="color: #666;">
+                                [ Крупный план: лицо основателя.<br>
+                                Он смотрит в телефон.<br>
+                                Его лицо медленно меняется.<br>
+                                Фоновая музыка обрывается. ]
+                            </div>
+                        </div>
+                        <div class="phone-subtitle">
+                            <span class="sub-text">"Ребята... <em>подойдите все</em>"</span>
+                        </div>
+                        <div class="phone-sidebar">
+                            <div class="sb-icon">&#9829;</div>
+                            <div class="sb-count">891K</div>
+                            <div class="sb-icon">&#128172;</div>
+                            <div class="sb-count">12K</div>
+                            <div class="sb-icon">&#8618;</div>
+                            <div class="sb-count">45K</div>
+                        </div>
+                    </div>
+                    <div class="phone-bottom">
+                        <div class="username">@xanavi.voice</div>
+                        <div class="caption">Тот самый день... #part7</div>
+                        <div class="tags">#стартап #воры #программист</div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-label">ДРАМА (0:30-0:60)</div>
+            <div class="phone-label-sub">Крупный план + тишина + удар</div>
+        </div>
+
+        <!-- Phone 3: Cliffhanger -->
+        <div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-visual" style="background: linear-gradient(180deg, #1a0005, #000);">
+                        <div class="phone-overlay-top">
+                            <span class="phone-part-badge">Part 7</span>
+                            <span class="phone-time">1:12</span>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="font-size: 16px; font-weight: 800; color: white; text-align: center; line-height: 1.4;">
+                                На экране —<br>
+                                <span style="color: #fe2c55; font-size: 20px;">их приложение</span><br>
+                                в Telegram-канале<br>
+                                <span style="color: #666; font-size: 14px;">бесплатно</span>
+                            </div>
+                        </div>
+                        <div class="phone-subtitle">
+                            <span class="sub-text">Что они сделали дальше? <em>Part 8 &#8594;</em></span>
+                        </div>
+                        <div class="phone-sidebar">
+                            <div class="sb-icon">&#9829;</div>
+                            <div class="sb-count">891K</div>
+                            <div class="sb-icon">&#128172;</div>
+                            <div class="sb-count">12K</div>
+                            <div class="sb-icon">&#8618;</div>
+                            <div class="sb-count">45K</div>
+                        </div>
+                    </div>
+                    <div class="phone-bottom">
+                        <div class="username">@xanavi.voice</div>
+                        <div class="caption">Часть 8 уже в профиле...</div>
+                        <div class="tags">#клиффхэнгер #сериал</div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-label">КЛИФФХЭНГЕР (конец)</div>
+            <div class="phone-label-sub">Обрыв + "Part X в профиле"</div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ==================== FULL SCRIPT ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Полный сценарий</div>
+    <h2 class="section-title">24 части — посекундная раскладка</h2>
+    <p class="section-desc">
+        Каждая часть размечена по секундам. Хук, тело, клиффхэнгер.
+        Цветовые метки: <span class="text-overlay">текст на экране</span>
+        <span class="subtitle-cue">субтитры</span>
+        <span class="music-cue">музыка</span>
+        <span class="sfx-cue">звуковой эффект</span>
+    </p>
+
+    <!-- ===== ARC 1: НАЧАЛО (Parts 1-3) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        АРК 1: НАЧАЛО</h3>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">01</div>
+            <div class="ep-meta">
+                <h3>"20 школьников и одна мечта"</h3>
+                <div class="ep-sub">75 сек | Знакомство с командой</div>
+            </div>
+        </div>
+        <div class="ep-body">
+            <div class="part">
+                <div class="part-hook">
+                    <div class="hook-label">Хук (первые 2 секунды)</div>
+                    <div class="hook-text">"Нам было по 16 лет. У нас не было ни денег, ни офиса. Только ноутбук и Wi-Fi соседа."</div>
+                </div>
+
+                <div class="shot">
+                    <div class="shot-time">0:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Нам было 16. У нас ничего не было.</span> Чёрный экран, текст появляется с ударом. <span class="sfx-cue">BOOM</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:03</div>
+                    <div class="shot-desc"><span class="music-cue">Тихое пианино, грустное</span> Крупно: руки на клавиатуре. Подсветка экрана на лице. Ночь.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:07</div>
+                    <div class="shot-desc"><strong>Голос за кадром (основатель):</strong> <span class="subtitle-cue">"В Узбекистан пришли машины BYD. Красивые. Современные. Но они не понимали ни русский, ни узбекский."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:15</div>
+                    <div class="shot-desc">Кадр: салон BYD. Палец жмёт кнопку голоса. Из динамика — китайская речь. <span class="text-overlay">Машина не понимает тебя</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:20</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"И я подумал — если никто не сделает... сделаю я"</span> Крупно: глаза основателя. Решимость.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:27</div>
+                    <div class="shot-desc"><span class="music-cue">Бит нарастает</span> Быстрый монтаж: код на экране / провода / 3 человека за столом ночью / часы: 03:47</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:35</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Нас стало 5. Потом 10. Потом 20."</span> Лица — одно за другим. Молодые. 16, 17, 19 лет.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:42</div>
+                    <div class="shot-desc"><span class="text-overlay">Средний возраст — 19 лет</span> <span class="text-overlay">Зарплата — 0</span> <span class="text-overlay">Мотивация — бесконечная</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:50</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Мама думает, я играю в компьютер. А я делаю будущее."</span> Улыбка молодого разработчика.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:58</div>
+                    <div class="shot-desc"><span class="music-cue">Музыка резко обрывается</span> Чёрный экран.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Через 8 месяцев машина впервые поняла нас.</span> Пауза 2 сек.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:05</div>
+                    <div class="shot-desc"><span class="text-overlay" style="color: var(--tiktok2);">А через год — кто-то украл всё.</span> <span class="sfx-cue">BOOM</span></div>
+                </div>
+
+                <div class="cliffhanger">
+                    <div class="ch-label">Клиффхэнгер</div>
+                    <div class="ch-text">"Часть 2 — как машина впервые заговорила. Ссылка в профиле."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">02</div>
+            <div class="ep-meta">
+                <h3>"Открой окно"</h3>
+                <div class="ep-sub">80 сек | Момент, когда машина впервые поняла</div>
+            </div>
+        </div>
+        <div class="ep-body">
+            <div class="part">
+                <div class="part-hook">
+                    <div class="hook-label">Хук</div>
+                    <div class="hook-text">"4:30 утра. Парковка. Мы сидели в машине и боялись нажать кнопку."</div>
+                </div>
+
+                <div class="shot">
+                    <div class="shot-time">0:00</div>
+                    <div class="shot-desc"><span class="text-overlay">4:30 утра. 4 месяца работы. 1 шанс.</span> <span class="sfx-cue">Тиканье часов</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:04</div>
+                    <div class="shot-desc">Кадр: тёмная парковка. Одна машина. Свет из салона. <span class="music-cue">Тихий эмбиент, напряжение</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:10</div>
+                    <div class="shot-desc">Внутри: трое. Ноутбук подключён к головному устройству. Провода. Руки трясутся. <span class="subtitle-cue">"Не нажимай... Ладно. Нажимай."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:18</div>
+                    <div class="shot-desc"><strong>Крупно: губы основателя.</strong> Шёпотом: <span class="subtitle-cue">"Открой окно..."</span> <span class="music-cue">Музыка замирает</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:22</div>
+                    <div class="shot-desc"><strong>ТИШИНА. 3 секунды.</strong> Крупно: лица. Ожидание. Никто не дышит.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:25</div>
+                    <div class="shot-desc"><span class="sfx-cue">Звук мотора стеклоподъёмника</span> Окно медленно опускается. <span class="music-cue">ВЗРЫВ — эпичная музыка</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:28</div>
+                    <div class="shot-desc"><strong>КРИК. СЛЁЗЫ. ОБЪЯТИЯ.</strong> Кто-то бьёт по рулю. Кто-то обнимает друга. Камера трясётся — это РЕАЛЬНО.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:35</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"РАБОТАЕТ! ОНА РАБОТАЕТ!"</span> <span class="text-overlay">4 месяца. 0 часов сна. 1 момент.</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:42</div>
+                    <div class="shot-desc">Замедленно: лицо CTO. Глаза блестят. <span class="subtitle-cue">"Четыре месяца мы шли к этому моменту."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:52</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Мы сидели в машине до рассвета. И просто... разговаривали с ней."</span> Рассвет за окном.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Это был лучший день моей жизни.</span> Пауза. <span class="text-overlay" style="color: var(--tiktok2);">Но не последний.</span></div>
+                </div>
+
+                <div class="cliffhanger">
+                    <div class="ch-label">Клиффхэнгер</div>
+                    <div class="ch-text">"Часть 3 — первые $100. И почему мы не потратили их на еду."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">03</div>
+            <div class="ep-meta">
+                <h3>"$100"</h3>
+                <div class="ep-sub">70 сек | Первые деньги, которые ушли обратно в продукт</div>
+            </div>
+        </div>
+        <div class="ep-body">
+            <div class="part">
+                <div class="part-hook">
+                    <div class="hook-label">Хук</div>
+                    <div class="hook-text">"Первый клиент заплатил $100. 20 человек работали 8 месяцев. Это $0.02 в час."</div>
+                </div>
+
+                <div class="shot">
+                    <div class="shot-time">0:00</div>
+                    <div class="shot-desc"><span class="text-overlay">$100. 20 человек. 8 месяцев.</span> <span class="text-overlay">= $0.02 в час на человека</span> <span class="sfx-cue">Звук кассы</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:05</div>
+                    <div class="shot-desc">Клиент садится в BYD: <span class="subtitle-cue">"Включи кондиционер."</span> Кондиционер включается. Лицо клиента — шок. <span class="subtitle-cue">"Вы это САМИ сделали?!"</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:18</div>
+                    <div class="shot-desc">Крупно: купюра $100 на столе. 20 пар глаз смотрят на неё. <span class="music-cue">Тёплое пианино</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:25</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Ну что... пицца? Наконец нормальная пицца?"</span> Смех.</div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:30</div>
+                    <div class="shot-desc"><span class="music-cue">Музыка чуть грустнеет</span> Основатель: <span class="subtitle-cue">"Нет. Это идёт на сервер. Azure API стоит денег. Каждый запрос — наши деньги."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:42</div>
+                    <div class="shot-desc">Лица меняются. Разочарование. Но все кивают. <span class="text-overlay">Каждый тийин — обратно в продукт</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">0:50</div>
+                    <div class="shot-desc"><span class="subtitle-cue">"Мой друг открыл шаурмячную. Зарабатывает в 5 раз больше."</span> Пауза. Улыбка. <span class="subtitle-cue">"Но у него нет команды."</span></div>
+                </div>
+                <div class="shot">
+                    <div class="shot-time">1:00</div>
+                    <div class="shot-desc"><span class="text-overlay">Мы не зарабатываем. Мы инвестируем.</span> <span class="text-overlay" style="color: var(--tiktok2);">Пока кто-то не решил заработать за нас...</span></div>
+                </div>
+
+                <div class="cliffhanger">
+                    <div class="ch-label">Клиффхэнгер</div>
+                    <div class="ch-text">"Часть 4 — как мы не спали. Вообще."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ARC 2: ЦЕНА (Parts 4-6) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        АРК 2: ЦЕНА МЕЧТЫ</h3>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">04</div>
+            <div class="ep-meta">
+                <h3>"3 часа сна"</h3>
+                <div class="ep-sub">75 сек | Бессонные ночи</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"Учительница спросила, почему я сплю на уроке. Я не сказал, что до 4 утра дебажил CAN-bus протокол."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Мне 17. Я сплю 3 часа.</span> Крупно: красные глаза. <span class="sfx-cue">Звук будильника</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc">Таймлапс: часы на стене. 22:00 → 00:00 → 02:00 → 04:00. Человек за ноутбуком не двигается. <span class="music-cue">Lo-fi бит</span></div></div>
+            <div class="shot"><div class="shot-time">0:15</div><div class="shot-desc">Интервью-нарезка: <span class="subtitle-cue">"Я сплю 4 часа" / "Иногда 3" / "Мои оценки упали" / "Мама переживает"</span></div></div>
+            <div class="shot"><div class="shot-time">0:28</div><div class="shot-desc"><span class="subtitle-cue">"Моя девушка сказала: ты женился на этом приложении."</span> Пауза. <span class="subtitle-cue">"Мы расстались через месяц."</span> <span class="music-cue">Пианино, грусть</span></div></div>
+            <div class="shot"><div class="shot-time">0:40</div><div class="shot-desc">Кто-то спит за столом. Другой накрывает его курткой. <span class="text-overlay">Семья, а не компания</span></div></div>
+            <div class="shot"><div class="shot-time">0:50</div><div class="shot-desc"><span class="subtitle-cue">"Иногда я думаю — стоит ли? А потом вспоминаю тот момент в машине..."</span> Улыбка сквозь усталость.</div></div>
+            <div class="shot"><div class="shot-time">1:00</div><div class="shot-desc"><span class="text-overlay">За каждой строчкой кода — бессонная ночь чьего-то ребёнка.</span> <span class="text-overlay" style="color: var(--tiktok2);">Который верит, что может изменить мир.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 5 — звонок мамы, который всё изменил."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">05</div>
+            <div class="ep-meta">
+                <h3>"Мама звонит"</h3>
+                <div class="ep-sub">70 сек | Самый эмоциональный эпизод</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"Мама позвонила в 2 ночи. Я соврал, что уже сплю. А на экране — 47-й баг за день."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">2:00 ночи. Мама звонит.</span> Экран телефона светится в темноте. <span class="music-cue">Тихо, интимно</span></div></div>
+            <div class="shot"><div class="shot-time">0:06</div><div class="shot-desc">Голос мамы (по телефону): <span class="subtitle-cue">"Сынок, ты когда поешь нормально? Сосед говорит — свет до четырёх утра не выключаешь..."</span></div></div>
+            <div class="shot"><div class="shot-time">0:18</div><div class="shot-desc"><span class="subtitle-cue">"Мама, всё хорошо. У нас уже 200 клиентов. Скоро будет лучше."</span></div></div>
+            <div class="shot"><div class="shot-time">0:25</div><div class="shot-desc">Голос мамы: <span class="subtitle-cue">"Ты мне это говоришь уже полгода..."</span> <span class="music-cue">Пианино нарастает</span></div></div>
+            <div class="shot"><div class="shot-time">0:32</div><div class="shot-desc">Кладёт трубку. Долго смотрит на экран. На экране — Excel. Выручка: $600. Расходы: $580. <span class="text-overlay">Прибыль: $20</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="text-overlay">$20 на 20 человек = $1 на человека</span> Пауза. <span class="text-overlay">В месяц.</span></div></div>
+            <div class="shot"><div class="shot-time">0:50</div><div class="shot-desc">Он закрывает Excel. Открывает Android Studio. Продолжает работать. <span class="subtitle-cue">"У меня нет выбора. Это не бизнес. Это то, кто я есть."</span></div></div>
+            <div class="shot"><div class="shot-time">1:02</div><div class="shot-desc"><span class="text-overlay">Они не знали, что через 3 месяца кто-то украдёт всё, что они создали.</span> <span class="sfx-cue">Удар</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 6 — 500 установок. Мы думали, что победили."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">06</div>
+            <div class="ep-meta">
+                <h3>"500 машин"</h3>
+                <div class="ep-sub">65 сек | Пик успеха перед падением</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"500 машин в Узбекистане говорят по-русски благодаря нам. Мы думали, что это успех."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">500+ автомобилей. Наше приложение.</span> <span class="music-cue">Триумфальная музыка, эпик</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc">Монтаж: машины BYD на улицах Ташкента. Один за другим. Красивые кадры города.</div></div>
+            <div class="shot"><div class="shot-time">0:12</div><div class="shot-desc"><span class="subtitle-cue">"Включи навигацию" / "Позвони маме" / "Какая погода?"</span> Машины понимают. Водители улыбаются.</div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc">Команда: high-five, смех. <span class="subtitle-cue">"Мы сделали это. 20 школьников из Ташкента сделали то, чего не сделал BYD."</span></div></div>
+            <div class="shot"><div class="shot-time">0:35</div><div class="shot-desc"><span class="music-cue">Музыка начинает замедляться...</span> <span class="text-overlay">Но кто-то наблюдал за нами.</span></div></div>
+            <div class="shot"><div class="shot-time">0:40</div><div class="shot-desc"><span class="text-overlay">Кто-то решил: "Зачем создавать, если можно украсть?"</span> <span class="music-cue">Музыка обрывается</span> <span class="sfx-cue">Глухой удар</span></div></div>
+            <div class="shot"><div class="shot-time">0:48</div><div class="shot-desc">Чёрный экран. Мигающий курсор. <span class="text-overlay" style="color: var(--tiktok2);">Telegram-канал. Наш APK. Бесплатно.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 7 — день, когда мы увидели. Самый тяжёлый день."</div></div>
+        </div></div>
+    </div>
+
+    <!-- ===== ARC 3: КРАЖА (Parts 7-12) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        АРК 3: ВОРЫ (кульминация — максимум частей)</h3>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">07</div>
+            <div class="ep-meta">
+                <h3>"Ребята... подойдите"</h3>
+                <div class="ep-sub">80 сек | День, когда увидели пиратский канал</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">Крупно: лицо основателя. Он смотрит в телефон. Его лицо МЕНЯЕТСЯ. Без слов. 3 секунды.</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><strong>БЕЗ ТЕКСТА. БЕЗ МУЗЫКИ.</strong> Крупно: лицо. Телефон в руках. Выражение меняется от спокойствия к шоку. <span class="sfx-cue">Только дыхание</span></div></div>
+            <div class="shot"><div class="shot-time">0:04</div><div class="shot-desc"><span class="subtitle-cue">"Ребята... подойдите."</span> Тихий голос. Все поворачиваются.</div></div>
+            <div class="shot"><div class="shot-time">0:08</div><div class="shot-desc">20 человек собираются вокруг одного телефона. <span class="music-cue">Низкий гул, нарастающий</span></div></div>
+            <div class="shot"><div class="shot-time">0:12</div><div class="shot-desc">Экран телефона (наезд камеры): Telegram-канал. Их иконка. Их название. Скрипт установки. Цена: $30.</div></div>
+            <div class="shot"><div class="shot-time">0:18</div><div class="shot-desc"><span class="text-overlay">Наше приложение. Наш код. Чужой Telegram.</span></div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc"><strong>ТИШИНА.</strong> Крупно: лица. Одно за другим. Шок. Злость. Боль. Непонимание.</div></div>
+            <div class="shot"><div class="shot-time">0:30</div><div class="shot-desc">Молодой разработчик (17 лет), голос ломается: <span class="subtitle-cue">"Это же... это же мой код. Вот эту часть. Я не спал три недели..."</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="music-cue">Грустное пианино</span> <span class="subtitle-cue">"Они продают за 30 долларов. Мы берём 100, и это еле покрывает расходы."</span></div></div>
+            <div class="shot"><div class="shot-time">0:55</div><div class="shot-desc"><span class="text-overlay">100 машин. Наш код. Чужие деньги.</span> <span class="text-overlay">$10,000 украдено.</span></div></div>
+            <div class="shot"><div class="shot-time">1:05</div><div class="shot-desc"><span class="text-overlay" style="color: var(--tiktok2);">И самое больное...</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 8 — самое больное, что мы увидели в том канале."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">08</div>
+            <div class="ep-meta">
+                <h3>"Спасибо, Улугбек!"</h3>
+                <div class="ep-sub">65 сек | Клиенты пирата благодарят ЕГО за НАШУ работу</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"Они благодарили ЕГО. За НАШУ работу. За наши бессонные ночи."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">"Спасибо, Улугбек! Отличная работа!"</span> Скриншот из Telegram. <span class="sfx-cue">Удар сердца</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc">Скролл: сообщение за сообщением. <span class="text-overlay">"Лучше чем оригинал!"</span> <span class="text-overlay">"Установил 5 друзьям!"</span> <span class="text-overlay">"Топ! Работает идеально!"</span></div></div>
+            <div class="shot"><div class="shot-time">0:15</div><div class="shot-desc"><span class="subtitle-cue">"Они даже не изменили название. Оставили XANAVI. Как будто это ЕГО продукт."</span></div></div>
+            <div class="shot"><div class="shot-time">0:25</div><div class="shot-desc">Основатель один на балконе. Закат. <span class="music-cue">Грустно, медленно</span></div></div>
+            <div class="shot"><div class="shot-time">0:30</div><div class="shot-desc"><span class="subtitle-cue">"Знаете, что я почувствовал? Не злость. Стыд. Как будто это Я виноват, что не защитил."</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="text-overlay">20 детей не спали ночами.</span> <span class="text-overlay">А кто-то скачал это за 30 секунд.</span></div></div>
+            <div class="shot"><div class="shot-time">0:50</div><div class="shot-desc"><span class="subtitle-cue">"Но мы не остановимся. Потому что если мы остановимся — значит, он победил."</span> Поворачивается к камере. Решимость в глазах.</div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 9 — мы нашли, КТО это сделал. И КАК."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">09</div>
+            <div class="ep-meta">
+                <h3>"install_hack.txt"</h3>
+                <div class="ep-sub">70 сек | Как они это сделали — техническая детективная часть</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"Наш CTO нашёл их скрипт. 50 строк кода, которые уничтожили год нашей работы."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">50 строк. 1 скрипт. Год работы уничтожен.</span> Экран с кодом. <span class="music-cue">Тревожный бит</span></div></div>
+            <div class="shot"><div class="shot-time">0:06</div><div class="shot-desc">CTO за ноутбуком: <span class="subtitle-cue">"Вот. fix_app.txt. Он клонирует данные с одной машины на сотню."</span></div></div>
+            <div class="shot"><div class="shot-time">0:16</div><div class="shot-desc"><span class="text-overlay">1 оплата → 100 копий</span> Анимация: одна иконка размножается в сотню.</div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc"><span class="subtitle-cue">"Но в скрипте он оставил свой след. Telegram-метку."</span> <span class="text-overlay">"Улугбек, 08.02.2026, 0:47"</span></div></div>
+            <div class="shot"><div class="shot-time">0:32</div><div class="shot-desc"><span class="text-overlay">Он подписался. В своём же взломе.</span> Ирония. <span class="sfx-cue">Драматический удар</span></div></div>
+            <div class="shot"><div class="shot-time">0:40</div><div class="shot-desc"><span class="subtitle-cue">"Python-скрипт через ADB root заменяет наш APK в системном разделе. Обходит лицензию."</span></div></div>
+            <div class="shot"><div class="shot-time">0:52</div><div class="shot-desc"><span class="text-overlay">Мы знаем кто. Мы знаем как. Осталось одно...</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 10 — $16,300 ущерба. И статья 149-1. До 3 лет."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">10</div>
+            <div class="ep-meta">
+                <h3>"Статья 149-1"</h3>
+                <div class="ep-sub">70 сек | Юридический удар — сколько это стоит по закону</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"Вы думаете, пиратство — это бесплатно? Нет. Это до 3 лет тюрьмы и $100,000 штрафа."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Пиратство ≠ бесплатно</span> <span class="text-overlay" style="color: var(--tiktok2);">Пиратство = до 3 лет</span> <span class="sfx-cue">Удар молотка судьи</span></div></div>
+            <div class="shot"><div class="shot-time">0:05</div><div class="shot-desc"><span class="text-overlay">Прямой ущерб: $16,300</span> Цифры появляются одна за другой. <span class="music-cue">Напряжённый бит</span></div></div>
+            <div class="shot"><div class="shot-time">0:12</div><div class="shot-desc"><span class="text-overlay">Узбекистан: ст. 149-1 → до 3 лет</span> <span class="text-overlay">Россия: ст. 146 → до 6 лет</span></div></div>
+            <div class="shot"><div class="shot-time">0:22</div><div class="shot-desc"><span class="subtitle-cue">"По российскому закону — каждая копия от 10,000 до 5,000,000 рублей."</span> <span class="text-overlay">100 копий × 5,000,000 = ...</span></div></div>
+            <div class="shot"><div class="shot-time">0:35</div><div class="shot-desc"><span class="text-overlay" style="font-size: 1.2em; color: var(--tiktok2);">$5,000,000 максимум</span> <span class="sfx-cue">Удар</span></div></div>
+            <div class="shot"><div class="shot-time">0:42</div><div class="shot-desc"><span class="subtitle-cue">"Он сэкономил клиентам $100. А теперь каждый из них рискует потерять $2,500."</span></div></div>
+            <div class="shot"><div class="shot-time">0:52</div><div class="shot-desc"><span class="text-overlay">Сэкономил $100 — потеряешь $2,500.</span> <span class="text-overlay">Выгодная сделка?</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 11 — мы начали собирать доказательства. Тихо."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">11</div>
+            <div class="ep-meta">
+                <h3>"Тихая охота"</h3>
+                <div class="ep-sub">70 сек | Серверный логгер собирает IP пиратов</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"Каждый пират, который включает наше приложение — оставляет свой IP. Они не знают, что мы смотрим."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Они думают, что невидимы.</span> Экран сервера. Логи бегут. <span class="music-cue">Кибер-бит, напряжённо</span></div></div>
+            <div class="shot"><div class="shot-time">0:08</div><div class="shot-desc"><span class="text-overlay">IP: 195.xxx.xxx.42 — Ташкент</span> <span class="text-overlay">IP: 91.xxx.xxx.15 — Самарканд</span> <span class="text-overlay">IP: 178.xxx.xxx.88 — ...</span></div></div>
+            <div class="shot"><div class="shot-time">0:16</div><div class="shot-desc"><span class="subtitle-cue">"Мы написали middleware для сервера. Каждый запрос — IP, время, устройство. Всё записывается."</span></div></div>
+            <div class="shot"><div class="shot-time">0:28</div><div class="shot-desc"><span class="subtitle-cue">"Они приходят на наш сервер. Наш. И оставляют свои следы."</span></div></div>
+            <div class="shot"><div class="shot-time">0:38</div><div class="shot-desc"><span class="text-overlay">IP → Провайдер → МВД → Имя и адрес</span></div></div>
+            <div class="shot"><div class="shot-time">0:48</div><div class="shot-desc"><span class="subtitle-cue">"Мы знаем, где каждая украденная копия. И мы просто... ждём."</span> Улыбка CTO.</div></div>
+            <div class="shot"><div class="shot-time">0:58</div><div class="shot-desc"><span class="text-overlay" style="color: var(--tiktok2);">А потом мы нажали кнопку.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 12 — красная кнопка. Kill switch."</div></div>
+        </div></div>
+    </div>
+
+    <div class="ep-card">
+        <div class="ep-header">
+            <div class="ep-num">12</div>
+            <div class="ep-meta">
+                <h3>"Kill Switch"</h3>
+                <div class="ep-sub">75 сек | Пиратские копии начинают умирать</div>
+            </div>
+        </div>
+        <div class="ep-body"><div class="part">
+            <div class="part-hook">
+                <div class="hook-label">Хук</div>
+                <div class="hook-text">"Воскресенье, 5:10 утра. Автоматическая проверка. 100 пиратских копий — мертвы."</div>
+            </div>
+            <div class="shot"><div class="shot-time">0:00</div><div class="shot-desc"><span class="text-overlay">Воскресенье. 5:10 AM.</span> <span class="text-overlay" style="color: var(--tiktok2);">Kill Switch активирован.</span> <span class="sfx-cue">Сирена, тихо</span></div></div>
+            <div class="shot"><div class="shot-time">0:06</div><div class="shot-desc">Экран: дашборд. Точки на карте начинают гаснуть. Одна. Две. Десять. <span class="music-cue">Нарастающий электронный бит</span></div></div>
+            <div class="shot"><div class="shot-time">0:15</div><div class="shot-desc"><span class="subtitle-cue">"Каждую неделю приложение проверяет базу. Нет базы — нет приложения. Навсегда."</span></div></div>
+            <div class="shot"><div class="shot-time">0:25</div><div class="shot-desc"><span class="text-overlay">Catch-22</span> <span class="subtitle-cue">"Блокируешь наш сервер — база удаляется. Не блокируешь — мы блокируем тебя."</span></div></div>
+            <div class="shot"><div class="shot-time">0:38</div><div class="shot-desc">Экран пиратской машины: приложение открывается → <span class="text-overlay" style="color: var(--tiktok2); font-size: 1.1em;">Красный экран. "Нелегальная копия."</span></div></div>
+            <div class="shot"><div class="shot-time">0:48</div><div class="shot-desc"><span class="subtitle-cue">"7 штук за сегодня. Они не могут скачать базу. Приложение заблокировано."</span> Команда за экраном. Тихое удовлетворение.</div></div>
+            <div class="shot"><div class="shot-time">0:58</div><div class="shot-desc"><span class="text-overlay">Максимум 7 дней жизни для пиратской копии.</span> <span class="text-overlay">Потом — всё.</span></div></div>
+            <div class="cliffhanger"><div class="ch-label">Клиффхэнгер</div><div class="ch-text">"Часть 13 — но пират тоже не сдался. Он нанёс ответный удар."</div></div>
+        </div></div>
+    </div>
+
+    <!-- ===== ARC 4: БОРЬБА (Parts 13-18) ===== -->
+    <h3 style="color: var(--tiktok2); margin: 40px 0 20px; font-size: 1.3em;">
+        АРКИ 4-6: краткое описание оставшихся частей</h3>
+
+    <div class="tip-box">
+        <h4>Части 13-24 — Outline</h4>
+        <ul>
+            <li><strong>Part 13:</strong> "Ответный удар" — пират пытается обойти защиту, /etc/hosts блокировка, новые скрипты</li>
+            <li><strong>Part 14:</strong> "Мы умнее" — DeviceIntegrity, привязка к железу, каждый APK уникален</li>
+            <li><strong>Part 15:</strong> "IP Center" — визит в центр интеллектуальной собственности, регистрация</li>
+            <li><strong>Part 16:</strong> "70 страниц кода" — печатаем исходный код для депонирования</li>
+            <li><strong>Part 17:</strong> "Заявление" — МВД, статья 149-1, официальное обращение</li>
+            <li><strong>Part 18:</strong> "Telegram DMCA" — жалоба, канал удалён</li>
+            <li><strong>Part 19:</strong> "Они нашли нас" — пираты пишут угрозы, давление</li>
+            <li><strong>Part 20:</strong> "Мы не боимся" — публичное заявление команды</li>
+            <li><strong>Part 21:</strong> "Клиенты возвращаются" — бывшие пираты покупают лицензию</li>
+            <li><strong>Part 22:</strong> "Обновление" — новая версия с защитой, красивая, мощная</li>
+            <li><strong>Part 23:</strong> "Крыша" — вся команда на крыше, закат над Ташкентом</li>
+            <li><strong>Part 24:</strong> "Мы не сдадимся" — финал, послание, тизер сезона 2</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<!-- ==================== PRODUCTION TIPS ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Продакшн</div>
+    <h2 class="section-title">Как снимать</h2>
+
+    <div class="rules-grid">
+        <div class="rule-card">
+            <h4>Камера</h4>
+            <p>iPhone / Samsung в портретном режиме. 4K 30fps. Стаб через DJI OM или Zhiyun. Штатив для интервью. Handheld для эмоциональных моментов — тряска = аутентичность.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Свет</h4>
+            <p>Естественный + экран ноутбука как источник. Ночные сцены — ТОЛЬКО подсветка экрана. Это создаёт "тот самый" вайб кодинга. Кольцевая лампа для интервью.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Звук</h4>
+            <p>Петличка ОБЯЗАТЕЛЬНА (Boya BY-M1 за $15). Звук клавиатуры — записать отдельно, добавить в монтаж. Тишина важнее музыки.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Монтаж</h4>
+            <p>CapCut / Premiere Rush / DaVinci. Смена кадра каждые 2-4 секунды. Zoom-ins на ключевых фразах. Slow-mo на эмоциях. Speed ramp на монтажных переходах.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Субтитры</h4>
+            <p>CapCut Auto Captions → ручная правка. Шрифт: жирный, без засечек. Размер: читаемый на телефоне. Ключевые слова — красным. Имена — голубым.</p>
+        </div>
+        <div class="rule-card">
+            <h4>Текст на экране</h4>
+            <p>Появление: typewriter-эффект или fade-in с ударом. Расположение: верхняя треть или центр. НИКОГДА не перекрывать лицо. Шрифт: Inter Black или Montserrat Bold.</p>
+        </div>
+    </div>
+
+    <h3 style="margin: 40px 0 20px;">Музыка и звуки</h3>
+
+    <table class="music-table">
+        <tr>
+            <th>Настроение</th>
+            <th>Что использовать</th>
+            <th>Где</th>
+        </tr>
+        <tr>
+            <td>Грусть / Боль</td>
+            <td>Тихое пианино, корейские OST</td>
+            <td>Parts 4, 5, 7, 8</td>
+        </tr>
+        <tr>
+            <td>Напряжение</td>
+            <td>Low drone + heartbeat</td>
+            <td>Parts 7, 9, 11</td>
+        </tr>
+        <tr>
+            <td>Триумф / Надежда</td>
+            <td>Epic orchestral build-up</td>
+            <td>Parts 2, 6, 12, 24</td>
+        </tr>
+        <tr>
+            <td>Кодинг / Работа</td>
+            <td>Lo-fi beats, тихий электронный</td>
+            <td>Parts 1, 3, 4, 14</td>
+        </tr>
+        <tr>
+            <td>Шок / Удар</td>
+            <td>Тишина → BOOM (bass drop)</td>
+            <td>Parts 6, 7, 10, 12</td>
+        </tr>
+        <tr>
+            <td>Тишина</td>
+            <td>Только ambient + дыхание</td>
+            <td>Parts 7 (хук), 8</td>
+        </tr>
+    </table>
+
+    <div class="tip-box">
+        <h4>TikTok-звуки для вирусности</h4>
+        <ul>
+            <li>Используйте трендовые звуки TikTok как фоновые — алгоритм продвигает видео с популярным аудио</li>
+            <li>Оригинальный саунд "XANAVI Series" — создайте свой звук, чтобы все части были связаны</li>
+            <li>Корейские OST (дорамы) в начале — мгновенно создают нужную атмосферу</li>
+            <li>Поищите: "Sad Korean Piano", "Epic Trailer Music", "Dramatic Reveal Sound"</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<!-- ==================== POSTING STRATEGY ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Стратегия</div>
+    <h2 class="section-title">Как выкладывать</h2>
+
+    <div class="rules-grid">
+        <div class="rule-card">
+            <h4 style="color: var(--tiktok2);">День 1: Бомба</h4>
+            <p>Выложить Parts 1-3 сразу. Интервал 2-3 часа. Создать воронку. Закрепить Part 1 в профиле. Это ваш "пилот" — он решает всё.</p>
+        </div>
+        <div class="rule-card">
+            <h4 style="color: var(--tiktok);">Дни 2-7: По одной</h4>
+            <p>1 часть в день. 19:00-21:00 местного времени. Каждая часть — ответ на клиффхэнгер предыдущей. Комментарии: отвечать на ВСЕ.</p>
+        </div>
+        <div class="rule-card">
+            <h4 style="color: var(--gold);">Crosspost</h4>
+            <p>TikTok + Instagram Reels + YouTube Shorts. Один контент — три платформы. На YouTube Shorts добавить в плейлист "XANAVI Series".</p>
+        </div>
+        <div class="rule-card">
+            <h4 style="color: var(--green);">Engagement</h4>
+            <p>В каждом видео задавайте вопрос: "Что бы вы сделали?" / "Это справедливо?" Комментарии = алгоритм. Провоцируйте дискуссию.</p>
+        </div>
+    </div>
+
+    <h3 style="margin: 40px 0 20px;">Хэштеги</h3>
+
+    <div class="hashtag-cloud">
+        <span class="hashtag">#стартап</span>
+        <span class="hashtag">#программист</span>
+        <span class="hashtag">#разработка</span>
+        <span class="hashtag">#украли</span>
+        <span class="hashtag">#пиратство</span>
+        <span class="hashtag">#школьники</span>
+        <span class="hashtag">#bydcar</span>
+        <span class="hashtag">#узбекистан</span>
+        <span class="hashtag">#ташкент</span>
+        <span class="hashtag">#IT</span>
+        <span class="hashtag">#android</span>
+        <span class="hashtag">#coding</span>
+        <span class="hashtag">#startuplife</span>
+        <span class="hashtag">#сторителлинг</span>
+        <span class="hashtag">#сериал</span>
+        <span class="hashtag">#part1</span>
+        <span class="hashtag">#xanavi</span>
+        <span class="hashtag">#devlife</span>
+        <span class="hashtag">#несдадимся</span>
+        <span class="hashtag">#справедливость</span>
+    </div>
+
+    <div class="tip-box">
+        <h4>Вирусные триггеры</h4>
+        <ul>
+            <li><strong>"Школьники vs Пираты"</strong> — конфликт поколений, возраст команды шокирует</li>
+            <li><strong>"$0.02 в час"</strong> — цифра, которая ударяет</li>
+            <li><strong>"Мама думает я играю"</strong> — каждый подросток узнает себя</li>
+            <li><strong>"Украли за 30 секунд то, что делали год"</strong> — несправедливость = вирусность</li>
+            <li><strong>"До 3 лет тюрьмы"</strong> — закон пугает, люди шерят как предупреждение</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<!-- ==================== EQUIPMENT CHECKLIST ==================== -->
+<section>
+<div class="container">
+    <div class="section-label">Оборудование</div>
+    <h2 class="section-title">Минимальный набор</h2>
+    <p class="section-desc">Бюджет: $50-200. Не нужно дорогое оборудование — аутентичность важнее качества.</p>
+
+    <ul class="checklist">
+        <li><span class="check">+</span><div><div class="item-title">Смартфон (iPhone 12+ или Samsung S21+)</div><div class="item-desc">4K видео, портретный режим. Скорее всего уже есть.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Петличный микрофон ($10-15)</div><div class="item-desc">Boya BY-M1 или аналог. Критически важен для интервью.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Мини-штатив ($10-15)</div><div class="item-desc">Для статичных интервью и кадров экрана.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Стабилизатор (опционально, $80-100)</div><div class="item-desc">DJI OM 5/6 или Zhiyun Smooth 5. Для плавных проводок.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">CapCut (бесплатно)</div><div class="item-desc">Монтаж, субтитры, текст, эффекты — всё в одном. Прямо на телефоне.</div></div></li>
+        <li><span class="check">+</span><div><div class="item-title">Кольцевая лампа ($15-20)</div><div class="item-desc">Для интервью. Мягкий свет, приятный для лица.</div></div></li>
+    </ul>
+</div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<section style="padding: 80px 0; border: none;">
+<div class="container" style="text-align: center;">
+    <div style="background: linear-gradient(135deg, rgba(254, 44, 85, 0.1), rgba(37, 244, 238, 0.08)); border: 1px solid rgba(254, 44, 85, 0.2); border-radius: 20px; padding: 50px 30px; margin-bottom: 40px;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 2em; margin-bottom: 16px;">
+            "Мы не спали ночами, чтобы кто-то<br>
+            <span style="background: linear-gradient(135deg, var(--tiktok2), var(--tiktok)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">скачал это за 30 секунд</span>"
+        </h3>
+        <p style="color: var(--dim); font-size: 1.1em;">24 части. 1 история. 0 шансов остаться равнодушным.</p>
+    </div>
+
+    <p style="color: #333; font-size: 0.85em;">
+        XANAVI Voice &copy; UluSoft<br>
+        TikTok Series Production Guide v1.0 — February 2026<br>
+        @xanavi.voice
+    </p>
+</div>
+</section>
+
+</body>
+</html>
